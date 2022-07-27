@@ -5,8 +5,7 @@ import com.warriors.model.Warrior;
 import com.warriors.service.Battle;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SuitTest {
 
@@ -26,7 +25,34 @@ class SuitTest {
         assertFalse(dave.isAlive());
     }
 
-    @Test // 1. Fight
+    @Test
+    void givenKnightHitsWarrior_WarriorHealthIsReducedBy7() {
+        // arrange
+        var knight = new Knight();
+        var warrior = new Warrior();
+        //act
+        knight.hit(warrior);
+        var remainingHealth = warrior.getHealth();
+        // assert
+        int expectedHealth = Warrior.INITIAL_HEALTH - Knight.ATTACK;
+        assertEquals(expectedHealth, remainingHealth);
+    }
+
+    @Test
+    void givenWarriorHitsKnight_KnightHealthIsReducedBy5() {
+        // arrange
+        var warrior = new Warrior();
+        var knight = new Knight();
+        // act
+        warrior.hit(knight);
+        var remainingHealth = knight.getHealth();
+        // assert
+        int expectedHealth = Knight.INITIAL_HEALTH - Warrior.ATTACK;
+        assertEquals(expectedHealth, remainingHealth);
+    }
+
+    @Test
+        // 1. Fight
     void givenWarriorFightsKnight_thenKnightShouldWin() {
         // arrange
         var carl = new Warrior();
@@ -37,7 +63,8 @@ class SuitTest {
         assertFalse(result);
     }
 
-    @Test // 2. Fight
+    @Test
+        // 2. Fight
     void givenKnightFightsWarrior_thenKnightShouldWin() {
         // arrange
         var ramon = new Knight();
@@ -48,7 +75,8 @@ class SuitTest {
         assertTrue(result);
     }
 
-    @Test // 3. Fight
+    @Test
+        // 3. Fight
     void givenWarriorFightsOtherWarrior_thenFirstWarriorShouldBeAlive() {
         // arrange
         var bob = new Warrior();
@@ -60,7 +88,8 @@ class SuitTest {
         assertTrue(result);
     }
 
-    @Test // 4. Fight
+    @Test
+        // 4. Fight
     void givenKnightFightsWarrior_thenKnightShouldBeAlive() {
         // arrange
         var zeus = new Knight();
@@ -72,7 +101,8 @@ class SuitTest {
         assertTrue(result);
     }
 
-    @Test // 5. Fight
+    @Test
+        // 5. Fight
     void givenWarriorFightsOtherWarrior_thenOtherShouldBeDead() {
         // arrange
         var husband = new Warrior();
@@ -84,7 +114,8 @@ class SuitTest {
         assertFalse(result);
     }
 
-    @Test // 6. Fight
+    @Test
+        // 6. Fight
     void givenWarriorFightsKnight_thenKnightShouldBeAlive() {
         // arrange
         var dragon = new Warrior();
@@ -96,7 +127,8 @@ class SuitTest {
         assertTrue(result);
     }
 
-    @Test // 7. Fight
+    @Test
+        // 7. Fight
     void givenWarriorFightsKnight_thenKnightShouldWin_thenKnightFightsOtherWarrior_thenKnightShouldLose() {
         // arrange
         var unit1 = new Warrior();
