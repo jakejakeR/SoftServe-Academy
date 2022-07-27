@@ -2,7 +2,7 @@ package com.warriors.model;
 
 public class Warrior {
     private static final int ATTACK = 5;
-    static final int INITIAL_HEALTH = 50;
+    private static final int INITIAL_HEALTH = 50;
     private int health = INITIAL_HEALTH;
     public boolean isAlive() {
         return health > 0;

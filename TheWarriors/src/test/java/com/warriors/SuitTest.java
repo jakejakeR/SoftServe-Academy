@@ -3,12 +3,13 @@ package com.warriors;
 import com.warriors.model.Knight;
 import com.warriors.model.Warrior;
 import com.warriors.service.Battle;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BattleTest {
+class SuitTest {
 
     @Test
     void smokeTest() {
@@ -17,15 +18,24 @@ public class BattleTest {
         var carl = new Knight();
         var dave = new Warrior();
 
-        var res1 = Battle.fight(chuck, bruce);
-        assertTrue(res1);
-
-        var res2 = Battle.fight(dave, carl);
-        assertFalse(res2);
-
+        assertTrue(Battle.fight(chuck, bruce));
+        assertFalse(Battle.fight(dave, carl));
+        
         assertTrue(chuck.isAlive());
         assertFalse(bruce.isAlive());
         assertTrue(carl.isAlive());
         assertFalse(dave.isAlive());
+    }
+
+    @Test
+    @DisplayName("1. Fight: Warrior vs Knight, then Knight should win")
+    void givenWarriorFightsKnight_thenWarriorShouldWin() {
+        // arrange
+        var carl = new Warrior();
+        var jim = new Knight();
+        //act
+        var result = Battle.fight(carl, jim);
+        //assert
+        assertFalse(result);
     }
 }
