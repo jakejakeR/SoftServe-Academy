@@ -1,5 +1,10 @@
 package com.warriors.model;
 
 public class Knight extends Warrior {
-    //TODO finish Knight class implementation
+    static final int ATTACK = 7;
+
+    @Override
+    public int getAttack() {
+        return ATTACK;
+    }
 }
