@@ -20,7 +20,7 @@ class SuitTest {
 
         assertTrue(Battle.fight(chuck, bruce));
         assertFalse(Battle.fight(dave, carl));
-        
+
         assertTrue(chuck.isAlive());
         assertFalse(bruce.isAlive());
         assertTrue(carl.isAlive());
@@ -29,7 +29,7 @@ class SuitTest {
 
     @Test
     @DisplayName("1. Fight: Warrior vs Knight, then Knight should win")
-    void givenWarriorFightsKnight_thenWarriorShouldWin() {
+    void givenWarriorFightsKnight_thenKnightShouldWin() {
         // arrange
         var carl = new Warrior();
         var jim = new Knight();
@@ -37,5 +37,16 @@ class SuitTest {
         var result = Battle.fight(carl, jim);
         //assert
         assertFalse(result);
+    }
+
+    @Test
+    void givenKnightFightsWarrior_thenKnightShouldWin() {
+        // arrange
+        var ramon = new Knight();
+        var slevin = new Warrior();
+        // act
+        var result = Battle.fight(ramon, slevin);
+        // assert
+        assertTrue(result);
     }
 }
