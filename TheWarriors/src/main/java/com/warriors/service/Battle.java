@@ -1,5 +1,6 @@
 package com.warriors.service;
 
+import com.warriors.model.Army;
 import com.warriors.model.Warrior;
 
 /**
@@ -19,5 +20,9 @@ public class Battle {
             }
         }
         return warriorAttacker.isAlive();
+    }
+
+    public static boolean fight(Army attackingArmy, Army defendingArmy) {
+        return false;
     }
 }
