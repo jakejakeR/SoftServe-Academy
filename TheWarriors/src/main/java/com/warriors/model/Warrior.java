@@ -27,7 +27,7 @@ public class Warrior implements Unit, Cloneable {
         try {
             return (Warrior) super.clone();
         } catch (CloneNotSupportedException ignored) {
-            // ignored
+            System.out.println("This message will never be printed");
         }
         return null;
     }

@@ -129,7 +129,7 @@ class SuitTest {
 
     @Test
         // 7. Fight
-    void givenWarriorFightsKnight_thenKnightShouldWin_thenKnightFightsOtherWarrior_thenKnightShouldLose() {
+    void givenKnightWinsWithWarriorAndFightsOtherWarrior_thenKnightShouldLose() {
         // arrange
         var unit1 = new Warrior();
         var unit2 = new Knight();
