@@ -22,6 +22,7 @@ public class Battle {
         return warriorAttacker.isAlive();
     }
 
+    //TODO instead of casting, change Unit interface in order to allow taking Unit as parameter
     public static boolean fight(Army attackingArmy, Army defendingArmy) {
         while (attackingArmy.isAlive() && defendingArmy.isAlive()) {
             if (fight((Warrior) attackingArmy.getUnit(), (Warrior) defendingArmy.getUnit())) {
