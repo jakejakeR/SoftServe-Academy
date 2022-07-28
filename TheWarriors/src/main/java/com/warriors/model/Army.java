@@ -31,6 +31,18 @@ public class Army {
         return this;
     }
 
+    /*public void addUnits(Class<? extends Warrior> clazz, int quantity) {
+        try {
+            var constructor = clazz.getDeclaredConstructor();
+            var o = constructor.newInstance();
+            for (int i = 0; i < quantity; i++) {
+                troops.add(o);
+            }
+        } catch (ReflectiveOperationException e) {
+            throw new RuntimeException();
+        }
+    }*/
+
     public boolean isAlive() {
         return !troops.isEmpty();
     }

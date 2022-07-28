@@ -3,6 +3,7 @@ package com.warriors;
 import com.warriors.model.Army;
 import com.warriors.model.Knight;
 import com.warriors.model.Unit;
+import com.warriors.model.Warrior;
 import com.warriors.service.Battle;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +21,9 @@ class ArmyBattleTest {
 
         attackingArmy.addUnits(Unit.Type.WARRIOR, 2).addUnits(Unit.Type.WARRIOR, 1);
         defendingArmy.addUnits(Unit.Type.WARRIOR, 3);
-        anotherArmy.addUnits(Unit.Type.WARRIOR, 3);
-        knightsArmy.addUnits(Knight::new, 3);
+        Warrior prototype = new Warrior();
+        anotherArmy.addUnits(prototype, 2).addUnits(prototype, 1);
+        knightsArmy.addUnits(Knight::new, 2).addUnits(Knight::new, 1);
 
         assertTrue(Battle.fight(attackingArmy, defendingArmy));
         assertFalse(Battle.fight(anotherArmy, knightsArmy));
