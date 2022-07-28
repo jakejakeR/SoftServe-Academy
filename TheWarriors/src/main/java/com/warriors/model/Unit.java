@@ -13,7 +13,7 @@ public interface Unit {
             this.constructor = constructor;
         }
 
-        public Supplier<Unit> getConstructor() {
+        Supplier<Unit> getConstructor() {
             return constructor;
         }
     }

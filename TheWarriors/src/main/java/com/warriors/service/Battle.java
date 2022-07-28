@@ -26,9 +26,9 @@ public class Battle {
     public static boolean fight(Army attackingArmy, Army defendingArmy) {
         while (attackingArmy.isAlive() && defendingArmy.isAlive()) {
             if (fight((Warrior) attackingArmy.getUnit(), (Warrior) defendingArmy.getUnit())) {
-                defendingArmy.killUnit();
+                defendingArmy.removeDeadUnit();
             } else {
-                attackingArmy.killUnit();
+                attackingArmy.removeDeadUnit();
             }
         }
 

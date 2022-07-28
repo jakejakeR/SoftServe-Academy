@@ -2,14 +2,33 @@ package com.warriors.model;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.function.Supplier;
 
 public class Army {
     private final Queue<Unit> troops = new LinkedList<>();
 
-    public void addUnits(Unit.Type unitType, int quantity) {
+    // Factory method pattern
+    public Army addUnits(Unit.Type unitType, int quantity) {
         for (int i = 0; i < quantity; i++) {
             troops.add(unitType.getConstructor().get());
         }
+        return this;
+    }
+
+    // Prototype pattern
+    public Army addUnits(Warrior prototype, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            troops.add(prototype.clone());
+        }
+        return this;
+    }
+
+    // Using supplier
+    public Army addUnits(Supplier<Warrior> factory, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            troops.add(factory.get());
+        }
+        return this;
     }
 
     public boolean isAlive() {
@@ -20,11 +39,7 @@ public class Army {
         return troops.peek();
     }
 
-    public void killUnit() {
+    public void removeDeadUnit() {
         troops.remove();
-    }
-
-    public Queue<Unit> getTroops() {
-        return troops;
     }
 }

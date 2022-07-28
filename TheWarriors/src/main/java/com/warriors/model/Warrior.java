@@ -1,16 +1,35 @@
 package com.warriors.model;
 
-public class Warrior implements Unit {
+public class Warrior implements Unit, Cloneable {
     public static final int ATTACK = 5;
     public static final int INITIAL_HEALTH = 50;
-    private int health = INITIAL_HEALTH;
+    private int health;
+    private int attack;
+
+    public Warrior() {
+        this(INITIAL_HEALTH, ATTACK);
+    }
+
+    protected Warrior(int health, int attack) {
+        this.health = health;
+        this.attack = attack;
+    }
 
     public boolean isAlive() {
         return health > 0;
     }
-
     public void hit(Warrior opponent) {
         opponent.health -= getAttack();
+    }
+
+    @Override
+    public Warrior clone() {
+        try {
+            return (Warrior) super.clone();
+        } catch (CloneNotSupportedException ignored) {
+            // ignored
+        }
+        return null;
     }
 
     public int getHealth() {
@@ -18,6 +37,6 @@ public class Warrior implements Unit {
     }
 
     public int getAttack() {
-        return ATTACK;
+        return attack;
     }
 }
