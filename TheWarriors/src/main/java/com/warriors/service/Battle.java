@@ -23,6 +23,14 @@ public class Battle {
     }
 
     public static boolean fight(Army attackingArmy, Army defendingArmy) {
-        return false;
+        while (attackingArmy.isAlive() && defendingArmy.isAlive()) {
+            if (fight((Warrior) attackingArmy.getUnit(), (Warrior) defendingArmy.getUnit())) {
+                defendingArmy.killUnit();
+            } else {
+                attackingArmy.killUnit();
+            }
+        }
+
+        return attackingArmy.isAlive();
     }
 }

@@ -9,7 +9,6 @@ public class Warrior implements Unit {
         return health > 0;
     }
 
-
     public void hit(Warrior opponent) {
         opponent.health -= getAttack();
     }

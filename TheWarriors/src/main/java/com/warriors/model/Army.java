@@ -1,10 +1,10 @@
 package com.warriors.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Army {
-    Collection<Unit> troops = new ArrayList<>();
+    private final Queue<Unit> troops = new LinkedList<>();
 
     public void addUnits(Unit.Type unitType, int quantity) {
         for (int i = 0; i < quantity; i++) {
@@ -12,7 +12,19 @@ public class Army {
         }
     }
 
-    public Collection<Unit> getTroops() {
+    public boolean isAlive() {
+        return !troops.isEmpty();
+    }
+
+    public Unit getUnit() {
+        return troops.peek();
+    }
+
+    public void killUnit() {
+        troops.remove();
+    }
+
+    public Queue<Unit> getTroops() {
         return troops;
     }
 }
