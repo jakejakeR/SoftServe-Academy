@@ -8,16 +8,16 @@ import java.util.function.Supplier;
 public enum WarriorType {
 
     WARRIOR(Warrior::new),
-    KNIGHT(Knight::new),
-    DEFENDER(Defender::new);
+    KNIGHT(Knight::new);
+//    DEFENDER(Defender::new);
 
-    private final Supplier<Unit> constructor;
+    private final Supplier<Warrior> constructor;
 
-    WarriorType(Supplier<Unit> constructor) {
+    WarriorType(Supplier<Warrior> constructor) {
         this.constructor = constructor;
     }
 
-    Supplier<Unit> getConstructor() {
+    Supplier<Warrior> getConstructor() {
         return constructor;
     }
 }

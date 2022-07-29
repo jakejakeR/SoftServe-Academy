@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.function.Supplier;
 
 public class Army {
-    private final Queue<Unit> troops = new LinkedList<>();
+    private final Queue<Warrior> troops = new LinkedList<>();
 
     // Factory method pattern
     public Army addUnits(WarriorType warriorType, int quantity) {
@@ -35,7 +35,7 @@ public class Army {
         return !troops.isEmpty();
     }
 
-    public Unit getUnit() {
+    public Warrior getUnit() {
         return troops.peek();
     }
 

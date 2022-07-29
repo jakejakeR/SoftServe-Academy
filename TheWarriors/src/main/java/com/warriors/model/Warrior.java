@@ -1,6 +1,6 @@
 package com.warriors.model;
 
-public class Warrior implements Unit, Cloneable {
+public class Warrior implements Cloneable {
     public static final int INITIAL_ATTACK = 5;
     public static final int INITIAL_HEALTH = 50;
     private int health;
