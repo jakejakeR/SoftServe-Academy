@@ -8,9 +8,9 @@ public class Army {
     private final Queue<Unit> troops = new LinkedList<>();
 
     // Factory method pattern
-    public Army addUnits(Unit.Type unitType, int quantity) {
+    public Army addUnits(WarriorType warriorType, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            troops.add(unitType.getConstructor().get());
+            troops.add(warriorType.getConstructor().get());
         }
         return this;
     }
