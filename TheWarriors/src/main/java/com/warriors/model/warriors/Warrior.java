@@ -7,7 +7,7 @@ public class Warrior implements Cloneable, Fightable {
     public static final int INITIAL_ATTACK = 5;
     public static final int INITIAL_HEALTH = 50;
     private int health;
-    private int attack;
+    private final int attack;
 
     public Warrior() {
         this(INITIAL_HEALTH, INITIAL_ATTACK);
