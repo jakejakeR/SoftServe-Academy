@@ -6,9 +6,6 @@ import com.warriors.model.warriors.Warrior;
 
 import java.util.function.Supplier;
 
-/**
- * Warrior Factory
- */
 public enum WarriorType {
 
     WARRIOR(Warrior::new),

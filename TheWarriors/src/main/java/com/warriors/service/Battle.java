@@ -22,7 +22,6 @@ public class Battle {
         return sideOne.isAlive();
     }
 
-    //TODO use Fightable interface instead of using Warrior class directly
     public static boolean fight(Army attackingArmy, Army defendingArmy) {
         while (attackingArmy.isAlive() && defendingArmy.isAlive()) {
             if (fight(attackingArmy.getUnit(), defendingArmy.getUnit())) {
@@ -31,7 +30,6 @@ public class Battle {
                 attackingArmy.removeDeadUnit();
             }
         }
-
         return attackingArmy.isAlive();
     }
 }
