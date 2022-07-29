@@ -1,7 +1,6 @@
 package com.warriors.model.warriors;
 
-import com.warriors.model.damage.Damage;
-import com.warriors.model.damage.SimpleDamage;
+import com.warriors.model.warriors.interfaces.Fightable;
 
 public class Warrior implements Cloneable, Fightable {
     public static final int INITIAL_ATTACK = 5;
@@ -19,21 +18,6 @@ public class Warrior implements Cloneable, Fightable {
     }
 
     @Override
-    public boolean isAlive() {
-        return health > 0;
-    }
-
-    @Override
-    public void hit(Fightable opponent) {
-        opponent.receiveDamage(new SimpleDamage(getAttack()), this);
-    }
-
-    @Override
-    public void receiveDamage(Damage damage, Fightable damageDealer) {
-        setHealth(getHealth() - damage.getHitPoints());
-    }
-
-    @Override
     public Warrior clone() {
         try {
             return (Warrior) super.clone();
@@ -43,15 +27,22 @@ public class Warrior implements Cloneable, Fightable {
         return null;
     }
 
-    public int getHealth() {
-        return health;
+    @Override
+    public void reduceHealthBasedOnDamage(int damage) {
+        setHealth(getHealth() - damage);
     }
 
+    @Override
     public int getAttack() {
         return attack;
     }
 
-    public void setHealth(int health) {
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    protected void setHealth(int health) {
         this.health = health;
     }
 }

@@ -1,5 +1,7 @@
 package com.warriors.model.warriors;
 
+import com.warriors.model.warriors.interfaces.Defendable;
+
 public class Defender extends Warrior implements Defendable {
     private static final int INITIAL_DEFENSE = 2;
     private final int defense;

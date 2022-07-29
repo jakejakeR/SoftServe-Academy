@@ -1,7 +1,7 @@
 package com.warriors.service;
 
 import com.warriors.model.Army;
-import com.warriors.model.warriors.Fightable;
+import com.warriors.model.warriors.interfaces.Fightable;
 
 /**
  * Battle simulation of fighting warriors
