@@ -34,7 +34,7 @@ class SuitTest {
         knight.hit(warrior);
         var remainingHealth = warrior.getHealth();
         // assert
-        int expectedHealth = Warrior.INITIAL_HEALTH - Knight.ATTACK;
+        int expectedHealth = Warrior.INITIAL_HEALTH - Knight.INITIAL_ATTACK;
         assertEquals(expectedHealth, remainingHealth);
     }
 
@@ -47,7 +47,7 @@ class SuitTest {
         warrior.hit(knight);
         var remainingHealth = knight.getHealth();
         // assert
-        int expectedHealth = Knight.INITIAL_HEALTH - Warrior.ATTACK;
+        int expectedHealth = Knight.INITIAL_HEALTH - Warrior.INITIAL_ATTACK;
         assertEquals(expectedHealth, remainingHealth);
     }
 

@@ -1,13 +1,13 @@
 package com.warriors.model;
 
 public class Warrior implements Unit, Cloneable {
-    public static final int ATTACK = 5;
+    public static final int INITIAL_ATTACK = 5;
     public static final int INITIAL_HEALTH = 50;
     private int health;
     private int attack;
 
     public Warrior() {
-        this(INITIAL_HEALTH, ATTACK);
+        this(INITIAL_HEALTH, INITIAL_ATTACK);
     }
 
     protected Warrior(int health, int attack) {
@@ -18,6 +18,7 @@ public class Warrior implements Unit, Cloneable {
     public boolean isAlive() {
         return health > 0;
     }
+
     public void hit(Warrior opponent) {
         opponent.health -= getAttack();
     }
