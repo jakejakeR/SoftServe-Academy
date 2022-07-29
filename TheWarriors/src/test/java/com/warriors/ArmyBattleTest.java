@@ -1,9 +1,9 @@
 package com.warriors;
 
 import com.warriors.model.Army;
-import com.warriors.model.Knight;
-import com.warriors.model.Warrior;
 import com.warriors.model.WarriorType;
+import com.warriors.model.warriors.Knight;
+import com.warriors.model.warriors.Warrior;
 import com.warriors.service.Battle;
 import org.junit.jupiter.api.Test;
 

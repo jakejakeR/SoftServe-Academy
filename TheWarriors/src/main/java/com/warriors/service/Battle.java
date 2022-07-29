@@ -1,7 +1,7 @@
 package com.warriors.service;
 
 import com.warriors.model.Army;
-import com.warriors.model.Warrior;
+import com.warriors.model.warriors.Fightable;
 
 /**
  * Battle simulation of fighting warriors
@@ -12,20 +12,20 @@ public class Battle {
         throw new IllegalStateException("Utility class");
     }
 
-    public static boolean fight(Warrior warriorAttacker, Warrior warriorDefender) {
-        while (warriorAttacker.isAlive() && warriorDefender.isAlive()) {
-            warriorAttacker.hit(warriorDefender);
-            if (warriorDefender.isAlive()) {
-                warriorDefender.hit(warriorAttacker);
+    public static boolean fight(Fightable sideOne, Fightable sideTwo) {
+        while (sideOne.isAlive() && sideTwo.isAlive()) {
+            sideOne.hit(sideTwo);
+            if (sideTwo.isAlive()) {
+                sideTwo.hit(sideOne);
             }
         }
-        return warriorAttacker.isAlive();
+        return sideOne.isAlive();
     }
 
-    //TODO instead of casting, change Unit interface in order to allow taking Unit as parameter
+    //TODO use Fightable interface instead of using Warrior class directly
     public static boolean fight(Army attackingArmy, Army defendingArmy) {
         while (attackingArmy.isAlive() && defendingArmy.isAlive()) {
-            if (fight((Warrior) attackingArmy.getUnit(), (Warrior) defendingArmy.getUnit())) {
+            if (fight(attackingArmy.getUnit(), defendingArmy.getUnit())) {
                 defendingArmy.removeDeadUnit();
             } else {
                 attackingArmy.removeDeadUnit();

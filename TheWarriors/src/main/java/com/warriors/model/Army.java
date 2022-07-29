@@ -1,5 +1,7 @@
 package com.warriors.model;
 
+import com.warriors.model.warriors.Warrior;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Supplier;
