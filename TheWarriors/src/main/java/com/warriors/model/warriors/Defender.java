@@ -1,4 +1,4 @@
-package com.warriors.model;
+package com.warriors.model.warriors;
 
 public class Defender extends Warrior {
 }

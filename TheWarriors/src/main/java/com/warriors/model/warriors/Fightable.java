@@ -1,4 +1,6 @@
-package com.warriors.model;
+package com.warriors.model.warriors;
+
+import com.warriors.model.damage.Damage;
 
 public interface Fightable {
     boolean isAlive();
