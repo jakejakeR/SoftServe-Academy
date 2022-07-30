@@ -48,11 +48,18 @@ public class Army {
         }
     }
 
-
     // Factory method pattern (adding warriors to troopsCollection!!!)
-    public Army addUnits(WarriorType warriorType, int quantity) {
+    public Army addUnitsIterator(WarriorType warriorType, int quantity) {
         for (int i = 0; i < quantity; i++) {
             troopsList.add(warriorType.getConstructor().get());
+        }
+        return this;
+    }
+
+    // Factory method pattern
+    public Army addUnits(WarriorType warriorType, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            troops.add(warriorType.getConstructor().get());
         }
         return this;
     }
