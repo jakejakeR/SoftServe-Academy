@@ -15,9 +15,9 @@ public class Army {
     /* Iterator that always returns the first alive warrior,
     not removes dead warriors, because maybe in future
     they will be required to revive */
-    List<Fightable> troopsList = new ArrayList<>();
+    private final List<Fightable> troopsList = new ArrayList<>();
 
-    Iterator<Fightable> firstAlive() {
+    public Iterator<Fightable> firstAlive() {
         return new FirstAliveIterator();
     }
 
@@ -28,6 +28,7 @@ public class Army {
          * If the current warrior is not alive -> skip him (cursor++)
          * If the current warrior is alive -> exit loop
          * Iterator points to the first alive warrior
+         *
          * @return true if next warrior is alive
          */
         @Override

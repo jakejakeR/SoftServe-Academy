@@ -32,4 +32,15 @@ public class Battle {
         }
         return attackingArmy.isAlive();
     }
+
+    public static boolean fightUsingIterator(Army attackingArmy, Army defendingArmy) {
+        var iterator1 = attackingArmy.firstAlive();
+        var iterator2 = defendingArmy.firstAlive();
+
+        while (iterator1.hasNext() && iterator2.hasNext()) {
+            fight(iterator1.next(), iterator2.next());
+        }
+
+        return iterator1.hasNext();
+    }
 }
