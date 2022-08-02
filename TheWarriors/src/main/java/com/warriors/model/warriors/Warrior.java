@@ -41,7 +41,7 @@ public class Warrior implements Cloneable, Fightable {
 
     @Override
     public int getHealth() {
-        log.debug("{} has {} points of health.", this, health);
+        LOGGER.debug("{} has {} points of health.", this, health);
         return health;
     }
 
