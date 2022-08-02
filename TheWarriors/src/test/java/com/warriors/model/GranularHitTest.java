@@ -1,4 +1,4 @@
-package com.warriors.service;
+package com.warriors.model;
 
 import com.warriors.model.warriors.Defender;
 import com.warriors.model.warriors.Vampire;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class BattleTest {
+class GranularHitTest {
 
     //region Granular tests
     @Test

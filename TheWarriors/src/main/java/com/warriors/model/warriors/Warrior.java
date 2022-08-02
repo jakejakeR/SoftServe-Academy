@@ -51,6 +51,6 @@ public class Warrior implements Cloneable, Fightable {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "@" + Integer.toHexString(hashCode());
+        return this.getClass().getSimpleName();
     }
 }

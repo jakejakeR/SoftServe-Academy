@@ -1,4 +1,4 @@
-package com.warriors.service;
+package com.warriors.model;
 
 import com.warriors.model.warriors.Warrior;
 

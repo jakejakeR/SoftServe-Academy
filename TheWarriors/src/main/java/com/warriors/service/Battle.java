@@ -9,21 +9,23 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class Battle {
+    private static final String ATTACKING = "attacking ";
+    private static final String DEFENDING = "defending ";
     private Battle() {
         throw new IllegalStateException("Utility class");
     }
 
     public static boolean fight(Fightable sideOne, Fightable sideTwo) {
-        LOGGER.info("The fight between {} and {} has begun!", sideOne, sideTwo);
+        LOGGER.info("The fight between {} and {} has begun!", ATTACKING + sideOne, DEFENDING + sideTwo);
         while (sideOne.isAlive() && sideTwo.isAlive()) {
             sideOne.hit(sideTwo);
-            LOGGER.debug("{} hits {}.", sideOne, sideTwo);
+            LOGGER.debug("{} hits {} (health after hit: {}).", ATTACKING + sideOne, DEFENDING + sideTwo, sideTwo.getHealth());
             if (sideTwo.isAlive()) {
                 sideTwo.hit(sideOne);
-                LOGGER.debug("{} hits back {}.", sideTwo, sideOne);
+                LOGGER.debug("{} hits back {} (health after hit: {}).", DEFENDING + sideTwo, ATTACKING + sideOne, sideOne.getHealth());
             }
         }
-        LOGGER.info("{} has won the fight!", sideOne.isAlive() ? sideOne : sideTwo);
+        LOGGER.info("{} has won the fight! (Health left: {}).", sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo, sideOne.isAlive() ?  sideOne.getHealth() : sideTwo.getHealth());
         return sideOne.isAlive();
     }
 
