@@ -41,11 +41,16 @@ public class Warrior implements Cloneable, Fightable {
 
     @Override
     public int getHealth() {
-        LOGGER.debug("{} has {} points of health.", this, health);
+        LOGGER.trace("{} has {} points of health.", this, health);
         return health;
     }
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "@" + Integer.toHexString(hashCode());
     }
 }

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BattleTest {
 
-    //region Defender Granular tests
+    //region Granular tests
     @Test
     void givenRookie_whenHitsDefender_thenDefenderHealthDoNotIncrease() {
         // given
@@ -112,9 +112,3 @@ class BattleTest {
     //endregion
 }
 
-class Rookie extends Warrior {
-    @Override
-    public int getAttack() {
-        return 1;
-    }
-}

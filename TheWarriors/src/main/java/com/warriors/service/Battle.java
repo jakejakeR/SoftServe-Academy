@@ -2,23 +2,28 @@ package com.warriors.service;
 
 import com.warriors.model.Army;
 import com.warriors.model.warriors.interfaces.Fightable;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Battle simulation of fighting warriors
  */
+@Slf4j
 public class Battle {
-
     private Battle() {
         throw new IllegalStateException("Utility class");
     }
 
     public static boolean fight(Fightable sideOne, Fightable sideTwo) {
+        LOGGER.info("The fight between {} and {} has begun!", sideOne, sideTwo);
         while (sideOne.isAlive() && sideTwo.isAlive()) {
             sideOne.hit(sideTwo);
+            LOGGER.debug("{} hits {}.", sideOne, sideTwo);
             if (sideTwo.isAlive()) {
                 sideTwo.hit(sideOne);
+                LOGGER.debug("{} hits back {}.", sideTwo, sideOne);
             }
         }
+        LOGGER.info("{} has won the fight!", sideOne.isAlive() ? sideOne : sideTwo);
         return sideOne.isAlive();
     }
 
