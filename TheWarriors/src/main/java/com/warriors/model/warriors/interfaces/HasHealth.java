@@ -6,6 +6,4 @@ public interface HasHealth {
     }
     void reduceHealthBasedOnDamage(int damage);
     int getHealth();
-    void setReceivedDamage(int damage);
-    int getReceivedDamage();
 }

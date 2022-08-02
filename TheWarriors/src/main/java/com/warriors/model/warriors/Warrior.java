@@ -1,13 +1,14 @@
 package com.warriors.model.warriors;
 
 import com.warriors.model.warriors.interfaces.Fightable;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Warrior implements Cloneable, Fightable {
     public static final int INITIAL_ATTACK = 5;
     public static final int INITIAL_HEALTH = 50;
     private int health;
     private int attack;
-    private int receivedDamage;
 
     public Warrior() {
         this(INITIAL_HEALTH, INITIAL_ATTACK);
@@ -40,22 +41,11 @@ public class Warrior implements Cloneable, Fightable {
 
     @Override
     public int getHealth() {
+        log.debug("{} has {} points of health.", this, health);
         return health;
     }
 
-    @Override
-    public void setReceivedDamage(int damage) {
-        receivedDamage = damage;
-    }
-
-    @Override
-    public int getReceivedDamage() {
-        return receivedDamage;
-    }
-
-    protected void setHealth(int health) {
+    public void setHealth(int health) {
         this.health = health;
     }
-
-
 }

@@ -6,8 +6,6 @@ public interface Fightable extends Attackable, HasHealth {
     }
 
     default void receiveHit(Attackable damageDealer) {
-        int damage = damageDealer.getAttack();
-        reduceHealthBasedOnDamage(damage);
-        setReceivedDamage(damage);
+        reduceHealthBasedOnDamage(damageDealer.getAttack());
     }
 }

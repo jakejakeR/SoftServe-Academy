@@ -14,8 +14,11 @@ public class Vampire extends Warrior implements Vampirism {
 
     @Override
     public void hit(Fightable opponent) {
+        int opponentsHealthBeforeHit = opponent.getHealth();
         super.hit(opponent);
-        drainLife(opponent);
+        int opponentsHealthAfterHit = opponent.getHealth();
+        int dealtDamage = opponentsHealthBeforeHit - opponentsHealthAfterHit;
+        drainLife(dealtDamage);
     }
 
     @Override
@@ -24,8 +27,8 @@ public class Vampire extends Warrior implements Vampirism {
     }
 
     @Override
-    public void drainLife(Fightable opponent) {
-        int drainedLife = (opponent.getReceivedDamage() * getVampirism()) / 100;
+    public void drainLife(int dealtDamage) {
+        int drainedLife = (dealtDamage * getVampirism()) / 100;
         this.setHealth(Math.min(INITIAL_HEALTH, this.getHealth() + drainedLife));
     }
 }
