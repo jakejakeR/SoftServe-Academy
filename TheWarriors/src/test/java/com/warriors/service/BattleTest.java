@@ -92,6 +92,23 @@ class BattleTest {
         int actualHealth = vampire.getHealth();
         assertEquals(expectedHealth, actualHealth);
     }
+
+    @Test
+    void givenVampireWithHealth37_whenHitsDefender_thenVampireHealthIncreasesTo38() {
+        // given
+        var vampire = new Vampire();
+        vampire.setHealth(37);
+
+        var defender = new Defender();
+
+        // when
+        vampire.hit(defender);
+
+        // then
+        int expectedHealth = 38;
+        int actualHealth = vampire.getHealth();
+        assertEquals(expectedHealth, actualHealth);
+    }
     //endregion
 }
 
