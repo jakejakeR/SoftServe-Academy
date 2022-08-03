@@ -1,4 +1,4 @@
-package com.warriors.service;
+package com.warriors.model;
 
 import com.warriors.model.warriors.Defender;
 import com.warriors.model.warriors.Vampire;
@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class BattleTest {
+class GranularHitTest {
 
-    //region Defender Granular tests
+    //region Granular tests
     @Test
     void givenRookie_whenHitsDefender_thenDefenderHealthDoNotIncrease() {
         // given
@@ -112,9 +112,3 @@ class BattleTest {
     //endregion
 }
 
-class Rookie extends Warrior {
-    @Override
-    public int getAttack() {
-        return 1;
-    }
-}
