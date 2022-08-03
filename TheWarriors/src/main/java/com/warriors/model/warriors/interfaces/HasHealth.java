@@ -8,5 +8,5 @@ public interface HasHealth {
         setHealth(getHealth() - damage);
     }
     int getHealth();
-    void setHealth(int i);
+    void setHealth(int health);
 }
