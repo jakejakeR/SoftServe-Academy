@@ -3,15 +3,19 @@ package com.warriors.model;
 import com.warriors.model.warriors.Defender;
 import com.warriors.model.warriors.Vampire;
 import com.warriors.model.warriors.Warrior;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Slf4j
 class GranularHitTest {
 
     //region Granular tests
     @Test
-    void givenRookie_whenHitsDefender_thenDefenderHealthDoNotIncrease() {
+    void givenRookie_whenHitsDefender_thenDefenderHealthShouldNotIncrease() {
+        LOGGER.info("Rookie hits Defender, Defender's health shouldn't increase.");
+
         // given
         var rookie = new Rookie();
         var defender = new Defender();
@@ -27,6 +31,8 @@ class GranularHitTest {
 
     @Test
     void givenWarrior_whenHitsDefender_thenDefenderHealthShouldBeReducedByThree() {
+        LOGGER.info("Warrior hits Defender, Defender's health should be reduced by 3.");
+
         // given
         var warrior = new Warrior();
         var defender = new Defender();
@@ -42,7 +48,9 @@ class GranularHitTest {
     }
 
     @Test
-    void givenVampireWithHealth30_whenHitsWarrior_thenVampireHealthIncreasesTo32() {
+    void givenVampireWith30Health_whenHitsWarrior_thenVampireHealthShouldIncreaseTo32() {
+        LOGGER.info("Vampire with health: 30 hits Warrior, Vampire's health should increase to 32.");
+
         // given
         var vampire = new Vampire();
         vampire.setHealth(30);
@@ -59,7 +67,9 @@ class GranularHitTest {
     }
 
     @Test
-    void givenVampireWithHealth39_whenHitsWarrior_thenVampireHealthIncreasesTo40() {
+    void givenVampireWith39Health_whenHitsWarrior_thenVampireHealthIncreasesTo40() {
+        LOGGER.info("Vampire with health: 39 hits Warrior, Vampire's health should increase to 40.");
+
         // given
         var vampire = new Vampire();
         vampire.setHealth(39);
@@ -76,7 +86,9 @@ class GranularHitTest {
     }
 
     @Test
-    void givenVampireWithHealth37_whenHitsWarriorWithHealth1_thenVampireHealthIncreasesTo39() {
+    void givenVampireWith37Health_whenHitsWarriorWith1Health_thenVampireHealthIncreasesTo39() {
+        LOGGER.info("Vampire with health: 37 hits Warrior with health: 1, Vampire's health should increase to 39.");
+
         // given
         var vampire = new Vampire();
         vampire.setHealth(37);
@@ -95,6 +107,8 @@ class GranularHitTest {
 
     @Test
     void givenVampireWithHealth37_whenHitsDefender_thenVampireHealthIncreasesTo38() {
+        LOGGER.info("Vampire with health: 37 hits Defender, Vampire's health should increase to 38.");
+
         // given
         var vampire = new Vampire();
         vampire.setHealth(37);

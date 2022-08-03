@@ -23,7 +23,7 @@ public class Vampire extends Warrior implements Vampirism {
         int opponentsHealthAfterHit = opponent.getHealth();
         int dealtDamage = opponentsHealthBeforeHit - opponentsHealthAfterHit;
         drainLife(dealtDamage);
-        LOGGER.debug("{} drains life base on dealt damage ({}) from {} (Health left: {})", this, dealtDamage, opponent, opponent.getHealth());
+        LOGGER.debug("{} drains {} point(s) of life base on dealt damage ({}) from {} (Health left: {})", this, dealtDamage / 2, dealtDamage, opponent, opponent.getHealth());
     }
 
     @Override
