@@ -19,6 +19,4 @@ public class RequestHandler {
     protected void printHandling(Request request) {
         LOGGER.info("{} handling request \"{}\"", this, request);
     }
-
-
 }

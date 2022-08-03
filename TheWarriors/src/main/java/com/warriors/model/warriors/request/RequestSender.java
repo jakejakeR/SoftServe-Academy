@@ -1,6 +1,8 @@
 package com.warriors.model.warriors.request;
 
-public class RequestSender {
+import com.warriors.model.Army;
+
+public class RequestSender extends Army {
     RequestHandler chain;
 
     public RequestSender buildChain(RequestHandler chain) {

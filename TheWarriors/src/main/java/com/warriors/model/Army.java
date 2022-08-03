@@ -25,6 +25,7 @@ public class Army {
 
     private class FirstAliveIterator implements Iterator<Fightable> {
         int cursor = 0;
+        int cursorNext = 1;
 
         /**
          * If the current warrior is not alive -> skip him (cursor++)
@@ -37,8 +38,17 @@ public class Army {
         public boolean hasNext() {
             while (cursor < troopsList.size() && !troopsList.get(cursor).isAlive()) {
                 cursor++;
+                cursorNext = cursor + 1;
             }
             return cursor < troopsList.size();
+        }
+
+        public boolean hasNextBehind() {
+            if (cursorNext < troopsList.size() && !troopsList.get(cursorNext).isAlive()) {
+                return cursorNext < troopsList.size();
+            } else {
+                return false;
+            }
         }
 
         @Override
@@ -47,6 +57,13 @@ public class Army {
                 throw new NoSuchElementException();
             }
             return troopsList.get(cursor); // Typically, next() should return something and move to the next element
+        }
+
+        public Fightable nextBehind() {
+            if (!hasNextBehind()) {
+                throw new NoSuchElementException();
+            }
+            return troopsList.get(cursorNext);
         }
     }
 
