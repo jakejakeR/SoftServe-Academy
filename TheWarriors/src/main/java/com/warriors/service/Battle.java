@@ -43,11 +43,11 @@ public class Battle {
     public static boolean fightUsingIterator(Army attackingArmy, Army defendingArmy) {
         var iterator1 = attackingArmy.firstAlive();
         var iterator2 = defendingArmy.firstAlive();
-
+        LOGGER.info("The battle between {} and {} has begun!", attackingArmy, defendingArmy);
         while (iterator1.hasNext() && iterator2.hasNext()) {
             fight(iterator1.next(), iterator2.next());
         }
-
+        LOGGER.info("{} has won the battle!}", iterator1.hasNext() ? attackingArmy : defendingArmy);
         return iterator1.hasNext();
     }
 }

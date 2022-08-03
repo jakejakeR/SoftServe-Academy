@@ -2,6 +2,7 @@ package com.warriors.model;
 
 import com.warriors.model.warriors.Warrior;
 import com.warriors.model.warriors.interfaces.Fightable;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -9,6 +10,7 @@ import java.util.function.Supplier;
 /**
  * Warrior Factory, creates troops of Warriors
  */
+@Slf4j
 public class Army {
     private final Queue<Fightable> troops = new LinkedList<>();
 
@@ -51,7 +53,9 @@ public class Army {
     // Factory method pattern (adding warriors to troopsCollection!!!)
     public Army addUnitsIterator(WarriorType warriorType, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            troopsList.add(warriorType.getConstructor().get());
+            Warrior warrior = warriorType.getConstructor().get();
+            troopsList.add(warrior);
+            LOGGER.debug("{} added to the army {}.", warrior, this);
         }
         return this;
     }
@@ -90,5 +94,10 @@ public class Army {
 
     public void removeDeadUnit() {
         troops.remove();
+    }
+
+    @Override
+    public String toString() {
+        return "Army: " + troopsList;
     }
 }
