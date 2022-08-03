@@ -123,6 +123,26 @@ class GranularHitTest {
         int actualHealth = vampire.getHealth();
         assertEquals(expectedHealth, actualHealth);
     }
+
+    @Test
+    void givenLancerInArmy1_whenHitsWarriorInArmy2_thenWarriorsHealthShouldDecreaseBy6AndWarriorsHealthBehindHimBy3() {
+
+    }
+
+    @Test
+    void givenLancerInArmy1_whenHitsWarriorInArmy2_thenWarriorsHealthShouldDecreaseBy6AndDefendersHealthBehindHimBy1() {
+
+    }
+
+    @Test
+    void givenLancerInArmy1_whenHitsDefenderInArmy2_thenDefendersHealthShouldDecreaseBy4AndWarriorsHealthBehindHimBy2() {
+
+    }
+
+    @Test
+    void givenLancerInArmy1_whenHitsDefenderInArmy2_thenDefendersHealthShouldDecreaseBy4AndDefendersHealthBehindHimShouldNotDecrease() {
+
+    }
     //endregion
 }
 
