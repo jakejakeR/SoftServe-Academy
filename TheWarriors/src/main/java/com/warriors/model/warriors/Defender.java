@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Defender extends Warrior implements Defendable {
     private static final int INITIAL_HEALTH = 60;
+    public static final int INITIAL_ATTACK = 3;
     private static final int INITIAL_DEFENSE = 2;
     private final int defense;
 
