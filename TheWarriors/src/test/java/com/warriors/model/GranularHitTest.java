@@ -30,6 +30,25 @@ class GranularHitTest {
     }
 
     @Test
+    void givenDefender_whenHitsWarrior_thenWarriorsHealthShouldDecreaseBy3() {
+        LOGGER.info("Defender hits Warrior, Warrior's health should be reduced by 3.");
+
+        // given
+        var defender = new Defender();
+        var warrior = new Warrior();
+        var warriorInitialHealth = warrior.getHealth();
+
+        // when
+        defender.hit(warrior);
+
+
+        // then
+        var actualDifference = warriorInitialHealth - warrior.getHealth();
+        var expectedDifference = 3;
+        assertEquals(expectedDifference, actualDifference);
+    }
+
+    @Test
     void givenWarrior_whenHitsDefender_thenDefenderHealthShouldBeReducedByThree() {
         LOGGER.info("Warrior hits Defender, Defender's health should be reduced by 3.");
 
