@@ -14,8 +14,6 @@ public class Lancer extends Warrior implements LongWeapon {
 
     @Override
     public void hit(Fightable opponent) {
-//        AwareWarrior awareWarrior = new AwareWarrior(opponent, ???);
-//        awareWarrior.hit(awareWarrior);
     }
 
     public void setAttack(int attack) {

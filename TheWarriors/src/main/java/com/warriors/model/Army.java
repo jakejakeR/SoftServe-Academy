@@ -2,6 +2,7 @@ package com.warriors.model;
 
 import com.warriors.model.warriors.Warrior;
 import com.warriors.model.warriors.interfaces.Fightable;
+import com.warriors.model.warriors.request.RequestSender;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -11,7 +12,7 @@ import java.util.function.Supplier;
  * Warrior Factory, creates troops of Warriors
  */
 @Slf4j
-public class Army {
+public class Army extends RequestSender {
     private final Queue<Fightable> troops = new LinkedList<>();
 
     /* Iterator that always returns the first alive warrior,
@@ -68,7 +69,7 @@ public class Army {
     }
 
     // Factory method pattern (adding warriors to troopsCollection!!!)
-    public Army addUnitsIterator(WarriorType warriorType, int quantity) {
+    public Army addUnitsUsingIterator(WarriorType warriorType, int quantity) {
         for (int i = 0; i < quantity; i++) {
             Warrior warrior = warriorType.getConstructor().get();
             troopsList.add(warrior);
