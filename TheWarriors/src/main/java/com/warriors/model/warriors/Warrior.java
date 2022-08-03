@@ -30,11 +30,6 @@ public class Warrior implements Cloneable, Fightable {
     }
 
     @Override
-    public void reduceHealthBasedOnDamage(int damage) {
-        setHealth(getHealth() - damage);
-    }
-
-    @Override
     public int getAttack() {
         return attack;
     }

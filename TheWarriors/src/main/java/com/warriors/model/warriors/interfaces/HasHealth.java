@@ -4,6 +4,9 @@ public interface HasHealth {
     default boolean isAlive() {
         return getHealth() > 0;
     }
-    void reduceHealthBasedOnDamage(int damage);
+    default void reduceHealthBasedOnDamage(int damage) {
+        setHealth(getHealth() - damage);
+    }
     int getHealth();
+    void setHealth(int i);
 }
