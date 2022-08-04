@@ -1,14 +1,23 @@
 package com.warriors.model.damage;
 
-public class SimpleDamage implements Damage {
-    private final int hitPoints;
+import com.warriors.model.warriors.interfaces.IWarrior;
 
-    public SimpleDamage(int hitPoints) {
+public class SimpleDamage implements IDamage {
+    private int hitPoints;
+    private IWarrior damageDealer;
+
+    public SimpleDamage(int hitPoints, IWarrior damageDealer) {
         this.hitPoints = hitPoints;
+        this.damageDealer = damageDealer;
     }
 
     @Override
     public int getHitPoints() {
         return hitPoints;
+    }
+
+    @Override
+    public IWarrior getDamageDealer() {
+        return damageDealer;
     }
 }

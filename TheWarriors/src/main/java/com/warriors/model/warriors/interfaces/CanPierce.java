@@ -1,5 +1,5 @@
 package com.warriors.model.warriors.interfaces;
 
-public interface Attackable {
-    int getAttack();
+public interface CanPierce {
+    int getPierce();
 }

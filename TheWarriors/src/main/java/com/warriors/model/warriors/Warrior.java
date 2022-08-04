@@ -1,12 +1,13 @@
 package com.warriors.model.warriors;
 
-import com.warriors.model.warriors.interfaces.Fightable;
+import com.warriors.model.warriors.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Warrior implements Cloneable, Fightable {
+public class Warrior implements IWarrior {
     public static final int INITIAL_ATTACK = 5;
     public static final int INITIAL_HEALTH = 50;
+    private IWarrior nextBehindInArmy;
     private int health;
     private int attack;
 
@@ -20,18 +21,13 @@ public class Warrior implements Cloneable, Fightable {
     }
 
     @Override
-    public Warrior clone() {
-        try {
-            return (Warrior) super.clone();
-        } catch (CloneNotSupportedException ignored) {
-            System.out.println("This message will never be printed");
-        }
-        return null;
+    public IWarrior getNextBehind() {
+        return nextBehindInArmy;
     }
 
     @Override
-    public void reduceHealthBasedOnDamage(int damage) {
-        setHealth(getHealth() - damage);
+    public void setNextBehind(IWarrior nextBehind) {
+        this.nextBehindInArmy = nextBehind;
     }
 
     @Override
