@@ -1,14 +1,5 @@
 package com.warriors.model.damage;
 
-public class SimpleDamage implements IDamage {
-    private final int hitPoints;
+import com.warriors.model.warriors.interfaces.IWarrior;
 
-    public SimpleDamage(int hitPoints) {
-        this.hitPoints = hitPoints;
-    }
-
-    @Override
-    public int getHitPoints() {
-        return hitPoints;
-    }
-}
+public record SimpleDamage(int hitPoints, IWarrior damageDealer) implements IDamage {}

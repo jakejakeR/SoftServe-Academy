@@ -1,11 +1,9 @@
 package com.warriors.model.warriors.interfaces;
 
-public interface IWarrior extends Attackable, HasHealth {
-    default void hit(IWarrior opponent) {
-        opponent.receiveHit(this);
-    }
+import com.warriors.model.damage.IDamage;
 
-    default void receiveHit(Attackable damageDealer) {
-        reduceHealthBasedOnDamage(damageDealer.getAttack());
-    }
+public interface IWarrior extends CanAttack, HasHealth {
+    void hit(IWarrior opponent);
+
+    void receiveDamage(IDamage damage);
 }

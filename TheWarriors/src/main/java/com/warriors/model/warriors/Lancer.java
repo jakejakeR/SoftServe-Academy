@@ -15,8 +15,4 @@ public class Lancer extends Warrior implements LongWeapon {
     @Override
     public void hit(IWarrior opponent) {
     }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
 }

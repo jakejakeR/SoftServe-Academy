@@ -1,5 +1,5 @@
 package com.warriors.model.warriors.interfaces;
 
-public interface Defendable {
+public interface HasDefense {
     int getDefense();
 }
