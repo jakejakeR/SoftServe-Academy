@@ -5,4 +5,5 @@ public interface HasHealth {
         return getHealth() > 0;
     }
     int getHealth();
+    void setHealth(int health);
 }

@@ -1,7 +1,5 @@
 package com.warriors.model.warriors;
 
-import com.warriors.model.damage.IDamage;
-import com.warriors.model.damage.SimpleDamage;
 import com.warriors.model.warriors.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,16 +17,6 @@ public class Warrior implements IWarrior {
     protected Warrior(int health, int attack) {
         this.health = health;
         this.attack = attack;
-    }
-
-    @Override
-    public void hit(IWarrior opponent) {
-        opponent.receiveDamage(new SimpleDamage(getAttack(), this));
-    }
-
-    @Override
-    public void receiveDamage(IDamage damage) {
-        setHealth(getHealth() - damage.hitPoints());
     }
 
     @Override
