@@ -1,7 +1,7 @@
 package com.warriors.model.warriors.interfaces;
 
-public interface Fightable extends Attackable, HasHealth {
-    default void hit(Fightable opponent) {
+public interface IWarrior extends Attackable, HasHealth {
+    default void hit(IWarrior opponent) {
         opponent.receiveHit(this);
     }
 

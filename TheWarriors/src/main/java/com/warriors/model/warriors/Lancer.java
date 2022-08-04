@@ -1,6 +1,6 @@
 package com.warriors.model.warriors;
 
-import com.warriors.model.warriors.interfaces.Fightable;
+import com.warriors.model.warriors.interfaces.IWarrior;
 import com.warriors.model.warriors.interfaces.LongWeapon;
 
 public class Lancer extends Warrior implements LongWeapon {
@@ -13,7 +13,7 @@ public class Lancer extends Warrior implements LongWeapon {
     }
 
     @Override
-    public void hit(Fightable opponent) {
+    public void hit(IWarrior opponent) {
     }
 
     public void setAttack(int attack) {

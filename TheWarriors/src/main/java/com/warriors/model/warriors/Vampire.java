@@ -1,6 +1,6 @@
 package com.warriors.model.warriors;
 
-import com.warriors.model.warriors.interfaces.Fightable;
+import com.warriors.model.warriors.interfaces.IWarrior;
 import com.warriors.model.warriors.interfaces.Vampirism;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +15,7 @@ public class Vampire extends Warrior implements Vampirism {
     }
 
     @Override
-    public void hit(Fightable opponent) {
+    public void hit(IWarrior opponent) {
         int opponentsHealthBeforeHit = opponent.getHealth();
 
         super.hit(opponent);

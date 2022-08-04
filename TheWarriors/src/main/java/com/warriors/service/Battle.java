@@ -1,7 +1,7 @@
 package com.warriors.service;
 
 import com.warriors.model.Army;
-import com.warriors.model.warriors.interfaces.Fightable;
+import com.warriors.model.warriors.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,7 +15,7 @@ public class Battle {
         throw new IllegalStateException("Utility class");
     }
 
-    public static boolean fight(Fightable sideOne, Fightable sideTwo) {
+    public static boolean fight(IWarrior sideOne, IWarrior sideTwo) {
         LOGGER.info("The fight between {} and {} has begun!", ATTACKING + sideOne, DEFENDING + sideTwo);
         while (sideOne.isAlive() && sideTwo.isAlive()) {
             sideOne.hit(sideTwo);
@@ -30,17 +30,6 @@ public class Battle {
     }
 
     public static boolean fight(Army attackingArmy, Army defendingArmy) {
-        while (attackingArmy.isAlive() && defendingArmy.isAlive()) {
-            if (fight(attackingArmy.getUnit(), defendingArmy.getUnit())) {
-                defendingArmy.removeDeadUnit();
-            } else {
-                attackingArmy.removeDeadUnit();
-            }
-        }
-        return attackingArmy.isAlive();
-    }
-
-    public static boolean fightUsingIterator(Army attackingArmy, Army defendingArmy) {
         var iterator1 = attackingArmy.firstAlive();
         var iterator2 = defendingArmy.firstAlive();
         LOGGER.info("The battle between {} and {} has begun!", attackingArmy, defendingArmy);

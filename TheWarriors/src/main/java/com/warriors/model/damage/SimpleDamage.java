@@ -1,6 +1,6 @@
 package com.warriors.model.damage;
 
-public class SimpleDamage implements Damage {
+public class SimpleDamage implements IDamage {
     private final int hitPoints;
 
     public SimpleDamage(int hitPoints) {

@@ -1,5 +1,5 @@
 package com.warriors.model.damage;
 
-public interface Damage {
+public interface IDamage {
     int getHitPoints();
 }
