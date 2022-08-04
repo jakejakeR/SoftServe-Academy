@@ -9,6 +9,6 @@ public interface IWarrior extends CanAttack, HasHealth {
     }
 
     default void receiveDamage(IDamage damage) {
-        setHealth(getHealth() - damage.hitPoints());
+        reduceHealthBasedOnDamage(damage.hitPoints());
     }
 }
