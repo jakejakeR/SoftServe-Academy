@@ -1,7 +1,8 @@
 package com.warriors.service;
 
 import com.warriors.model.Army;
-import com.warriors.model.WarriorType;
+import com.warriors.model.warriors.Knight;
+import com.warriors.model.warriors.Warrior;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,9 +14,9 @@ class ArmyBattleTestSuite {
     void givenArmyOf1Warrior2KnightsAndAnotherArmyOf2Warriors1Knight_whenFightEachOther_ThenFirstArmyShouldWin() {
         // given
         var army1 = new Army();
-        army1.addUnits(WarriorType.WARRIOR, 1).addUnits(WarriorType.KNIGHT, 2);
+        army1.addUnits(Warrior::new, 1).addUnits(Knight::new, 2);
         var army2 = new Army();
-        army2.addUnits(WarriorType.WARRIOR, 2).addUnits(WarriorType.KNIGHT, 1);
+        army2.addUnits(Warrior::new, 2).addUnits(Knight::new, 1);
 
         // when
         var result = Battle.fight(army1, army2);

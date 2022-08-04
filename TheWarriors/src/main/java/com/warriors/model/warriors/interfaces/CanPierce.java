@@ -1,4 +1,5 @@
 package com.warriors.model.warriors.interfaces;
 
-public interface LongWeapon {
+public interface CanPierce {
+    int getPierce();
 }

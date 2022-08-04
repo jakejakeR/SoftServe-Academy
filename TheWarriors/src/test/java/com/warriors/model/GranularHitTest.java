@@ -1,6 +1,7 @@
 package com.warriors.model;
 
 import com.warriors.model.warriors.Defender;
+import com.warriors.model.warriors.Lancer;
 import com.warriors.model.warriors.Vampire;
 import com.warriors.model.warriors.Warrior;
 import lombok.extern.slf4j.Slf4j;
@@ -146,21 +147,116 @@ class GranularHitTest {
     @Test
     void givenLancerInArmy1_whenHitsWarriorInArmy2_thenWarriorsHealthShouldDecreaseBy6AndWarriorsHealthBehindHimBy3() {
 
+        // given
+        var army1 = new Army();
+        army1.addUnits(Lancer::new, 1);
+        var army2 = new Army();
+        army2.addUnits(Warrior::new, 2);
+
+        var lancer = army1.getTroops().get(0);
+        var warrior = army2.getTroops().get(0);
+        var warriorBehind = army2.getTroops().get(1);
+
+        var warriorInitialHealth = warrior.getHealth();
+        var warriorBehindInitialHealth = warriorBehind.getHealth();
+
+        // when
+        lancer.hit(warrior);
+
+        // then
+        var expectedWarriorDamage = 6;
+        var expectedWarriorBehindDamage = 3;
+
+        var actualWarriorDamage = warriorInitialHealth - warrior.getHealth();
+        var actualWarriorBehindDamage = warriorBehindInitialHealth - warriorBehind.getHealth();
+        assertEquals(expectedWarriorDamage, actualWarriorDamage);
+        assertEquals(expectedWarriorBehindDamage, actualWarriorBehindDamage);
     }
 
     @Test
     void givenLancerInArmy1_whenHitsWarriorInArmy2_thenWarriorsHealthShouldDecreaseBy6AndDefendersHealthBehindHimBy1() {
 
+        // given
+        var army1 = new Army();
+        army1.addUnits(Lancer::new, 1);
+        var army2 = new Army();
+        army2.addUnits(Warrior::new, 1).addUnits(Defender::new, 1);
+
+        var lancer = army1.getTroops().get(0);
+        var warrior = army2.getTroops().get(0);
+        var defenderBehind = army2.getTroops().get(1);
+
+        var warriorInitialHealth = warrior.getHealth();
+        var defenderBehindInitialHealth = defenderBehind.getHealth();
+
+        // when
+        lancer.hit(warrior);
+
+        // then
+        var expectedWarriorDamage = 6;
+        var expectedDefenderBehindDamage = 1;
+
+        var actualWarriorDamage = warriorInitialHealth - warrior.getHealth();
+        var actualDefenderBehindDamage = defenderBehindInitialHealth - defenderBehind.getHealth();
+        assertEquals(expectedWarriorDamage, actualWarriorDamage);
+        assertEquals(expectedDefenderBehindDamage, actualDefenderBehindDamage);
     }
 
     @Test
     void givenLancerInArmy1_whenHitsDefenderInArmy2_thenDefendersHealthShouldDecreaseBy4AndWarriorsHealthBehindHimBy2() {
 
+        // given
+        var army1 = new Army();
+        army1.addUnits(Lancer::new, 1);
+        var army2 = new Army();
+        army2.addUnits(Defender::new, 1).addUnits(Warrior::new, 1);
+
+        var lancer = army1.getTroops().get(0);
+        var defender = army2.getTroops().get(0);
+        var warriorBehind = army2.getTroops().get(1);
+
+        var defenderInitialHealth = defender.getHealth();
+        var warriorBehindInitialHealth = warriorBehind.getHealth();
+
+        // when
+        lancer.hit(defender);
+
+        // then
+        var expectedDefenderDamage = 4;
+        var expectedWarriorBehindDamage = 2;
+
+        var actualDefenderDamage = defenderInitialHealth - defender.getHealth();
+        var actualWarriorBehindDamage = warriorBehindInitialHealth - warriorBehind.getHealth();
+        assertEquals(expectedDefenderDamage, actualDefenderDamage);
+        assertEquals(expectedWarriorBehindDamage, actualWarriorBehindDamage);
     }
 
     @Test
     void givenLancerInArmy1_whenHitsDefenderInArmy2_thenDefendersHealthShouldDecreaseBy4AndDefendersHealthBehindHimShouldNotDecrease() {
+        // given
+        var army1 = new Army();
+        army1.addUnits(Lancer::new, 1);
+        var army2 = new Army();
+        army2.addUnits(Defender::new, 2);
 
+        var lancer = army1.getTroops().get(0);
+        var defender = army2.getTroops().get(0);
+        var defenderBehind = army2.getTroops().get(1);
+
+        var defenderInitialHealth = defender.getHealth();
+        var defenderBehindInitialHealth = defenderBehind.getHealth();
+
+        // when
+        lancer.hit(defender);
+
+        // then
+        var expectedDefenderDamage = 4;
+        var expectedDefenderBehindDamage = 0;
+
+        var actualDefenderDamage = defenderInitialHealth - defender.getHealth();
+        var actualDefenderBehindDamage = defenderBehindInitialHealth - defenderBehind.getHealth();
+        assertEquals(expectedDefenderDamage, actualDefenderDamage);
+        assertEquals(expectedDefenderBehindDamage, actualDefenderBehindDamage);
     }
     //endregion
 }

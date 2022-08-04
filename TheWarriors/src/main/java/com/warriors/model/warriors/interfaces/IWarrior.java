@@ -9,6 +9,17 @@ public interface IWarrior extends CanAttack, HasHealth {
     }
 
     default void receiveDamage(IDamage damage) {
-        reduceHealthBasedOnDamage(damage.hitPoints());
+        reduceHealthBasedOnDamage(damage.getHitPoints());
+    }
+
+    /**
+     *  Remove it do decorator in future
+     */
+    default IWarrior getNextBehind() {
+        return null;
+    }
+
+    default void setNextBehind(IWarrior nextBehind) {
+        throw new UnsupportedOperationException();
     }
 }

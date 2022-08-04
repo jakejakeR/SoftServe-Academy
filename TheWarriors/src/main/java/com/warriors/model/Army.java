@@ -1,6 +1,5 @@
 package com.warriors.model;
 
-import com.warriors.model.warriors.Warrior;
 import com.warriors.model.warriors.interfaces.IWarrior;
 import com.warriors.model.warriors.request.RequestSender;
 import lombok.extern.slf4j.Slf4j;
@@ -22,18 +21,14 @@ public class Army extends RequestSender {
         return new FirstAliveIterator();
     }
 
-    public Army addUnits(WarriorType warriorType, int quantity) {
-        for (int i = 0; i < quantity; i++) {
-            Warrior warrior = warriorType.getConstructor().get();
-            troops.add(warrior);
-            LOGGER.debug("{} added to the army {}.", warrior, this);
-        }
-        return this;
-    }
-
     public Army addUnits(Supplier<IWarrior> factory, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            troops.add(factory.get());
+            IWarrior next = factory.get();
+            if (!troops.isEmpty()) {
+                troops.get(troops.size() - 1).setNextBehind(next);
+            }
+            troops.add(next);
+            LOGGER.debug("{} added to the army {}.", next, this);
         }
         return this;
     }
@@ -41,6 +36,10 @@ public class Army extends RequestSender {
     @Override
     public String toString() {
         return "Army: " + troops;
+    }
+
+    public List<IWarrior> getTroops() {
+        return troops;
     }
 
     /**

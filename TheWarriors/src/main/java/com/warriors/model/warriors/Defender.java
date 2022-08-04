@@ -18,12 +18,12 @@ public class Defender extends Warrior implements HasDefense {
 
     @Override
     public void receiveDamage(IDamage damage) {
-        int reducedDamage = damage.hitPoints() - getDefense();
+        int reducedDamage = damage.getHitPoints() - getDefense();
         setHealth(getHealth() - Math.max(0, reducedDamage));
 
         LOGGER.debug(
-                "{} blocks the attack from {} (attack: {}), and reduces damage to {}",
-                this, damage.damageDealer(), damage.damageDealer().getAttack(), reducedDamage
+                "{} blocks the attack from {} (damage: {}), and reduces damage to {}",
+                this, damage.getDamageDealer(), damage.getHitPoints(), reducedDamage
         );
     }
 
