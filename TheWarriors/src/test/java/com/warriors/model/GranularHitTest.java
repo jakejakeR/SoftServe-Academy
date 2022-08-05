@@ -149,9 +149,9 @@ class GranularHitTest {
 
         // given
         var army1 = new Army();
-        army1.addUnits(Lancer::new, 1);
+        army1.addUnits(Lancer::new, 1).lineUp();
         var army2 = new Army();
-        army2.addUnits(Warrior::new, 2);
+        army2.addUnits(Warrior::new, 2).lineUp();
 
         var lancer = army1.getTroops().get(0);
         var warrior = army2.getTroops().get(0);
@@ -178,9 +178,9 @@ class GranularHitTest {
 
         // given
         var army1 = new Army();
-        army1.addUnits(Lancer::new, 1);
+        army1.addUnits(Lancer::new, 1).lineUp();
         var army2 = new Army();
-        army2.addUnits(Warrior::new, 1).addUnits(Defender::new, 1);
+        army2.addUnits(Warrior::new, 1).addUnits(Defender::new, 1).lineUp();
 
         var lancer = army1.getTroops().get(0);
         var warrior = army2.getTroops().get(0);
@@ -207,9 +207,9 @@ class GranularHitTest {
 
         // given
         var army1 = new Army();
-        army1.addUnits(Lancer::new, 1);
+        army1.addUnits(Lancer::new, 1).lineUp();
         var army2 = new Army();
-        army2.addUnits(Defender::new, 1).addUnits(Warrior::new, 1);
+        army2.addUnits(Defender::new, 1).addUnits(Warrior::new, 1).lineUp();
 
         var lancer = army1.getTroops().get(0);
         var defender = army2.getTroops().get(0);
@@ -235,9 +235,9 @@ class GranularHitTest {
     void givenLancerInArmy1_whenHitsDefenderInArmy2_thenDefendersHealthShouldDecreaseBy4AndDefendersHealthBehindHimShouldNotDecrease() {
         // given
         var army1 = new Army();
-        army1.addUnits(Lancer::new, 1);
+        army1.addUnits(Lancer::new, 1).lineUp();
         var army2 = new Army();
-        army2.addUnits(Defender::new, 2);
+        army2.addUnits(Defender::new, 2).lineUp();
 
         var lancer = army1.getTroops().get(0);
         var defender = army2.getTroops().get(0);
