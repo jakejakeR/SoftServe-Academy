@@ -1,9 +1,6 @@
 package com.warriors.model;
 
-import com.warriors.model.warriors.Defender;
-import com.warriors.model.warriors.Lancer;
-import com.warriors.model.warriors.Vampire;
-import com.warriors.model.warriors.Warrior;
+import com.warriors.model.warriors.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -257,6 +254,35 @@ class GranularHitTest {
         var actualDefenderBehindDamage = defenderBehindInitialHealth - defenderBehind.getHealth();
         assertEquals(expectedDefenderDamage, actualDefenderDamage);
         assertEquals(expectedDefenderBehindDamage, actualDefenderBehindDamage);
+    }
+
+    @Test
+    void givenHealerInDefendingArmyStandsBehindWarrior_whenInjuredWarriorHitsBackLancer_thenHealerHealsHimBy2() {
+
+        // given
+        var attackingArmy = new Army();
+        attackingArmy.addUnits(Lancer::new, 1).lineUp();
+        var defendingArmy = new Army();
+        defendingArmy.addUnits(Warrior::new, 1).addUnits(Healer::new, 1).lineUp();
+        var lancer = attackingArmy.getTroops().get(0);
+        var warrior = defendingArmy.getTroops().get(0);
+        var healer = defendingArmy.getTroops().get(1);
+
+        // when
+        lancer.hit(warrior);
+        var injuredWarriorHealth = warrior.getHealth();
+        var expectedHealthAfterHit = 44;
+
+        warrior.hit(lancer);
+        var healthAfterHealing = warrior.getHealth();
+        var expectedHealthAfterHealing = 46;
+        var healthHealed = healthAfterHealing - injuredWarriorHealth;
+        var expectedHealthHealed = 2;
+
+        // then
+        assertEquals(expectedHealthAfterHit, injuredWarriorHealth);
+        assertEquals(expectedHealthAfterHealing, healthAfterHealing);
+        assertEquals(expectedHealthHealed, healthHealed);
     }
     //endregion
 }
