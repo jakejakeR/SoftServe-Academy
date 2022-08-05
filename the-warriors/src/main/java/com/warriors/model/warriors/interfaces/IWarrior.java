@@ -16,7 +16,7 @@ public interface IWarrior extends CanAttack, HasHealth {
     }
 
     /**
-     *  Remove it do decorator in future
+     * Remove it do decorator in future
      */
     default IWarrior getNextBehind() {
         return null;

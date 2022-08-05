@@ -9,7 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class FightTestSuite {
 
-    @Test // 1. Fight
+    @Test
+        // 1. Fight
     void givenWarriorAndKnight_whenFightEachOther_thenKnightShouldWinWithHealth10() {
         // given
         var warrior = new Warrior();

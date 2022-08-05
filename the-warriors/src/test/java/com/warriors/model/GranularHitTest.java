@@ -291,7 +291,7 @@ class GranularHitTest {
         var warrior = new Warrior();
         var expectedHealthBeforeHeal = 49;
         warrior.setHealth(expectedHealthBeforeHeal);
-        var healer = new  Healer();
+        var healer = new Healer();
 
         // when
         var warriorHealthBeforeHeal = warrior.getHealth();
