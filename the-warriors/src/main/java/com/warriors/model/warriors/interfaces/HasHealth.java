@@ -8,5 +8,6 @@ public interface HasHealth {
         setHealth(getHealth() - hitPoints);
     }
     int getHealth();
+    int getInitialHealth();
     void setHealth(int health);
 }

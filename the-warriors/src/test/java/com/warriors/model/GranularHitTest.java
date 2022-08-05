@@ -284,6 +284,26 @@ class GranularHitTest {
         assertEquals(expectedHealthAfterHealing, healthAfterHealing);
         assertEquals(expectedHealthHealed, healthHealed);
     }
+
+    @Test
+    void givenHealer_whenHealsWarriorWith49Health_thenWarriorShouldBeHealedTo50() {
+        // given
+        var warrior = new Warrior();
+        var expectedHealthBeforeHeal = 49;
+        warrior.setHealth(expectedHealthBeforeHeal);
+        var healer = new  Healer();
+
+        // when
+        var warriorHealthBeforeHeal = warrior.getHealth();
+        healer.heal(warrior);
+        var warriorHealthAfterHeal = warrior.getHealth();
+        var expectedHealthAfterHeal = 50;
+
+        // then
+        assertEquals(expectedHealthBeforeHeal, warriorHealthBeforeHeal);
+        assertEquals(expectedHealthAfterHeal, warriorHealthAfterHeal);
+    }
     //endregion
 }
+
 
