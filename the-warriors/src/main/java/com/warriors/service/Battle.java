@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Battle {
     private static final String ATTACKING = "attacking ";
     private static final String DEFENDING = "defending ";
+
     private Battle() {
         throw new IllegalStateException("Utility class");
     }
@@ -25,7 +26,11 @@ public class Battle {
                 LOGGER.debug("{} hits back {} (health after hit: {}).", DEFENDING + sideTwo, ATTACKING + sideOne, sideOne.getHealth());
             }
         }
-        LOGGER.info("{} has won the fight! (Health left: {}).", sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo, sideOne.isAlive() ?  sideOne.getHealth() : sideTwo.getHealth());
+        LOGGER.info(
+                "{} has won the fight! (Health left: {}).",
+                sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo,
+                sideOne.isAlive() ? sideOne.getHealth() : sideTwo.getHealth()
+        );
         return sideOne.isAlive();
     }
 
