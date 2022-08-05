@@ -41,6 +41,12 @@ public class Warrior implements IWarrior {
         return health;
     }
 
+    @Override
+    public int getInitialHealth() {
+        return INITIAL_HEALTH;
+    }
+
+    @Override
     public void setHealth(int health) {
         this.health = health;
     }
