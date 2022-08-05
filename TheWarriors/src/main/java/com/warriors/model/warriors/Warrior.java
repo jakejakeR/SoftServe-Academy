@@ -42,7 +42,7 @@ public class Warrior implements IWarrior {
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        this.health = Math.min(INITIAL_HEALTH, health);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.warriors.model;
 
 import com.warriors.model.warriors.interfaces.IWarrior;
-import com.warriors.model.warriors.request.RequestSender;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.function.Supplier;
  * Warrior Factory, creates troops of Warriors
  */
 @Slf4j
-public class Army extends RequestSender {
+public class Army {
     private final List<IWarrior> troops = new ArrayList<>();
 
     public Iterator<IWarrior> firstAlive() {
