@@ -1,9 +1,6 @@
 package com.warriors.model;
 
-import com.warriors.model.warriors.Defender;
-import com.warriors.model.warriors.Lancer;
-import com.warriors.model.warriors.Vampire;
-import com.warriors.model.warriors.Warrior;
+import com.warriors.model.warriors.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -149,9 +146,9 @@ class GranularHitTest {
 
         // given
         var army1 = new Army();
-        army1.addUnits(Lancer::new, 1);
+        army1.addUnits(Lancer::new, 1).lineUp();
         var army2 = new Army();
-        army2.addUnits(Warrior::new, 2);
+        army2.addUnits(Warrior::new, 2).lineUp();
 
         var lancer = army1.getTroops().get(0);
         var warrior = army2.getTroops().get(0);
@@ -178,9 +175,9 @@ class GranularHitTest {
 
         // given
         var army1 = new Army();
-        army1.addUnits(Lancer::new, 1);
+        army1.addUnits(Lancer::new, 1).lineUp();
         var army2 = new Army();
-        army2.addUnits(Warrior::new, 1).addUnits(Defender::new, 1);
+        army2.addUnits(Warrior::new, 1).addUnits(Defender::new, 1).lineUp();
 
         var lancer = army1.getTroops().get(0);
         var warrior = army2.getTroops().get(0);
@@ -207,9 +204,9 @@ class GranularHitTest {
 
         // given
         var army1 = new Army();
-        army1.addUnits(Lancer::new, 1);
+        army1.addUnits(Lancer::new, 1).lineUp();
         var army2 = new Army();
-        army2.addUnits(Defender::new, 1).addUnits(Warrior::new, 1);
+        army2.addUnits(Defender::new, 1).addUnits(Warrior::new, 1).lineUp();
 
         var lancer = army1.getTroops().get(0);
         var defender = army2.getTroops().get(0);
@@ -235,9 +232,9 @@ class GranularHitTest {
     void givenLancerInArmy1_whenHitsDefenderInArmy2_thenDefendersHealthShouldDecreaseBy4AndDefendersHealthBehindHimShouldNotDecrease() {
         // given
         var army1 = new Army();
-        army1.addUnits(Lancer::new, 1);
+        army1.addUnits(Lancer::new, 1).lineUp();
         var army2 = new Army();
-        army2.addUnits(Defender::new, 2);
+        army2.addUnits(Defender::new, 2).lineUp();
 
         var lancer = army1.getTroops().get(0);
         var defender = army2.getTroops().get(0);
@@ -257,6 +254,35 @@ class GranularHitTest {
         var actualDefenderBehindDamage = defenderBehindInitialHealth - defenderBehind.getHealth();
         assertEquals(expectedDefenderDamage, actualDefenderDamage);
         assertEquals(expectedDefenderBehindDamage, actualDefenderBehindDamage);
+    }
+
+    @Test
+    void givenHealerInDefendingArmyStandsBehindWarrior_whenInjuredWarriorHitsBackLancer_thenHealerHealsHimBy2() {
+
+        // given
+        var attackingArmy = new Army();
+        attackingArmy.addUnits(Lancer::new, 1).lineUp();
+        var defendingArmy = new Army();
+        defendingArmy.addUnits(Warrior::new, 1).addUnits(Healer::new, 1).lineUp();
+        var lancer = attackingArmy.getTroops().get(0);
+        var warrior = defendingArmy.getTroops().get(0);
+        var healer = defendingArmy.getTroops().get(1);
+
+        // when
+        lancer.hit(warrior);
+        var injuredWarriorHealth = warrior.getHealth();
+        var expectedHealthAfterHit = 44;
+
+        warrior.hit(lancer);
+        var healthAfterHealing = warrior.getHealth();
+        var expectedHealthAfterHealing = 46;
+        var healthHealed = healthAfterHealing - injuredWarriorHealth;
+        var expectedHealthHealed = 2;
+
+        // then
+        assertEquals(expectedHealthAfterHit, injuredWarriorHealth);
+        assertEquals(expectedHealthAfterHealing, healthAfterHealing);
+        assertEquals(expectedHealthHealed, healthHealed);
     }
     //endregion
 }

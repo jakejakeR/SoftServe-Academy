@@ -1,11 +1,14 @@
 package com.warriors.model.warriors.interfaces;
 
+import com.warriors.model.command.HealCommand;
+import com.warriors.model.command.ICommand;
 import com.warriors.model.damage.IDamage;
 import com.warriors.model.damage.SimpleDamage;
 
 public interface IWarrior extends CanAttack, HasHealth {
     default void hit(IWarrior opponent) {
         opponent.receiveDamage(new SimpleDamage(getAttack(), this));
+        processCommand(new HealCommand(), this);
     }
 
     default void receiveDamage(IDamage damage) {
@@ -21,5 +24,12 @@ public interface IWarrior extends CanAttack, HasHealth {
 
     default void setNextBehind(IWarrior nextBehind) {
         throw new UnsupportedOperationException();
+    }
+
+    default void processCommand(ICommand command, IWarrior sender) {
+        var behind = getNextBehind();
+        if (behind != null) {
+            behind.processCommand(command, this);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.warriors.model;
 
 import com.warriors.model.warriors.interfaces.IWarrior;
-import com.warriors.model.warriors.request.RequestSender;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.function.Supplier;
  * Warrior Factory, creates troops of Warriors
  */
 @Slf4j
-public class Army extends RequestSender {
+public class Army {
     private final List<IWarrior> troops = new ArrayList<>();
 
     public Iterator<IWarrior> firstAlive() {
@@ -23,12 +22,16 @@ public class Army extends RequestSender {
 
     public Army addUnits(Supplier<IWarrior> factory, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            IWarrior next = factory.get();
-            if (!troops.isEmpty()) {
-                troops.get(troops.size() - 1).setNextBehind(next);
-            }
-            troops.add(next);
-            LOGGER.debug("{} added to the army {}.", next, this);
+            IWarrior warrior = factory.get();
+            troops.add(warrior);
+            LOGGER.debug("{} added to the army {}.", warrior, this);
+        }
+        return this;
+    }
+
+    public Army lineUp() {
+        for (int i = 1; i < troops.size(); i++) {
+            troops.get(i - 1).setNextBehind(troops.get(i));
         }
         return this;
     }
@@ -44,8 +47,8 @@ public class Army extends RequestSender {
 
     /**
      * Iterator that always returns the first alive warrior,
-     *     not removes dead warriors, because maybe in future
-     *     they will be required to revive
+     * not removes dead warriors, because maybe in future
+     * they will be required to revive
      */
     private class FirstAliveIterator implements Iterator<IWarrior> {
         int cursor = 0;
