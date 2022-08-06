@@ -36,6 +36,14 @@ public class Army {
         return this;
     }
 
+    public boolean isAlive() {
+        return !troops.isEmpty();
+    }
+
+    public void removeDeadWarriors() {
+        troops.removeIf(iWarrior -> !iWarrior.isAlive());
+    }
+
     @Override
     public String toString() {
         return "Army: " + troops;
