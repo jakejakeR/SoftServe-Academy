@@ -3,11 +3,11 @@ package com.warriors.service;
 import com.warriors.model.Army;
 import com.warriors.model.warriors.Healer;
 import com.warriors.model.warriors.Knight;
+import com.warriors.model.warriors.Lancer;
 import com.warriors.model.warriors.Warrior;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ArmyBattleTestSuite {
 
@@ -31,7 +31,7 @@ class ArmyBattleTestSuite {
     }
 
     @Test
-    void givenArmy1AndArmy2_whenFightEachOther_thenTheFirstShouldWin() {
+    void givenArmy1AndArmy2_whenStraightFightEachOther_thenTheFirstShouldWin() {
 
         //given
         var army1 = new Army()
@@ -47,5 +47,22 @@ class ArmyBattleTestSuite {
 
         // then
         assertTrue(result);
+    }
+
+    @Test
+    void givenArmy1AndArmy2_whenStraightFightEachOther_thenTheSecondShouldWin() {
+
+        //given
+        var army1 = new Army()
+                .addUnits(Warrior::new, 10);
+        var army2 = new Army()
+                .addUnits(Warrior::new, 6)
+                .addUnits(Lancer::new, 5);
+
+        // when
+        var result = Battle.straightFight(army1, army2);
+
+        // then
+        assertFalse(result);
     }
 }

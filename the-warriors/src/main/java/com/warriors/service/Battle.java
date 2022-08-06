@@ -58,6 +58,9 @@ public class Battle {
             leftArmy.removeDeadWarriors();
             rightArmy.removeDeadWarriors();
         }
+
+        LOGGER.debug("First army after battle: {}", leftArmy);
+        LOGGER.debug("Second army after battle: {}", rightArmy);
         return leftArmy.isAlive();
     }
 }
