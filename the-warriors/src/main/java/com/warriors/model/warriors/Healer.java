@@ -18,6 +18,10 @@ public class Healer extends Warrior implements CanHeal {
     }
 
     @Override
+    public void hit(IWarrior opponent) {
+    }
+
+    @Override
     public void processCommand(ICommand command, IWarrior sender) {
         if (command instanceof HealCommand) {
             int healthBeforeHeal = sender.getHealth();
