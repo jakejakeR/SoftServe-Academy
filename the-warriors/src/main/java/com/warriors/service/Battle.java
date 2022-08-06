@@ -44,4 +44,20 @@ public class Battle {
         LOGGER.info("{} has won the battle!}", iterator1.hasNext() ? attackingArmy : defendingArmy);
         return iterator1.hasNext();
     }
+
+    // Maybe I will try to use iterator instead?
+    public static boolean straightFight(Army leftArmy, Army rightArmy) {
+        LOGGER.info("The straight fight between {} and {} has begun!", leftArmy, rightArmy);
+        while (leftArmy.isAlive() && rightArmy.isAlive()) {
+            int smallerArmySize = Math.min(leftArmy.getTroops().size(), rightArmy.getTroops().size());
+
+            for (int i = 0; i < smallerArmySize; i++) {
+                fight(leftArmy.getTroops().get(i), rightArmy.getTroops().get(i));
+            }
+
+            leftArmy.removeDeadWarriors();
+            rightArmy.removeDeadWarriors();
+        }
+        return leftArmy.isAlive();
+    }
 }
