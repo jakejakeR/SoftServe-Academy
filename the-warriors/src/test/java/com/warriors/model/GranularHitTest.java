@@ -230,6 +230,7 @@ class GranularHitTest {
 
     @Test
     void givenLancerInArmy1_whenHitsDefenderInArmy2_thenDefendersHealthShouldDecreaseBy4AndDefendersHealthBehindHimShouldNotDecrease() {
+
         // given
         var army1 = new Army();
         army1.addUnits(Lancer::new, 1).lineUp();
@@ -287,6 +288,7 @@ class GranularHitTest {
 
     @Test
     void givenHealer_whenHealsWarriorWith49Health_thenWarriorShouldBeHealedTo50() {
+
         // given
         var warrior = new Warrior();
         var expectedHealthBeforeHeal = 49;

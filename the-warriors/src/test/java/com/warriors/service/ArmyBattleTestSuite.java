@@ -13,6 +13,7 @@ class ArmyBattleTestSuite {
 
     @Test
     void givenArmyOf1Warrior2KnightsAndAnotherArmyOf2Warriors1Knight_whenFightEachOther_ThenFirstArmyShouldWin() {
+
         // given
         var army1 = new Army();
         army1.addUnits(Warrior::new, 1).addUnits(Knight::new, 2);
@@ -30,7 +31,9 @@ class ArmyBattleTestSuite {
     }
 
     @Test
-    void straightArmyTest() {
+    void givenArmy1AndArmy2_whenFightEachOther_thenTheFirstShouldWin() {
+
+        //given
         var army1 = new Army()
                 .addUnits(Warrior::new, 2)
                 .addUnits(Knight::new, 1);
@@ -38,8 +41,11 @@ class ArmyBattleTestSuite {
                 .addUnits(Knight::new, 1)
                 .addUnits(Healer::new, 1)
                 .addUnits(Knight::new, 1);
+
+        // when
         var result = Battle.straightFight(army1, army2);
 
+        // then
         assertTrue(result);
     }
 }
