@@ -53,6 +53,6 @@ public class Warrior implements IWarrior {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName();
+        return this.getClass().getSimpleName() + ": " + this.getHealth();
     }
 }
