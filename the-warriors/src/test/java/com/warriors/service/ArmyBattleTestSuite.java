@@ -1,6 +1,7 @@
 package com.warriors.service;
 
 import com.warriors.model.Army;
+import com.warriors.model.warriors.Healer;
 import com.warriors.model.warriors.Knight;
 import com.warriors.model.warriors.Warrior;
 import org.junit.jupiter.api.Test;
@@ -26,5 +27,19 @@ class ArmyBattleTestSuite {
         var expectedHealth = 22;
         assertTrue(result);
         assertEquals(expectedHealth, lastKnightAliveHealth);
+    }
+
+    @Test
+    void straightArmyTest() {
+        var army1 = new Army()
+                .addUnits(Warrior::new, 2)
+                .addUnits(Knight::new, 1);
+        var army2 = new Army()
+                .addUnits(Knight::new, 1)
+                .addUnits(Healer::new, 1)
+                .addUnits(Knight::new, 1);
+        var result = Battle.straightFight(army1, army2);
+
+        assertTrue(result);
     }
 }
