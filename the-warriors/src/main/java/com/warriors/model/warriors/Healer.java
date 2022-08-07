@@ -19,6 +19,7 @@ public class Healer extends Warrior implements CanHeal {
 
     @Override
     public void hit(IWarrior opponent) {
+        // ignore because healer has 0 points attack
     }
 
     @Override
