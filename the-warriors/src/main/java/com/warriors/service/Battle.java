@@ -35,6 +35,8 @@ public class Battle {
     }
 
     public static boolean fight(Army attackingArmy, Army defendingArmy) {
+        attackingArmy.lineUp();
+        defendingArmy.lineUp();
         var iterator1 = attackingArmy.firstAlive();
         var iterator2 = defendingArmy.firstAlive();
         LOGGER.info("The battle between {} and {} has begun!", attackingArmy, defendingArmy);
