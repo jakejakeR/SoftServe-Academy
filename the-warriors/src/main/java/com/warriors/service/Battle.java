@@ -42,6 +42,8 @@ public class Battle {
         LOGGER.info("The battle between {} and {} has begun!", attackingArmy, defendingArmy);
         while (iterator1.hasNext() && iterator2.hasNext()) {
             fight(iterator1.next(), iterator2.next());
+            LOGGER.error("First army after fight: {}", attackingArmy);
+            LOGGER.error("Second army after fight: {}", defendingArmy);
         }
         LOGGER.info("{} has won the battle!}", iterator1.hasNext() ? attackingArmy : defendingArmy);
         return iterator1.hasNext();
