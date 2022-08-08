@@ -150,9 +150,9 @@ class GranularHitTest {
         var army2 = new Army();
         army2.addUnits(Warrior::new, 2).lineUp();
 
-        var lancer = army1.getTroops().get(0);
-        var warrior = army2.getTroops().get(0);
-        var warriorBehind = army2.getTroops().get(1);
+        var lancer = army1.getWarriorFromTroops(0);
+        var warrior = army2.getWarriorFromTroops(0);
+        var warriorBehind = army2.getWarriorFromTroops(1);
 
         var warriorInitialHealth = warrior.getHealth();
         var warriorBehindInitialHealth = warriorBehind.getHealth();
@@ -179,9 +179,9 @@ class GranularHitTest {
         var army2 = new Army();
         army2.addUnits(Warrior::new, 1).addUnits(Defender::new, 1).lineUp();
 
-        var lancer = army1.getTroops().get(0);
-        var warrior = army2.getTroops().get(0);
-        var defenderBehind = army2.getTroops().get(1);
+        var lancer = army1.getWarriorFromTroops(0);
+        var warrior = army2.getWarriorFromTroops(0);
+        var defenderBehind = army2.getWarriorFromTroops(1);
 
         var warriorInitialHealth = warrior.getHealth();
         var defenderBehindInitialHealth = defenderBehind.getHealth();
@@ -208,9 +208,9 @@ class GranularHitTest {
         var army2 = new Army();
         army2.addUnits(Defender::new, 1).addUnits(Warrior::new, 1).lineUp();
 
-        var lancer = army1.getTroops().get(0);
-        var defender = army2.getTroops().get(0);
-        var warriorBehind = army2.getTroops().get(1);
+        var lancer = army1.getWarriorFromTroops(0);
+        var defender = army2.getWarriorFromTroops(0);
+        var warriorBehind = army2.getWarriorFromTroops(1);
 
         var defenderInitialHealth = defender.getHealth();
         var warriorBehindInitialHealth = warriorBehind.getHealth();
@@ -237,9 +237,9 @@ class GranularHitTest {
         var army2 = new Army();
         army2.addUnits(Defender::new, 2).lineUp();
 
-        var lancer = army1.getTroops().get(0);
-        var defender = army2.getTroops().get(0);
-        var defenderBehind = army2.getTroops().get(1);
+        var lancer = army1.getWarriorFromTroops(0);
+        var defender = army2.getWarriorFromTroops(0);
+        var defenderBehind = army2.getWarriorFromTroops(1);
 
         var defenderInitialHealth = defender.getHealth();
         var defenderBehindInitialHealth = defenderBehind.getHealth();
@@ -265,9 +265,9 @@ class GranularHitTest {
         attackingArmy.addUnits(Lancer::new, 1).lineUp();
         var defendingArmy = new Army();
         defendingArmy.addUnits(Warrior::new, 1).addUnits(Healer::new, 1).lineUp();
-        var lancer = attackingArmy.getTroops().get(0);
-        var warrior = defendingArmy.getTroops().get(0);
-        var healer = defendingArmy.getTroops().get(1);
+        var lancer = attackingArmy.getWarriorFromTroops(0);
+        var warrior = defendingArmy.getWarriorFromTroops(0);
+        var healer = defendingArmy.getWarriorFromTroops(1);
 
         // when
         lancer.hit(warrior);

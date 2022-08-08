@@ -36,6 +36,14 @@ public class Army {
         return this;
     }
 
+    public int armySize() {
+        return troops.size();
+    }
+
+    public IWarrior getWarriorFromTroops(int i) {
+        return troops.get(i);
+    }
+
     public boolean isAlive() {
         return !troops.isEmpty();
     }
@@ -47,10 +55,6 @@ public class Army {
     @Override
     public String toString() {
         return "Army: " + troops;
-    }
-
-    public List<IWarrior> getTroops() {
-        return troops;
     }
 
     /**

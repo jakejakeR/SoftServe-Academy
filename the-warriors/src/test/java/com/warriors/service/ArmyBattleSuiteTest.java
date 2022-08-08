@@ -39,9 +39,9 @@ class ArmyBattleSuiteTest {
 
         // when
         var result = Battle.fight(army1, army2);
-        var actualLancerHealth = army1.getTroops().get(0).getHealth();
-        var actualWarriorHealth = army2.getTroops().get(0).getHealth();
-        var actualHealerHealth = army2.getTroops().get(1).getHealth();
+        var actualLancerHealth = army1.getWarriorFromTroops(0).getHealth();
+        var actualWarriorHealth = army2.getWarriorFromTroops(0).getHealth();
+        var actualHealerHealth = army2.getWarriorFromTroops(1).getHealth();
 
         // then
         assertFalse(result);
