@@ -20,10 +20,8 @@ public class Battle {
         LOGGER.info("The fight between {} and {} has begun!", ATTACKING + sideOne, DEFENDING + sideTwo);
         while (sideOne.isAlive() && sideTwo.isAlive()) {
             sideOne.hit(sideTwo);
-            LOGGER.debug("{} hits {} (health after hit: {}).", ATTACKING + sideOne, DEFENDING + sideTwo, sideTwo.getHealth());
             if (sideTwo.isAlive()) {
                 sideTwo.hit(sideOne);
-                LOGGER.debug("{} hits back {} (health after hit: {}).", DEFENDING + sideTwo, ATTACKING + sideOne, sideOne.getHealth());
             }
         }
         LOGGER.info(

@@ -1,5 +1,8 @@
 package com.warriors.model.warriors;
 
+import com.warriors.model.command.ICommand;
+import com.warriors.model.damage.IDamage;
+import com.warriors.model.damage.IPiercing;
 import com.warriors.model.warriors.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +21,24 @@ public class Warrior implements IWarrior {
     protected Warrior(int health, int attack) {
         this.health = health;
         this.attack = attack;
+    }
+
+    @Override
+    public void processCommand(ICommand command, IWarrior sender) {
+        if (command instanceof IDamage damage) {
+            int initialHealth = getHealth();
+            receiveDamage(damage);
+            int dealtDamage = initialHealth - getHealth();
+
+            if (command instanceof IPiercing piercing && piercing.getCounter() > 1) {
+                piercing.decreaseCounter();
+                damage.setHitPoints(dealtDamage);
+                getNextBehind().processCommand(command, this);
+            }
+            return;
+        }
+
+        IWarrior.super.processCommand(command, sender);
     }
 
     @Override

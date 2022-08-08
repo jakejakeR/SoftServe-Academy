@@ -4,10 +4,14 @@ import com.warriors.model.command.HealCommand;
 import com.warriors.model.command.ICommand;
 import com.warriors.model.damage.IDamage;
 import com.warriors.model.damage.SimpleDamage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public interface IWarrior extends CanAttack, HasHealth {
     default void hit(IWarrior opponent) {
-        opponent.receiveDamage(new SimpleDamage(getAttack(), this));
+        opponent.processCommand(new SimpleDamage(getAttack(), this), this);
+        final Logger logger = LoggerFactory.getLogger("Hit logger");
+        logger.info("{} hits {} (health after hit: {}).", this, opponent, opponent.getHealth());
         processCommand(new HealCommand(), this);
     }
 

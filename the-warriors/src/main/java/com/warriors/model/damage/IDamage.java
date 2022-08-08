@@ -5,5 +5,7 @@ import com.warriors.model.warriors.interfaces.IWarrior;
 public interface IDamage {
     int getHitPoints();
 
+    void setHitPoints(int hitPoints);
+
     IWarrior getDamageDealer();
 }
