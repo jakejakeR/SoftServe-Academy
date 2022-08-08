@@ -13,7 +13,7 @@ public class SimpleDamage implements IDamage, ICommand {
     }
 
     @Override
-    public void setHitPoints(int hitPoints) {
+    public void setPierceHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
     }
 

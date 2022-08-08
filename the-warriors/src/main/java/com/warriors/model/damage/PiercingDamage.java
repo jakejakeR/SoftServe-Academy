@@ -25,8 +25,8 @@ public class PiercingDamage extends SimpleDamage implements IPiercing, CanPierce
     }
 
     @Override
-    public void setHitPoints(int hitPoints) {
-        super.setHitPoints(hitPoints * getPierce() / 100);
+    public void setPierceHitPoints(int hitPoints) {
+        super.setPierceHitPoints(hitPoints * getPierce() / 100);
     }
 
     @Override

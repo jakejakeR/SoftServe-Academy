@@ -32,7 +32,7 @@ public class Warrior implements IWarrior {
 
             if (command instanceof IPiercing piercing && piercing.getCounter() > 1) {
                 piercing.decreaseCounter();
-                damage.setHitPoints(dealtDamage);
+                damage.setPierceHitPoints(dealtDamage);
                 getNextBehind().processCommand(command, this);
             }
             return;
