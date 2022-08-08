@@ -31,6 +31,7 @@ public class Healer extends Warrior implements CanHeal {
                     "{} heals injured {} and increases his health from {} to {}.",
                     this, sender, healthBeforeHeal, sender.getHealth()
             );
+            return;
         }
         super.processCommand(command, sender);
     }
