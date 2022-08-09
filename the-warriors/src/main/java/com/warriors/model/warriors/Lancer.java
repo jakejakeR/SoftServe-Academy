@@ -1,6 +1,7 @@
 package com.warriors.model.warriors;
 
-import com.warriors.model.damage.SimpleDamage;
+import com.warriors.model.command.HealCommand;
+import com.warriors.model.damage.PiercingDamage;
 import com.warriors.model.warriors.interfaces.CanPierce;
 import com.warriors.model.warriors.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
@@ -20,21 +21,9 @@ public class Lancer extends Warrior implements CanPierce {
 
     @Override
     public void hit(IWarrior opponent) {
-        int healthBeforeHit = opponent.getHealth();
-        super.hit(opponent);
-        int dealtDamage = healthBeforeHit - opponent.getHealth();
-
-        LOGGER.info("{} hits {} and deals damage: {}.", this, opponent, dealtDamage);
-
-        IWarrior nextBehind = opponent.getNextBehind();
-        if (nextBehind != null) {
-            int pierceDamage = dealtDamage * getPierce() / 100;
-            int healthBeforePiercing = nextBehind.getHealth();
-            nextBehind.receiveDamage(new SimpleDamage(pierceDamage, this));
-            int piercingDamage = healthBeforePiercing - nextBehind.getHealth();
-
-            LOGGER.info("{} stands behind {} and receives piercing damage: {}.", nextBehind, opponent, piercingDamage);
-        }
+        opponent.processCommand(new PiercingDamage(getAttack(), this, getPierce()), this);
+        LOGGER.info("{} hits {} (health after hit: {}).", this, opponent, opponent.getHealth());
+        processCommand(new HealCommand(), this);
     }
 
     @Override

@@ -31,23 +31,25 @@ class ArmyBattleSuiteTest {
     }
 
     @Test
-    void givenArmyOf1LancerAndArmyOf1WarriorAndHealer_whenFightEachOther_thenTheSecondShouldWin() {
+    void givenArmyOf1LancerAndArmyOf1WarriorAnd2Healers_whenFightEachOther_thenTheSecondShouldWin() {
 
         // given
         Army army1 = new Army().addUnits(Lancer::new, 1);
-        Army army2 = new Army().addUnits(Warrior::new, 1).addUnits(Healer::new, 1);
+        Army army2 = new Army().addUnits(Warrior::new, 1).addUnits(Healer::new, 2);
 
         // when
         var result = Battle.fight(army1, army2);
         var actualLancerHealth = army1.getWarriorFromTroops(0).getHealth();
         var actualWarriorHealth = army2.getWarriorFromTroops(0).getHealth();
-        var actualHealerHealth = army2.getWarriorFromTroops(1).getHealth();
+        var actualHealer1Health = army2.getWarriorFromTroops(1).getHealth();
+        var actualHealer2Health = army2.getWarriorFromTroops(2).getHealth();
 
         // then
         assertFalse(result);
         assertEquals(0, actualLancerHealth);
         assertEquals(10, actualWarriorHealth);
-        assertEquals(30, actualHealerHealth);
+        assertEquals(30, actualHealer1Health);
+        assertEquals(60, actualHealer2Health);
     }
 
     @Test

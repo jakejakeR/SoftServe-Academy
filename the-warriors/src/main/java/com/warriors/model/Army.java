@@ -29,9 +29,26 @@ public class Army {
         return this;
     }
 
+    /**
+     * Lines up warriors in army in order to
+     * be sure that skills like pierce attack
+     * or heal are executed in Battle.Fight().
+     */
     public Army lineUp() {
         for (int i = 1; i < troops.size(); i++) {
             troops.get(i - 1).setNextBehind(troops.get(i));
+        }
+        return this;
+    }
+
+    /**
+     * Delete connections between warriors in army if any
+     * in order to be sure that skills like pierce attack
+     * or heal are not executed in Battle.straightFight().
+     */
+    public Army deleteConnections() {
+        for (IWarrior troop : troops) {
+            troop.setNextBehind(null);
         }
         return this;
     }

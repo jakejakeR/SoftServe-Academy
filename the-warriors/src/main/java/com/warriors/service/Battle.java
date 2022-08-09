@@ -20,10 +20,8 @@ public class Battle {
         LOGGER.info("The fight between {} and {} has begun!", ATTACKING + sideOne, DEFENDING + sideTwo);
         while (sideOne.isAlive() && sideTwo.isAlive()) {
             sideOne.hit(sideTwo);
-            LOGGER.debug("{} hits {} (health after hit: {}).", ATTACKING + sideOne, DEFENDING + sideTwo, sideTwo.getHealth());
             if (sideTwo.isAlive()) {
                 sideTwo.hit(sideOne);
-                LOGGER.debug("{} hits back {} (health after hit: {}).", DEFENDING + sideTwo, ATTACKING + sideOne, sideOne.getHealth());
             }
         }
         LOGGER.info(
@@ -42,6 +40,8 @@ public class Battle {
         LOGGER.info("The battle between {} and {} has begun!", attackingArmy, defendingArmy);
         while (iterator1.hasNext() && iterator2.hasNext()) {
             fight(iterator1.next(), iterator2.next());
+            LOGGER.error("First army after fight: {}", attackingArmy);
+            LOGGER.error("Second army after fight: {}", defendingArmy);
         }
         LOGGER.info("{} has won the battle!}", iterator1.hasNext() ? attackingArmy : defendingArmy);
         return iterator1.hasNext();
@@ -50,6 +50,8 @@ public class Battle {
     // Maybe I will try to use iterator instead?
     public static boolean straightFight(Army leftArmy, Army rightArmy) {
         LOGGER.info("The straight fight between {} and {} has begun!", leftArmy, rightArmy);
+        leftArmy.deleteConnections();
+        rightArmy.deleteConnections();
         while (leftArmy.isAlive() && rightArmy.isAlive()) {
             int smallerArmySize = Math.min(leftArmy.armySize(), rightArmy.armySize());
 
