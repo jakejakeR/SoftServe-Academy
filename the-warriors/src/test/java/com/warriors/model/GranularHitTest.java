@@ -267,7 +267,6 @@ class GranularHitTest {
         defendingArmy.addUnits(Warrior::new, 1).addUnits(Healer::new, 1).lineUp();
         var lancer = attackingArmy.getWarriorFromTroops(0);
         var warrior = defendingArmy.getWarriorFromTroops(0);
-        var healer = defendingArmy.getWarriorFromTroops(1);
 
         // when
         lancer.hit(warrior);
