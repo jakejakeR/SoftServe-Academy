@@ -42,9 +42,9 @@ public class Army {
     }
 
     /**
-     *  Delete connections between warriors in army if any
-     *  in order to be sure that skills like pierce attack
-     *  or heal are not executed in Battle.straightFight().
+     * Delete connections between warriors in army if any
+     * in order to be sure that skills like pierce attack
+     * or heal are not executed in Battle.straightFight().
      */
     public Army deleteConnections() {
         for (IWarrior troop : troops) {
