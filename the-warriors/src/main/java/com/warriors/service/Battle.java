@@ -50,6 +50,8 @@ public class Battle {
     // Maybe I will try to use iterator instead?
     public static boolean straightFight(Army leftArmy, Army rightArmy) {
         LOGGER.info("The straight fight between {} and {} has begun!", leftArmy, rightArmy);
+        leftArmy.deleteConnections();
+        rightArmy.deleteConnections();
         while (leftArmy.isAlive() && rightArmy.isAlive()) {
             int smallerArmySize = Math.min(leftArmy.armySize(), rightArmy.armySize());
 
