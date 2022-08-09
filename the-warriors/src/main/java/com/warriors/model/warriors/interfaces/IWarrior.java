@@ -7,6 +7,8 @@ import com.warriors.model.damage.SimpleDamage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 public interface IWarrior extends CanAttack, HasHealth {
     default void hit(IWarrior opponent) {
         opponent.processCommand(new SimpleDamage(getAttack(), this), this);
@@ -22,8 +24,8 @@ public interface IWarrior extends CanAttack, HasHealth {
     /**
      * Remove it do decorator in future
      */
-    default IWarrior getNextBehind() {
-        return null;
+    default Optional<IWarrior> getNextBehind() {
+        return Optional.empty();
     }
 
     default void setNextBehind(IWarrior nextBehind) {
@@ -31,9 +33,6 @@ public interface IWarrior extends CanAttack, HasHealth {
     }
 
     default void processCommand(ICommand command, IWarrior sender) {
-        var behind = getNextBehind();
-        if (behind != null) {
-            behind.processCommand(command, this);
-        }
+        getNextBehind().ifPresent(iWarrior -> iWarrior.processCommand(command, this));
     }
 }

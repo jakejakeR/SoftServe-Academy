@@ -6,6 +6,8 @@ import com.warriors.model.damage.IPiercing;
 import com.warriors.model.warriors.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+
 @Slf4j
 public class Warrior implements IWarrior {
     public static final int INITIAL_ATTACK = 5;
@@ -33,7 +35,8 @@ public class Warrior implements IWarrior {
             if (command instanceof IPiercing piercing && piercing.getCounter() > 1) {
                 piercing.decreaseCounter();
                 damage.setPierceHitPoints(dealtDamage);
-                getNextBehind().processCommand(command, this);
+                getNextBehind()
+                        .ifPresent(iWarrior -> iWarrior.processCommand(command, this));
             }
             return;
         }
@@ -42,8 +45,8 @@ public class Warrior implements IWarrior {
     }
 
     @Override
-    public IWarrior getNextBehind() {
-        return nextBehindInArmy;
+    public Optional<IWarrior> getNextBehind() {
+        return Optional.ofNullable(nextBehindInArmy);
     }
 
     @Override
