@@ -24,7 +24,7 @@ public class Army {
         for (int i = 0; i < quantity; i++) {
             IWarrior warrior = factory.get();
             troops.add(warrior);
-            LOGGER.debug("{} added to the army {}.", warrior, this);
+            LOGGER.trace("{} added to the army {}.", warrior, this);
         }
         return this;
     }
