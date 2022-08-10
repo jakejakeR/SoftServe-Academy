@@ -1,6 +1,6 @@
 package com.warriors.model;
 
-import com.warriors.model.warriors.*;
+import com.warriors.model.warrior.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 

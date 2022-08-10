@@ -1,7 +1,7 @@
-package com.warriors.model.warriors;
+package com.warriors.model.warrior;
 
 import com.warriors.model.damage.IDamage;
-import com.warriors.model.warriors.interfaces.HasDefense;
+import com.warriors.model.warrior.interfaces.HasDefense;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

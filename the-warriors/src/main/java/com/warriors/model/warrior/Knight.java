@@ -1,4 +1,4 @@
-package com.warriors.model.warriors;
+package com.warriors.model.warrior;
 
 public class Knight extends Warrior {
     public static final int INITIAL_ATTACK = 7;

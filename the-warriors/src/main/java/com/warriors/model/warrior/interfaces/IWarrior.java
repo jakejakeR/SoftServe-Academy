@@ -1,7 +1,7 @@
-package com.warriors.model.warriors.interfaces;
+package com.warriors.model.warrior.interfaces;
 
-import com.warriors.model.command.HealCommand;
-import com.warriors.model.command.ICommand;
+import com.warriors.command.HealCommand;
+import com.warriors.command.ICommand;
 import com.warriors.model.damage.IDamage;
 import com.warriors.model.damage.SimpleDamage;
 import org.slf4j.Logger;

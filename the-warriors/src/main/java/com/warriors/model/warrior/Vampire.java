@@ -1,7 +1,7 @@
-package com.warriors.model.warriors;
+package com.warriors.model.warrior;
 
-import com.warriors.model.warriors.interfaces.IWarrior;
-import com.warriors.model.warriors.interfaces.Vampirism;
+import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.Vampirism;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -34,7 +34,6 @@ public class Vampire extends Warrior implements Vampirism {
         return INITIAL_VAMPIRISM;
     }
 
-    @Override
     public void drainLife(int dealtDamage) {
         int drainedLife = (dealtDamage * getVampirism()) / 100;
         this.setHealth(Math.min(INITIAL_HEALTH, (this.getHealth() + drainedLife)));

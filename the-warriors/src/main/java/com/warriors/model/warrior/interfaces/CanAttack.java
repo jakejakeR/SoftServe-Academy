@@ -1,4 +1,4 @@
-package com.warriors.model.warriors.interfaces;
+package com.warriors.model.warrior.interfaces;
 
 public interface CanAttack {
     int getAttack();

@@ -1,7 +1,7 @@
 package com.warriors;
 
-import com.warriors.model.warriors.Knight;
-import com.warriors.model.warriors.Warrior;
+import com.warriors.model.warrior.Knight;
+import com.warriors.model.warrior.Warrior;
 import com.warriors.service.Battle;
 import org.junit.jupiter.api.Test;
 

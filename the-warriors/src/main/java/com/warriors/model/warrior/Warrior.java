@@ -1,9 +1,9 @@
-package com.warriors.model.warriors;
+package com.warriors.model.warrior;
 
-import com.warriors.model.command.ICommand;
+import com.warriors.command.ICommand;
 import com.warriors.model.damage.IDamage;
 import com.warriors.model.damage.IPiercing;
-import com.warriors.model.warriors.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;

@@ -1,10 +1,10 @@
 package com.warriors.service;
 
 import com.warriors.model.Army;
-import com.warriors.model.warriors.Healer;
-import com.warriors.model.warriors.Knight;
-import com.warriors.model.warriors.Lancer;
-import com.warriors.model.warriors.Warrior;
+import com.warriors.model.warrior.Healer;
+import com.warriors.model.warrior.Knight;
+import com.warriors.model.warrior.Lancer;
+import com.warriors.model.warrior.Warrior;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

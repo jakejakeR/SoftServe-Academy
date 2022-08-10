@@ -1,7 +1,7 @@
 package com.warriors.model;
 
-import com.warriors.model.warriors.*;
-import com.warriors.model.warriors.interfaces.IWarrior;
+import com.warriors.model.warrior.*;
+import com.warriors.model.warrior.interfaces.IWarrior;
 
 import java.util.function.Supplier;
 
