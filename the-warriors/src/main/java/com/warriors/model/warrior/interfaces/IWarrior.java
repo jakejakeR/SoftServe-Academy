@@ -9,33 +9,27 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
-public abstract class IWarrior implements CanAttack, HasHealth {
-    public void hit(IWarrior opponent) {
+public interface IWarrior extends CanAttack, HasHealth {
+    default void hit(IWarrior opponent) {
         opponent.processCommand(new SimpleDamage(getAttack(), this), this);
         final Logger logger = LoggerFactory.getLogger("Hit logger");
         logger.info("{} hits {} (health after hit: {}).", this, opponent, opponent.getHealth());
         processCommand(new HealCommand(), this);
     }
 
-    public void receiveDamage(IDamage damage) {
+    default void receiveDamage(IDamage damage) {
         reduceHealthBasedOnDamage(damage.getHitPoints());
     }
 
-    public void reduceHealthBasedOnDamage(int hitPoints) {
-        setHealth(getHealth() - hitPoints);
-    }
-
-    public Optional<IWarrior> getNextBehind() {
+    default Optional<IWarrior> getNextBehind() {
         return Optional.empty();
     }
 
-    public void setNextBehind(IWarrior nextBehind) {
+    default void setNextBehind(IWarrior nextBehind) {
         throw new UnsupportedOperationException();
     }
 
-    public abstract void processCommand(ICommand command, IWarrior sender);
-
-    public abstract void setHealth(int health);
-
-    public abstract int getInitialHealth();
+    default void processCommand(ICommand command, IWarrior sender) {
+        getNextBehind().ifPresent(iWarrior -> iWarrior.processCommand(command, this));
+    }
 }
