@@ -2,6 +2,7 @@ package com.warriors.model;
 
 import com.warriors.model.equipment.Forge;
 import com.warriors.model.warrior.Defender;
+import com.warriors.model.warrior.Healer;
 import com.warriors.model.warrior.Vampire;
 import com.warriors.model.warrior.Warrior;
 import org.junit.jupiter.api.Test;
@@ -101,5 +102,21 @@ class GranularWeaponTest {
         assertEquals(80, defender.getHealth());
         assertEquals(2, defender.getAttack());
         assertEquals(4, defender.getDefense());
+    }
+
+    @Test
+    void givenHealer_whenEquippedWithMagicWand_thenHisParametersShouldBeModified() {
+
+        // given
+        var healer = new Healer();
+        var shield = Forge.forgeMagicWand();
+
+        // when
+        healer.equipWeapon(shield);
+
+        // then
+        assertEquals(90, healer.getHealth());
+        assertEquals(0, healer.getAttack());
+        assertEquals(5, healer.getHealPower());
     }
 }

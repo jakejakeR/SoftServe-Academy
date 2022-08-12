@@ -26,7 +26,7 @@ public class Equipment {
         return weapons.stream().mapToInt(Weapon::getVampirism).sum();
     }
 
-    public int getHealModifiers() {
-        return weapons.stream().mapToInt(Weapon::getHealth).sum();
+    public int getHealPowerModifiers() {
+        return weapons.stream().mapToInt(Weapon::getHealPower).sum();
     }
 }
