@@ -31,4 +31,9 @@ public class Defender extends Warrior implements HasDefense {
     public int getDefense() {
         return defense + equipment.getDefenseModifiers();
     }
+
+    @Override
+    public int getInitialHealth() {
+        return INITIAL_HEALTH + equipment.getHealthModifiers();
+    }
 }

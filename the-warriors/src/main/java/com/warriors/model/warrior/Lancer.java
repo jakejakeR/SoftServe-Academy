@@ -30,4 +30,9 @@ public class Lancer extends Warrior implements CanPierce {
     public int getPierce() {
         return piercePower;
     }
+
+    @Override
+    public int getInitialHealth() {
+        return INITIAL_HEALTH + equipment.getHealthModifiers();
+    }
 }

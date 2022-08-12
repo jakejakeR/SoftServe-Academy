@@ -6,4 +6,9 @@ public class Knight extends Warrior {
     public Knight() {
         super(INITIAL_HEALTH, INITIAL_ATTACK);
     }
+
+    @Override
+    public int getInitialHealth() {
+        return INITIAL_HEALTH + equipment.getHealthModifiers();
+    }
 }
