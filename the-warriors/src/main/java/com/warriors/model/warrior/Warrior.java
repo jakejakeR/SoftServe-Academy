@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Optional;
 
 @Slf4j
-public class Warrior implements IWarrior {
+public class Warrior extends IWarrior {
     public static final int INITIAL_ATTACK = 5;
     public static final int INITIAL_HEALTH = 50;
     private IWarrior nextBehindInArmy;
@@ -41,7 +41,7 @@ public class Warrior implements IWarrior {
             return;
         }
 
-        IWarrior.super.processCommand(command, sender);
+        getNextBehind().ifPresent(iWarrior -> iWarrior.processCommand(command, this));
     }
 
     @Override
