@@ -33,6 +33,22 @@ class GranularWeaponTest {
     }
 
     @Test
+    void givenWoundedWarrior10Hp_whenEquippedWithSword_thenHisHpShouldIncreaseTo30() {
+
+        // given
+        var warrior = new Warrior();
+        warrior.setHealth(10);
+        System.out.println(warrior.getHealth());
+
+        // when
+        var sword = Forge.forgeSword();
+        warrior.equipWeapon(sword);
+
+        // then
+        assertEquals(15, warrior.getHealth());
+    }
+
+    @Test
     void givenWarrior_whenEquippedWithSwordAndKatana_thenHisAttackShouldBeIncreasedAndHealthDecreased() {
 
         // given

@@ -36,6 +36,8 @@ public class Vampire extends Warrior implements Vampirism {
         return vampirism + equipment.getVampirismModifiers();
     }
 
+
+    // move to setter
     public void drainLife(int dealtDamage) {
         int drainedLife = (dealtDamage * getVampirism()) / 100;
         this.setHealth(Math.min(getInitialHealth(), (this.getHealth() + drainedLife)));
