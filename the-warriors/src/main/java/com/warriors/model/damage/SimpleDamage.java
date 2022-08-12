@@ -1,7 +1,7 @@
 package com.warriors.model.damage;
 
-import com.warriors.model.command.ICommand;
-import com.warriors.model.warriors.interfaces.IWarrior;
+import com.warriors.command.ICommand;
+import com.warriors.model.warrior.interfaces.IWarrior;
 
 public class SimpleDamage implements IDamage, ICommand {
     private int hitPoints;

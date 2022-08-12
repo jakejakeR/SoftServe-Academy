@@ -1,7 +1,7 @@
-package com.warriors.model.warriors;
+package com.warriors.model.warrior;
 
-import com.warriors.model.warriors.interfaces.IWarrior;
-import com.warriors.model.warriors.interfaces.Vampirism;
+import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.Vampirism;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -9,9 +9,11 @@ public class Vampire extends Warrior implements Vampirism {
     public static final int INITIAL_ATTACK = 4;
     public static final int INITIAL_HEALTH = 40;
     public static final int INITIAL_VAMPIRISM = 50;
+    private int vampirism;
 
     public Vampire() {
         super(INITIAL_HEALTH, INITIAL_ATTACK);
+        vampirism = INITIAL_VAMPIRISM;
     }
 
     @Override
@@ -31,12 +33,18 @@ public class Vampire extends Warrior implements Vampirism {
 
     @Override
     public int getVampirism() {
-        return INITIAL_VAMPIRISM;
+        return vampirism + equipment.getVampirismModifiers();
+    }
+
+
+    // move to setter
+    public void drainLife(int dealtDamage) {
+        int drainedLife = (dealtDamage * getVampirism()) / 100;
+        this.setHealth(Math.min(getInitialHealth(), (this.getHealth() + drainedLife)));
     }
 
     @Override
-    public void drainLife(int dealtDamage) {
-        int drainedLife = (dealtDamage * getVampirism()) / 100;
-        this.setHealth(Math.min(INITIAL_HEALTH, (this.getHealth() + drainedLife)));
+    public int getInitialHealth() {
+        return INITIAL_HEALTH + equipment.getHealthModifiers();
     }
 }

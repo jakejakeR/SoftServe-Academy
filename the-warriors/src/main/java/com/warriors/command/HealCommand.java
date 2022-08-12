@@ -1,4 +1,4 @@
-package com.warriors.model.command;
+package com.warriors.command;
 
 public class HealCommand implements ICommand {
 }

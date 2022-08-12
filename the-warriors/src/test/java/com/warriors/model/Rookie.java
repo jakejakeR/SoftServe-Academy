@@ -1,6 +1,6 @@
 package com.warriors.model;
 
-import com.warriors.model.warriors.Warrior;
+import com.warriors.model.warrior.Warrior;
 
 /**
  * Class only for tests, especially for testing Defender

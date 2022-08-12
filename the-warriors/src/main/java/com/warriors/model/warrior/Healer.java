@@ -1,9 +1,9 @@
-package com.warriors.model.warriors;
+package com.warriors.model.warrior;
 
-import com.warriors.model.command.HealCommand;
-import com.warriors.model.command.ICommand;
-import com.warriors.model.warriors.interfaces.CanHeal;
-import com.warriors.model.warriors.interfaces.IWarrior;
+import com.warriors.command.HealCommand;
+import com.warriors.command.ICommand;
+import com.warriors.model.warrior.interfaces.CanHeal;
+import com.warriors.model.warrior.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -38,6 +38,16 @@ public class Healer extends Warrior implements CanHeal {
 
     @Override
     public int getHealPower() {
-        return healPower;
+        return healPower + equipment.getHealPowerModifiers();
+    }
+
+    @Override
+    public int getInitialHealth() {
+        return INITIAL_HEALTH + equipment.getHealthModifiers();
+    }
+
+    @Override
+    public int getAttack() {
+        return 0;
     }
 }

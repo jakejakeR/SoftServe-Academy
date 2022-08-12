@@ -1,13 +1,13 @@
 package com.warriors.service;
 
-import com.warriors.model.warriors.Knight;
-import com.warriors.model.warriors.Warrior;
+import com.warriors.model.warrior.Knight;
+import com.warriors.model.warrior.Warrior;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class FightTestSuite {
+class FightSuiteTest {
 
     @Test
         // 1. Fight

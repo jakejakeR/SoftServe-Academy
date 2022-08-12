@@ -1,6 +1,6 @@
 package com.warriors.model.damage;
 
-import com.warriors.model.warriors.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.IWarrior;
 
 public interface IDamage {
     int getHitPoints();

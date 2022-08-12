@@ -1,10 +1,7 @@
 package com.warriors.service;
 
 import com.warriors.model.Army;
-import com.warriors.model.warriors.Healer;
-import com.warriors.model.warriors.Knight;
-import com.warriors.model.warriors.Lancer;
-import com.warriors.model.warriors.Warrior;
+import com.warriors.model.warrior.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -80,6 +77,53 @@ class ArmyBattleSuiteTest {
         var army2 = new Army()
                 .addUnits(Warrior::new, 6)
                 .addUnits(Lancer::new, 5);
+
+        // when
+        var result = Battle.straightFight(army1, army2);
+
+        // then
+        assertFalse(result);
+    }
+
+    @Test
+    void test20_givenArmy1AndArmy2_whenStraightFightEachOther_thenTheFirstShouldWin() {
+
+        // given
+        var army1 = new Army()
+                .addUnits(Lancer::new, 7)
+                .addUnits(Vampire::new, 3)
+                .addUnits(Warrior::new, 4)
+                .addUnits(Defender::new, 2);
+        var army2 = new Army()
+                .addUnits(Warrior::new, 4)
+                .addUnits(Defender::new, 4)
+                .addUnits(Vampire::new, 6)
+                .addUnits(Lancer::new, 4);
+
+        // when
+        var result = Battle.straightFight(army1, army2);
+
+        // then
+        assertTrue(result);
+    }
+
+    @Test
+    void test21_givenArmy1AndArmy2_whenFightEachOther_thenTheSecondShouldWin() {
+
+        // given
+        var army1 = new Army()
+                .addUnits(Lancer::new, 7)
+                .addUnits(Vampire::new, 3)
+                .addUnits(Healer::new, 1)
+                .addUnits(Warrior::new, 4)
+                .addUnits(Healer::new, 1)
+                .addUnits(Defender::new, 2);
+        var army2 = new Army()
+                .addUnits(Warrior::new, 4)
+                .addUnits(Defender::new, 4)
+                .addUnits(Healer::new, 1)
+                .addUnits(Vampire::new, 6)
+                .addUnits(Lancer::new, 4);
 
         // when
         var result = Battle.straightFight(army1, army2);

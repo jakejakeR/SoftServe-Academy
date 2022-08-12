@@ -1,7 +1,7 @@
 package com.warriors.service;
 
 import com.warriors.model.Army;
-import com.warriors.model.warriors.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
 /**
