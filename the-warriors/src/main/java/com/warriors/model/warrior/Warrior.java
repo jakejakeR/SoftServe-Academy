@@ -3,6 +3,7 @@ package com.warriors.model.warrior;
 import com.warriors.command.ICommand;
 import com.warriors.model.damage.IDamage;
 import com.warriors.model.damage.IPiercing;
+import com.warriors.model.equipment.Equipment;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,11 +11,12 @@ import java.util.Optional;
 
 @Slf4j
 public class Warrior implements IWarrior {
+    protected final Equipment equipment;
     public static final int INITIAL_ATTACK = 5;
     public static final int INITIAL_HEALTH = 50;
     private IWarrior nextBehindInArmy;
+    private final int attack;
     private int health;
-    private int attack;
 
     public Warrior() {
         this(INITIAL_HEALTH, INITIAL_ATTACK);
@@ -23,6 +25,7 @@ public class Warrior implements IWarrior {
     protected Warrior(int health, int attack) {
         this.health = health;
         this.attack = attack;
+        this.equipment = new Equipment();
     }
 
     @Override
@@ -55,19 +58,23 @@ public class Warrior implements IWarrior {
     }
 
     @Override
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    @Override
     public int getAttack() {
-        return attack;
+        return attack + equipment.getAttackModifiers();
     }
 
     @Override
     public int getHealth() {
-        LOGGER.trace("{} has {} points of health.", this, health);
         return health;
     }
 
     @Override
     public int getInitialHealth() {
-        return INITIAL_HEALTH;
+        return INITIAL_HEALTH + equipment.getHealthModifiers();
     }
 
     @Override
@@ -79,4 +86,6 @@ public class Warrior implements IWarrior {
     public String toString() {
         return this.getClass().getSimpleName() + ": " + this.getHealth();
     }
+
+
 }

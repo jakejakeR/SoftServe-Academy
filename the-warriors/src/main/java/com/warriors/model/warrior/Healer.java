@@ -38,6 +38,6 @@ public class Healer extends Warrior implements CanHeal {
 
     @Override
     public int getHealPower() {
-        return healPower;
+        return healPower + equipment.getHealModifiers();
     }
 }

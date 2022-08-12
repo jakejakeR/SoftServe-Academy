@@ -1,4 +1,4 @@
-package com.warriors.model.weapon;
+package com.warriors.model.equipment;
 
 public class Forge {
 

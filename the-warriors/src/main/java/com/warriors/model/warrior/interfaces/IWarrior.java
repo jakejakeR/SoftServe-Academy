@@ -4,12 +4,13 @@ import com.warriors.command.HealCommand;
 import com.warriors.command.ICommand;
 import com.warriors.model.damage.IDamage;
 import com.warriors.model.damage.SimpleDamage;
+import com.warriors.model.equipment.Weapon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
-public interface IWarrior extends CanAttack, HasHealth {
+public interface IWarrior extends CanAttack, HasHealth, HasEquipment {
     default void hit(IWarrior opponent) {
         opponent.processCommand(new SimpleDamage(getAttack(), this), this);
         final Logger logger = LoggerFactory.getLogger("Hit logger");
@@ -31,5 +32,11 @@ public interface IWarrior extends CanAttack, HasHealth {
 
     default void processCommand(ICommand command, IWarrior sender) {
         getNextBehind().ifPresent(iWarrior -> iWarrior.processCommand(command, this));
+    }
+
+    @Override
+    default void equipWeapon(Weapon weapon) {
+        HasEquipment.super.equipWeapon(weapon);
+        this.setHealth(getInitialHealth() + getEquipment().getHealthModifiers());
     }
 }

@@ -33,7 +33,7 @@ public class Vampire extends Warrior implements Vampirism {
 
     @Override
     public int getVampirism() {
-        return vampirism;
+        return vampirism + equipment.getVampirismModifiers();
     }
 
     public void drainLife(int dealtDamage) {
@@ -43,6 +43,6 @@ public class Vampire extends Warrior implements Vampirism {
 
     @Override
     public int getInitialHealth() {
-        return INITIAL_HEALTH;
+        return INITIAL_HEALTH + equipment.getHealthModifiers();
     }
 }

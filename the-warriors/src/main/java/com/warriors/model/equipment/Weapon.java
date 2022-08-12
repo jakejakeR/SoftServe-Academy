@@ -1,4 +1,4 @@
-package com.warriors.model.weapon;
+package com.warriors.model.equipment;
 
 import lombok.Builder;
 import lombok.Getter;

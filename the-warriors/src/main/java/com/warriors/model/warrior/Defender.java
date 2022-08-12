@@ -29,6 +29,6 @@ public class Defender extends Warrior implements HasDefense {
 
     @Override
     public int getDefense() {
-        return defense;
+        return defense + equipment.getDefenseModifiers();
     }
 }

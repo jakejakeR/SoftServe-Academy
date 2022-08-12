@@ -1,7 +1,7 @@
 package com.warriors.model;
 
+import com.warriors.model.equipment.Forge;
 import com.warriors.model.warrior.Warrior;
-import com.warriors.model.weapon.Forge;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
