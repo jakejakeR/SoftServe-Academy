@@ -33,7 +33,7 @@ public class Forge {
                 .attack(5)
                 .health(-15)
                 .defense(-2)
-                .vampirism(20)
+                .vampirism(10)
                 .build();
     }
 
