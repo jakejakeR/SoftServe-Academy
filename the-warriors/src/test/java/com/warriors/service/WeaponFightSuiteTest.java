@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class WeaponFightSuiteTest {
+class WeaponFightSuiteTest {
 
     @Test
     void givenWarriorWithSword_whenFightsKnightWithKatana_thenWarriorShouldWin() {
