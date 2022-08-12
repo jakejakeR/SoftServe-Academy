@@ -12,6 +12,11 @@ public class Weapon {
     private int defense;
     private int vampirism;
     private int healPower;
+    private boolean isApplied;
+
+    public void setApplied(boolean applied) {
+        isApplied = applied;
+    }
 
     @Override
     public String toString() {

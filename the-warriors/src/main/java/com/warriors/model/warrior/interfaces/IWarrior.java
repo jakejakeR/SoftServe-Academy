@@ -40,7 +40,8 @@ public interface IWarrior extends CanAttack, HasHealth, HasEquipment {
     default HasEquipment equipWeapon(Weapon weapon) {
         HasEquipment.super.equipWeapon(weapon);
         LOGGER.debug("{} now wields a {}.", this, weapon);
-        this.setHealth(getInitialHealth());
+        this.setHealth(getHealth());
+        weapon.setApplied(true);
         return this;
     }
 }

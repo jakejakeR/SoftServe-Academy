@@ -13,6 +13,9 @@ public class Equipment {
     public int getHealthModifiers() {
         return weapons.stream().mapToInt(Weapon::getHealth).sum();
     }
+    public int getNonAppliedHealthModifiers() {
+        return weapons.stream().filter(weapon -> !weapon.isApplied()).mapToInt(Weapon::getHealth).sum();
+    }
 
     public int getAttackModifiers() {
         return weapons.stream().mapToInt(Weapon::getAttack).sum();

@@ -69,7 +69,7 @@ public class Warrior implements IWarrior {
 
     @Override
     public int getHealth() {
-        return health;
+        return health + equipment.getNonAppliedHealthModifiers();
     }
 
     @Override

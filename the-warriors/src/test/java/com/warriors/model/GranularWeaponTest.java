@@ -38,7 +38,6 @@ class GranularWeaponTest {
         // given
         var warrior = new Warrior();
         warrior.setHealth(10);
-        System.out.println(warrior.getHealth());
 
         // when
         var sword = Forge.forgeSword();
@@ -95,10 +94,10 @@ class GranularWeaponTest {
 
         // given
         var vampire = new Vampire();
-        var katana = Forge.forgeKatana();
 
         // when
-        vampire.equipWeapon(katana).equipWeapon(katana);
+        vampire.equipWeapon(Forge.forgeKatana());
+        vampire.equipWeapon(Forge.forgeKatana());
 
         // then
         assertFalse(vampire.isAlive());
