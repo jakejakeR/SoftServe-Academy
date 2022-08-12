@@ -21,9 +21,6 @@ public interface IWarrior extends CanAttack, HasHealth {
         reduceHealthBasedOnDamage(damage.getHitPoints());
     }
 
-    /**
-     * Remove it do decorator in future
-     */
     default Optional<IWarrior> getNextBehind() {
         return Optional.empty();
     }
