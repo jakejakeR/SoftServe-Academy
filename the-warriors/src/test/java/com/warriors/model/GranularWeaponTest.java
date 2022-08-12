@@ -104,6 +104,59 @@ class GranularWeaponTest {
     }
 
     @Test
+    void givenVampireWithKatana_whenLoses1Hp_thenDrainsLifeUpTo20Hp() {
+
+        // given
+        var vampire = new Vampire();
+        vampire.equipWeapon(Forge.forgeKatana());
+
+        // when
+        vampire.reduceHealthBasedOnDamage(1);
+        System.out.println(vampire.getHealth());
+        System.out.println(vampire.getAttack());
+
+        // then
+        vampire.drainLife(vampire.getAttack());
+        assertEquals(20, vampire.getHealth());
+    }
+
+    @Test
+    void givenVampireWithKatana_whenGetsHealFromHealer_thenVampiresHealthShouldBe20() {
+
+        //Given
+        var vampire = new Vampire();
+        var healer = new Healer();
+
+        //When
+        vampire.equipWeapon(Forge.forgeKatana());
+        healer.equipWeapon(Forge.forgeMagicWand());
+        healer.heal(vampire);
+
+        //Then
+        assertEquals(20, vampire.getHealth());
+    }
+
+    @Test
+    void givenWoundedVampire25Hp_whenEquipsKatanaHitsWarriorTwice_thenHisHealthShouldBe20() {
+
+        // given
+        var vampire = new Vampire();
+        var warrior = new Warrior();
+        vampire.reduceHealthBasedOnDamage(15);
+
+        // when
+        vampire.equipWeapon(Forge.forgeKatana());
+        vampire.hit(warrior);
+        var healthAfterFirstHit = vampire.getHealth();
+        vampire.hit(warrior);
+        var healthAfterSecondHit = vampire.getHealth();
+
+        // then
+        assertEquals(15, healthAfterFirstHit);
+        assertEquals(20, healthAfterSecondHit);
+    }
+
+    @Test
     void givenDefender_whenEquippedWithShield_thenHisParametersShouldBeModified() {
 
         // given
