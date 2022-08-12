@@ -6,8 +6,9 @@ import com.warriors.model.equipment.Weapon;
 @FunctionalInterface
 public interface HasEquipment {
 
-    default void equipWeapon(Weapon weapon) {
+    default HasEquipment equipWeapon(Weapon weapon) {
         getEquipment().addWeapon(weapon);
+        return this;
     }
 
     Equipment getEquipment();

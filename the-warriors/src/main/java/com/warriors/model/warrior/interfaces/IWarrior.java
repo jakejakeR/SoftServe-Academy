@@ -11,10 +11,12 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 
 public interface IWarrior extends CanAttack, HasHealth, HasEquipment {
+    Logger LOGGER = LoggerFactory.getLogger("IWarrior");
+
     default void hit(IWarrior opponent) {
         opponent.processCommand(new SimpleDamage(getAttack(), this), this);
-        final Logger logger = LoggerFactory.getLogger("Hit logger");
-        logger.info("{} hits {} (health after hit: {}).", this, opponent, opponent.getHealth());
+
+        LOGGER.info("{} hits {} (health after hit: {}).", this, opponent, opponent.getHealth());
         processCommand(new HealCommand(), this);
     }
 
@@ -35,8 +37,10 @@ public interface IWarrior extends CanAttack, HasHealth, HasEquipment {
     }
 
     @Override
-    default void equipWeapon(Weapon weapon) {
+    default HasEquipment equipWeapon(Weapon weapon) {
         HasEquipment.super.equipWeapon(weapon);
-        this.setHealth(getInitialHealth() + getEquipment().getHealthModifiers());
+        LOGGER.debug("{} now wields a {}.", this, weapon);
+        this.setHealth(getInitialHealth());
+        return this;
     }
 }
