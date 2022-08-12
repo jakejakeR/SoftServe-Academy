@@ -17,12 +17,15 @@ public class Equipment {
     public int getAttackModifiers() {
         return weapons.stream().mapToInt(Weapon::getAttack).sum();
     }
+
     public int getDefenseModifiers() {
         return weapons.stream().mapToInt(Weapon::getDefense).sum();
     }
+
     public int getVampirismModifiers() {
         return weapons.stream().mapToInt(Weapon::getVampirism).sum();
     }
+
     public int getHealModifiers() {
         return weapons.stream().mapToInt(Weapon::getHealth).sum();
     }

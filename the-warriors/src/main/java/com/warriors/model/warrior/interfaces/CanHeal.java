@@ -1,5 +1,6 @@
 package com.warriors.model.warrior.interfaces;
 
+@FunctionalInterface
 public interface CanHeal {
     default void heal(HasHealth notSoHealthyWarrior) {
         var currentHealth = notSoHealthyWarrior.getHealth();
