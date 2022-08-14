@@ -2,6 +2,7 @@ package com.warriors.model;
 
 import com.warriors.model.warrior.*;
 import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.Warlord;
 
 import java.util.function.Supplier;
 
@@ -11,7 +12,8 @@ public enum WarriorType {
     KNIGHT(Knight::new),
     DEFENDER(Defender::new),
     VAMPIRE(Vampire::new),
-    LANCER(Lancer::new);
+    LANCER(Lancer::new),
+    WARLORD(Warlord::new);
 
     private final Supplier<IWarrior> constructor;
 
