@@ -45,9 +45,9 @@ public class Army {
     public void moveUnits() {
         if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
             //TODO implement moveUnits() to move units
-            System.out.println("There is a Warlord and he will move units!");
+            LOGGER.debug("There is a Warlord and he will move units!");
         } else {
-            System.out.println("There is no Warlord!");
+            LOGGER.debug("There is no Warlord or he's dead!");
         }
     }
 
