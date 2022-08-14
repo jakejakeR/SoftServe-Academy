@@ -1,6 +1,7 @@
 package com.warriors.model;
 
 import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.Warlord;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ import java.util.function.Supplier;
 @Slf4j
 public class Army {
     private final List<IWarrior> troops = new ArrayList<>();
-
     public Iterator<IWarrior> firstAlive() {
         return new FirstAliveIterator();
     }
@@ -27,6 +27,15 @@ public class Army {
             LOGGER.trace("{} added to the army {}.", warrior, this);
         }
         return this;
+    }
+
+    public void moveUnits() {
+        if (troops.stream().anyMatch(Warlord.class::isInstance)) {
+            //TODO implement moveUnits() to move units
+            System.out.println("There is a Warlord and he will move units!");
+        } else {
+            System.out.println("There is no Warlord!");
+        }
     }
 
     /**
