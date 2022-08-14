@@ -1,5 +1,6 @@
 package com.warriors.model;
 
+import com.warriors.model.warrior.interfaces.HasHealth;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import com.warriors.model.warrior.interfaces.Warlord;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,7 @@ public class Army {
     }
 
     public void moveUnits() {
-        if (troops.stream().anyMatch(Warlord.class::isInstance)) {
+        if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
             //TODO implement moveUnits() to move units
             System.out.println("There is a Warlord and he will move units!");
         } else {
