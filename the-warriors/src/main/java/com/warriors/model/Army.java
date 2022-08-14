@@ -26,6 +26,7 @@ public class Army {
         if (factory.get() instanceof Warlord warlord) {
             if (troops.stream().noneMatch(Warlord.class::isInstance)) {
                 troops.add(warlord);
+                LOGGER.debug("Warlord added to the army!");
             } else {
                 LOGGER.debug("Warlord is already in army!");
             }
