@@ -17,16 +17,27 @@ import java.util.function.Supplier;
 @Slf4j
 public class Army {
     private final List<IWarrior> troops = new ArrayList<>();
+
     public Iterator<IWarrior> firstAlive() {
         return new FirstAliveIterator();
     }
 
     public Army addUnits(Supplier<IWarrior> factory, int quantity) {
+        if (factory.get() instanceof Warlord warlord) {
+            if (troops.stream().noneMatch(Warlord.class::isInstance)) {
+                troops.add(warlord);
+            } else {
+                LOGGER.debug("Warlord is already in army!");
+            }
+            return this;
+        }
+
         for (int i = 0; i < quantity; i++) {
             IWarrior warrior = factory.get();
             troops.add(warrior);
             LOGGER.trace("{} added to the army {}.", warrior, this);
         }
+
         return this;
     }
 
