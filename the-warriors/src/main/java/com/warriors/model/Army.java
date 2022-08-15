@@ -5,10 +5,7 @@ import com.warriors.model.warrior.interfaces.IWarrior;
 import com.warriors.model.warrior.interfaces.Warlord;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.function.Supplier;
 
 /**
@@ -46,7 +43,8 @@ public class Army {
 
     public void moveUnits() {
         if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
-            troops.addAll(warlord.rearrangeTroops(troops));
+            Collection<IWarrior> rearrangedTroops = warlord.rearrangeTroops(troops);
+            troops.addAll(rearrangedTroops);
             deleteConnections();
             lineUp();
 
