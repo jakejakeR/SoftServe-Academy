@@ -33,15 +33,17 @@ public class Battle {
     }
 
     public static boolean fight(Army attackingArmy, Army defendingArmy) {
-        attackingArmy.lineUp();
-        defendingArmy.lineUp();
+        attackingArmy.lineUp().moveUnits();
+        defendingArmy.lineUp().moveUnits();
         var iterator1 = attackingArmy.firstAlive();
         var iterator2 = defendingArmy.firstAlive();
         LOGGER.info("The battle between {} and {} has begun!", attackingArmy, defendingArmy);
         while (iterator1.hasNext() && iterator2.hasNext()) {
             fight(iterator1.next(), iterator2.next());
-            LOGGER.error("First army after fight: {}", attackingArmy);
-            LOGGER.error("Second army after fight: {}", defendingArmy);
+            attackingArmy.moveUnits();
+            defendingArmy.moveUnits();
+            LOGGER.info("First army after fight: {}", attackingArmy);
+            LOGGER.info("Second army after fight: {}", defendingArmy);
         }
         LOGGER.info("{} has won the battle!}", iterator1.hasNext() ? attackingArmy : defendingArmy);
         return iterator1.hasNext();

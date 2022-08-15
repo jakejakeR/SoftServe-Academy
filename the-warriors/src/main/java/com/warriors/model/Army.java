@@ -1,12 +1,12 @@
 package com.warriors.model;
 
+import com.warriors.model.equipment.Weapon;
+import com.warriors.model.warrior.interfaces.HasHealth;
 import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.Warlord;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.function.Supplier;
 
 /**
@@ -15,18 +15,45 @@ import java.util.function.Supplier;
 @Slf4j
 public class Army {
     private final List<IWarrior> troops = new ArrayList<>();
+    private Warlord warlord;
 
     public Iterator<IWarrior> firstAlive() {
         return new FirstAliveIterator();
     }
 
     public Army addUnits(Supplier<IWarrior> factory, int quantity) {
+        if (factory.get() instanceof Warlord warlordInstance) {
+            if (troops.stream().noneMatch(Warlord.class::isInstance)) {
+                warlord = warlordInstance;
+                troops.add(warlord);
+                LOGGER.debug("Warlord added to the army!");
+            } else {
+                LOGGER.debug("Warlord is already in army!");
+            }
+            return this;
+        }
+
         for (int i = 0; i < quantity; i++) {
             IWarrior warrior = factory.get();
             troops.add(warrior);
             LOGGER.trace("{} added to the army {}.", warrior, this);
         }
+
         return this;
+    }
+
+    public void moveUnits() {
+        if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
+            Collection<IWarrior> rearrangedTroops = warlord.rearrangeTroops(troops);
+            troops.clear();
+            troops.addAll(rearrangedTroops);
+            deleteConnections();
+            lineUp();
+
+            LOGGER.debug("There is a Warlord and he will move units!");
+        } else {
+            LOGGER.debug("There is no Warlord or he's dead!");
+        }
     }
 
     /**
@@ -69,10 +96,19 @@ public class Army {
         troops.removeIf(iWarrior -> !iWarrior.isAlive());
     }
 
+    public IWarrior unitAtPosition(int i) {
+        return troops.get(i);
+    }
+
+    public void equipWarriorAtPosition(int i, Weapon weapon) {
+        troops.get(i).equipWeapon(weapon);
+    }
+
     @Override
     public String toString() {
         return "Army: " + troops;
     }
+
 
     /**
      * Iterator that always returns the first alive warrior,
@@ -81,7 +117,6 @@ public class Army {
      */
     private class FirstAliveIterator implements Iterator<IWarrior> {
         int cursor = 0;
-        int cursorNext = 1;
 
         /**
          * If the current warrior is not alive -> skip him (cursor++)
@@ -94,7 +129,6 @@ public class Army {
         public boolean hasNext() {
             while (cursor < troops.size() && !troops.get(cursor).isAlive()) {
                 cursor++;
-                cursorNext = cursor + 1;
             }
             return cursor < troops.size();
         }
