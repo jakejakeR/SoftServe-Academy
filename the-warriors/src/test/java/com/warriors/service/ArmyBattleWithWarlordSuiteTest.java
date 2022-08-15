@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ArmyBattleWithWarlordSuiteTest {
 
     @Test
-    void test1() {
+    void warlordSuiteTest() {
         var ronald = new Warlord();
         var heimdall = new Knight();
 
