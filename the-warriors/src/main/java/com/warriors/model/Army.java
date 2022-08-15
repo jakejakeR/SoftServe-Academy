@@ -1,5 +1,6 @@
 package com.warriors.model;
 
+import com.warriors.model.equipment.Weapon;
 import com.warriors.model.warrior.interfaces.HasHealth;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import com.warriors.model.warrior.interfaces.Warlord;
@@ -44,6 +45,7 @@ public class Army {
     public void moveUnits() {
         if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
             Collection<IWarrior> rearrangedTroops = warlord.rearrangeTroops(troops);
+            troops.clear();
             troops.addAll(rearrangedTroops);
             deleteConnections();
             lineUp();
@@ -94,10 +96,19 @@ public class Army {
         troops.removeIf(iWarrior -> !iWarrior.isAlive());
     }
 
+    public IWarrior unitAtPosition(int i) {
+        return troops.get(i);
+    }
+
+    public void equipWarriorAtPosition(int i, Weapon weapon) {
+        troops.get(i).equipWeapon(weapon);
+    }
+
     @Override
     public String toString() {
         return "Army: " + troops;
     }
+
 
     /**
      * Iterator that always returns the first alive warrior,
