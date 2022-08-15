@@ -5,7 +5,7 @@ import com.warriors.model.warrior.Healer;
 import com.warriors.model.warrior.Lancer;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Comparator;
+import java.util.*;
 
 @Slf4j
 public class Warlord extends Defender implements Comparator<IWarrior> {
@@ -19,6 +19,40 @@ public class Warlord extends Defender implements Comparator<IWarrior> {
     @Override
     public int getInitialHealth() {
         return INITIAL_HEALTH + equipment.getHealthModifiers();
+    }
+
+    public Collection<IWarrior> rearrangeTroops(Iterable<IWarrior> troopsToRearrange) {
+        List<IWarrior> rearrangedTroopsOfWarriors = new ArrayList<>();
+        troopsToRearrange.forEach(rearrangedTroopsOfWarriors::add);
+
+        rearrangedTroopsOfWarriors.sort(this);
+
+        if (rearrangedTroopsOfWarriors.stream().filter(HasHealth::isAlive).anyMatch(Lancer.class::isInstance)) {
+            Iterator<IWarrior> iterator = rearrangedTroopsOfWarriors.iterator();
+            IWarrior temp = null;
+            while (iterator.hasNext()) {
+                var nextWarrior = iterator.next();
+                if (nextWarrior instanceof Lancer) {
+                    temp = nextWarrior;
+                    break;
+                }
+            }
+            iterator.remove();
+            rearrangedTroopsOfWarriors.add(0, temp);
+        } else {
+            Iterator<IWarrior> iterator = rearrangedTroopsOfWarriors.iterator();
+            IWarrior temp = null;
+            while (iterator.hasNext()) {
+                var nextWarrior = iterator.next();
+                if (!(nextWarrior instanceof Healer) && !(nextWarrior instanceof Warlord)) {
+                    temp = nextWarrior;
+                    break;
+                }
+            }
+            iterator.remove();
+            rearrangedTroopsOfWarriors.add(0, temp);
+        }
+        return rearrangedTroopsOfWarriors;
     }
 
     @Override
@@ -38,10 +72,13 @@ public class Warlord extends Defender implements Comparator<IWarrior> {
         if (o1 instanceof Lancer) {
             return -1;
         }
+        if (o2 instanceof Lancer) {
+            return 1;
+        }
         if (o1 instanceof Warlord && o1.isAlive()) {
             return 1;
         }
-        if (o2 instanceof Warlord && o1.isAlive()) {
+        if (o2 instanceof Warlord && o2.isAlive()) {
             return -1;
         }
         return 0;

@@ -1,11 +1,8 @@
 package com.warriors.model;
 
-import com.warriors.model.warrior.Healer;
-import com.warriors.model.warrior.Lancer;
 import com.warriors.model.warrior.interfaces.HasHealth;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import com.warriors.model.warrior.interfaces.Warlord;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -18,7 +15,6 @@ import java.util.function.Supplier;
  * Warrior Factory, creates troops of Warriors
  */
 @Slf4j
-@Getter
 public class Army {
     private final List<IWarrior> troops = new ArrayList<>();
     private Warlord warlord;
@@ -50,35 +46,10 @@ public class Army {
 
     public void moveUnits() {
         if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
-            troops.sort(warlord);
-
-            if (troops.stream().filter(HasHealth::isAlive).anyMatch(Lancer.class::isInstance)) {
-                Iterator<IWarrior> iterator = troops.iterator();
-                IWarrior temp = null;
-                while (iterator.hasNext()) {
-                    var nextWarrior = iterator.next();
-                    if (nextWarrior instanceof Lancer) {
-                        temp = nextWarrior;
-                        break;
-                    }
-                }
-                iterator.remove();
-                troops.add(0, temp);
-            } else {
-                Iterator<IWarrior> iterator = troops.iterator();
-                IWarrior temp = null;
-                while (iterator.hasNext()) {
-                    var nextWarrior = iterator.next();
-                    if (!(nextWarrior instanceof Healer) && !(nextWarrior instanceof Warlord)) {
-                        temp = nextWarrior;
-                        break;
-                    }
-                }
-                iterator.remove();
-                troops.add(0, temp);
-            }
+            troops.addAll(warlord.rearrangeTroops(troops));
             deleteConnections();
             lineUp();
+
             LOGGER.debug("There is a Warlord and he will move units!");
         } else {
             LOGGER.debug("There is no Warlord or he's dead!");
