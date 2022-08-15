@@ -5,10 +5,12 @@ import com.warriors.model.warrior.Healer;
 import com.warriors.model.warrior.Lancer;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Slf4j
-public class Warlord extends Defender implements Comparator<IWarrior> {
+public class Warlord extends Defender {
     public static final int INITIAL_HEALTH = 100;
     public static final int INITIAL_ATTACK = 4;
 
@@ -24,63 +26,32 @@ public class Warlord extends Defender implements Comparator<IWarrior> {
     public Collection<IWarrior> rearrangeTroops(Iterable<IWarrior> troopsToRearrange) {
         List<IWarrior> rearrangedTroopsOfWarriors = new ArrayList<>();
         troopsToRearrange.forEach(rearrangedTroopsOfWarriors::add);
+        rearrangedTroopsOfWarriors.remove(this);
 
-        rearrangedTroopsOfWarriors.sort(this);
+        List<IWarrior> aliveWarriors = rearrangedTroopsOfWarriors.stream().filter(HasHealth::isAlive).toList();
+        List<IWarrior> deadWarriors = rearrangedTroopsOfWarriors.stream().filter(warrior -> !(warrior.isAlive())).toList();
 
-        if (rearrangedTroopsOfWarriors.stream().filter(HasHealth::isAlive).anyMatch(Lancer.class::isInstance)) {
-            Iterator<IWarrior> iterator = rearrangedTroopsOfWarriors.iterator();
-            IWarrior temp = null;
-            while (iterator.hasNext()) {
-                var nextWarrior = iterator.next();
-                if (nextWarrior instanceof Lancer) {
-                    temp = nextWarrior;
-                    break;
-                }
-            }
-            iterator.remove();
-            rearrangedTroopsOfWarriors.add(0, temp);
+        List<IWarrior> healers = aliveWarriors.stream().filter(Healer.class::isInstance).toList();
+        List<IWarrior> lancers = aliveWarriors.stream().filter(Lancer.class::isInstance).toList();
+        List<IWarrior> rest = aliveWarriors.stream().filter(warrior -> !(warrior instanceof Lancer) && !(warrior instanceof Healer)).toList();
+        rearrangedTroopsOfWarriors.clear();
+
+        if (!lancers.isEmpty()) {
+            rearrangedTroopsOfWarriors.addAll(0, lancers);
+            rearrangedTroopsOfWarriors.addAll(rest);
         } else {
-            Iterator<IWarrior> iterator = rearrangedTroopsOfWarriors.iterator();
-            IWarrior temp = null;
-            while (iterator.hasNext()) {
-                var nextWarrior = iterator.next();
-                if (!(nextWarrior instanceof Healer) && !(nextWarrior instanceof Warlord)) {
-                    temp = nextWarrior;
-                    break;
-                }
-            }
-            iterator.remove();
-            rearrangedTroopsOfWarriors.add(0, temp);
+            rearrangedTroopsOfWarriors.addAll(0, rest);
         }
-        return rearrangedTroopsOfWarriors;
-    }
 
-    @Override
-    public int compare(IWarrior o1, IWarrior o2) {
-        if (!o1.isAlive()) {
-            return 1;
+        if (rest.isEmpty()) {
+            rearrangedTroopsOfWarriors.addAll(0, healers);
+        } else {
+            rearrangedTroopsOfWarriors.addAll(1, healers);
         }
-        if (!o2.isAlive()) {
-            return -1;
-        }
-        if (o1 instanceof Healer && o1.isAlive()) {
-            return -1;
-        }
-        if (o2 instanceof Healer && o1.isAlive()) {
-            return 1;
-        }
-        if (o1 instanceof Lancer) {
-            return -1;
-        }
-        if (o2 instanceof Lancer) {
-            return 1;
-        }
-        if (o1 instanceof Warlord && o1.isAlive()) {
-            return 1;
-        }
-        if (o2 instanceof Warlord && o2.isAlive()) {
-            return -1;
-        }
-        return 0;
+
+        rearrangedTroopsOfWarriors.add(this);
+        rearrangedTroopsOfWarriors.addAll(deadWarriors);
+
+        return rearrangedTroopsOfWarriors;
     }
 }

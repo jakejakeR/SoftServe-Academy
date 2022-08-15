@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Healer extends Warrior implements CanHeal {
     public static final int INITIAL_HEALTH = 60;
     public static final int INITIAL_HEAL_POWER = 2;
-    private int healPower;
+    private final int healPower;
 
     public Healer() {
         super(INITIAL_HEALTH, INITIAL_ATTACK);
@@ -24,6 +24,9 @@ public class Healer extends Warrior implements CanHeal {
 
     @Override
     public void processCommand(ICommand command, IWarrior sender) {
+        if (!this.isAlive()) {
+            return;
+        }
         if (command instanceof HealCommand) {
             int healthBeforeHeal = sender.getHealth();
             heal(sender);
