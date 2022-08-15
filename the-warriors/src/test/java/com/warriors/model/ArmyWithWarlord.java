@@ -13,13 +13,10 @@ class ArmyWithWarlord {
         army.addUnits(Warlord::new, 1)
                 .addUnits(Warrior::new, 2)
                 .addUnits(Healer::new, 2)
-                .addUnits(Lancer::new, 3)
+                .addUnits(Lancer::new, 10000000)
                 .addUnits(Defender::new, 1);
-        System.out.println(army);
         army.moveUnits();
-        System.out.println(army);
         army.getWarriorFromTroops(2).reduceHealthBasedOnDamage(30);
         army.moveUnits();
-        System.out.println(army);
     }
 }
