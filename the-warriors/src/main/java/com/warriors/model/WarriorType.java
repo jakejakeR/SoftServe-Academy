@@ -2,7 +2,6 @@ package com.warriors.model;
 
 import com.warriors.model.warrior.*;
 import com.warriors.model.warrior.interfaces.IWarrior;
-import com.warriors.model.warrior.interfaces.Warlord;
 
 import java.util.function.Supplier;
 

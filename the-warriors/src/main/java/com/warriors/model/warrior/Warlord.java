@@ -1,8 +1,7 @@
-package com.warriors.model.warrior.interfaces;
+package com.warriors.model.warrior;
 
-import com.warriors.model.warrior.Defender;
-import com.warriors.model.warrior.Healer;
-import com.warriors.model.warrior.Lancer;
+import com.warriors.model.warrior.interfaces.HasHealth;
+import com.warriors.model.warrior.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -31,9 +30,16 @@ public class Warlord extends Defender {
         List<IWarrior> aliveWarriors = rearrangedTroopsOfWarriors.stream().filter(HasHealth::isAlive).toList();
         List<IWarrior> deadWarriors = rearrangedTroopsOfWarriors.stream().filter(warrior -> !(warrior.isAlive())).toList();
 
-        List<IWarrior> healers = aliveWarriors.stream().filter(Healer.class::isInstance).toList();
-        List<IWarrior> lancers = aliveWarriors.stream().filter(Lancer.class::isInstance).toList();
-        List<IWarrior> rest = aliveWarriors.stream().filter(warrior -> !(warrior instanceof Lancer) && !(warrior instanceof Healer)).toList();
+        List<IWarrior> healers = aliveWarriors.stream()
+                .filter(Healer.class::isInstance)
+                .toList();
+        List<IWarrior> lancers = aliveWarriors.stream()
+                .filter(Lancer.class::isInstance)
+                .toList();
+        List<IWarrior> rest = aliveWarriors.stream()
+                .filter(warrior -> !(warrior instanceof Lancer) && !(warrior instanceof Healer))
+                .toList();
+
         rearrangedTroopsOfWarriors.clear();
 
         if (!lancers.isEmpty()) {

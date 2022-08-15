@@ -2,7 +2,6 @@ package com.warriors.service;
 
 import com.warriors.model.Army;
 import com.warriors.model.warrior.*;
-import com.warriors.model.warrior.interfaces.Warlord;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

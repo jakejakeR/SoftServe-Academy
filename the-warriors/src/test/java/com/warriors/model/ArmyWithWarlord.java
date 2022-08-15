@@ -1,23 +1,20 @@
-package com.warriors;
+package com.warriors.model;
 
-import com.warriors.model.Army;
-import com.warriors.model.warrior.Healer;
-import com.warriors.model.warrior.Lancer;
-import com.warriors.model.warrior.Warlord;
-import com.warriors.model.warrior.Warrior;
+import com.warriors.model.warrior.*;
+import org.junit.jupiter.api.Test;
 
-/**
- * The Warriors app!
- */
-public class TheWarriorsApp {
-    public static void main(String[] args) {
+class ArmyWithWarlord {
+
+    @Test
+    void testMoveUnits() {
+        //Given
         System.out.println("Let the battle begin!");
         var army = new Army();
         army.addUnits(Warlord::new, 1)
                 .addUnits(Warrior::new, 2)
                 .addUnits(Healer::new, 2)
-                .addUnits(Lancer::new, 3);
-
+                .addUnits(Lancer::new, 3)
+                .addUnits(Defender::new, 1);
         System.out.println(army);
         army.moveUnits();
         System.out.println(army);
