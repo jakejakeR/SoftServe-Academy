@@ -11,5 +11,9 @@ public interface HasEquipment {
         return this;
     }
 
+    default void dropEquipment() {
+        getEquipment().removeWeapons();
+    }
+
     Equipment getEquipment();
 }

@@ -1,6 +1,7 @@
 package com.warriors.model.warrior;
 
 import com.warriors.model.warrior.interfaces.HasHealth;
+import com.warriors.model.warrior.interfaces.IWarlord;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Slf4j
-public class Warlord extends Defender {
+public class Warlord extends Defender implements IWarlord {
     public static final int INITIAL_HEALTH = 100;
     public static final int INITIAL_ATTACK = 4;
 
@@ -22,6 +23,7 @@ public class Warlord extends Defender {
         return INITIAL_HEALTH + equipment.getHealthModifiers();
     }
 
+    @Override
     public Collection<IWarrior> rearrangeTroops(Iterable<IWarrior> troopsToRearrange) {
         List<IWarrior> rearrangedTroopsOfWarriors = new ArrayList<>();
         troopsToRearrange.forEach(rearrangedTroopsOfWarriors::add);

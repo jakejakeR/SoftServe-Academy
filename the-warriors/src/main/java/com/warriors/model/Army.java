@@ -3,6 +3,7 @@ package com.warriors.model;
 import com.warriors.model.equipment.Weapon;
 import com.warriors.model.warrior.Warlord;
 import com.warriors.model.warrior.interfaces.HasHealth;
+import com.warriors.model.warrior.interfaces.IWarlord;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,17 +16,17 @@ import java.util.function.Supplier;
 @Slf4j
 public class Army {
     private final List<IWarrior> troops = new ArrayList<>();
-    private Warlord warlord;
+    private IWarlord warlord;
 
     public Iterator<IWarrior> firstAlive() {
         return new FirstAliveIterator();
     }
 
     public Army addUnits(Supplier<IWarrior> factory, int quantity) {
-        if (factory.get() instanceof Warlord warlordInstance) {
+        if (factory.get() instanceof IWarlord warlordInstance) {
             if (troops.stream().noneMatch(Warlord.class::isInstance)) {
                 warlord = warlordInstance;
-                troops.add(warlord);
+                troops.add((IWarrior) warlord);
                 LOGGER.debug("Warlord added to the army!");
             } else {
                 LOGGER.debug("Warlord is already in army!");
@@ -50,9 +51,9 @@ public class Army {
             deleteConnections();
             lineUp();
 
-            LOGGER.debug("There is a Warlord and he will move units!");
+            LOGGER.trace("There is a Warlord and he will move units!");
         } else {
-            LOGGER.debug("There is no Warlord or he's dead!");
+            LOGGER.trace("There is no Warlord or he's dead!");
         }
     }
 
