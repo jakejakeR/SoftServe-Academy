@@ -5,6 +5,7 @@ import com.warriors.model.warrior.Warlord;
 import com.warriors.model.warrior.interfaces.HasHealth;
 import com.warriors.model.warrior.interfaces.IWarlord;
 import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.observer.Observer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
  * Warrior Factory, creates troops of Warriors
  */
 @Slf4j(topic = "ARMY LOG")
-public class Army {
+public class Army implements Observer {
     private final List<IWarrior> troops = new ArrayList<>();
     private IWarlord warlord;
 
@@ -37,10 +38,18 @@ public class Army {
         for (int i = 0; i < quantity; i++) {
             IWarrior warrior = factory.get();
             troops.add(warrior);
+            warrior.registerObserver(this);
             LOGGER.trace("{} added to the army {}.", warrior, this);
         }
 
         return this;
+    }
+
+    @Override
+    public void update(IWarrior warrior) {
+        if (!warrior.isAlive()) {
+            moveUnits();
+        }
     }
 
     public void moveUnits() {
@@ -110,7 +119,6 @@ public class Army {
     public String toString() {
         return "Army: " + troops;
     }
-
 
     /**
      * Iterator that always returns the first alive warrior,

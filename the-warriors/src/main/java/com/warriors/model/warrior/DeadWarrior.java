@@ -3,6 +3,7 @@ package com.warriors.model.warrior;
 import com.warriors.command.ICommand;
 import com.warriors.model.equipment.Equipment;
 import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.observer.Observer;
 
 import java.util.Optional;
 
@@ -62,5 +63,15 @@ public class DeadWarrior implements IWarrior {
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + " {HP:" + getHealth() + "| A:" + getAttack() + "}";
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        decoratedWarrior.registerObserver(observer);
+    }
+
+    @Override
+    public void notifyObserver() {
+        decoratedWarrior.notifyObserver();
     }
 }

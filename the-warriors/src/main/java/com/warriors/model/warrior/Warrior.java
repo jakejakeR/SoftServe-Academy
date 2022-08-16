@@ -5,12 +5,16 @@ import com.warriors.model.damage.IDamage;
 import com.warriors.model.damage.IPiercing;
 import com.warriors.model.equipment.Equipment;
 import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.observer.Observer;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j(topic = "WARRIOR LOG")
 public class Warrior implements IWarrior {
+    private final List<Observer> observers;
     protected final Equipment equipment;
     public static final int INITIAL_ATTACK = 5;
     public static final int INITIAL_HEALTH = 50;
@@ -26,6 +30,7 @@ public class Warrior implements IWarrior {
         this.health = health;
         this.attack = attack;
         this.equipment = new Equipment();
+        this.observers = new ArrayList<>();
     }
 
     @Override
@@ -45,6 +50,16 @@ public class Warrior implements IWarrior {
         }
 
         IWarrior.super.processCommand(command, sender);
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyObserver() {
+        observers.forEach(observer -> observer.update(this));
     }
 
     @Override
