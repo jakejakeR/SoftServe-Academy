@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 
-@Slf4j
+@Slf4j(topic = "WARRIOR LOG")
 public class Warrior implements IWarrior {
     protected final Equipment equipment;
     public static final int INITIAL_ATTACK = 5;

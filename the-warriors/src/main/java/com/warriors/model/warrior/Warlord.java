@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Slf4j
+@Slf4j(topic = "WARLORD LOG")
 public class Warlord extends Defender implements IWarlord {
     public static final int INITIAL_HEALTH = 100;
     public static final int INITIAL_ATTACK = 4;

@@ -7,17 +7,19 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Battle simulation of fighting warriors
  */
-@Slf4j
+@Slf4j(topic = "BATTLE LOG")
 public class Battle {
-    private static final String ATTACKING = "attacking ";
-    private static final String DEFENDING = "defending ";
+    private static final String ATTACKING = "Attacking ";
+    private static final String DEFENDING = "Defending ";
 
     private Battle() {
         throw new IllegalStateException("Utility class");
     }
 
     public static boolean fight(IWarrior sideOne, IWarrior sideTwo) {
-        LOGGER.info("The fight between {} and {} has begun!", ATTACKING + sideOne, DEFENDING + sideTwo);
+        LOGGER.info("* THE FIGHT HAS BEGUN *");
+        LOGGER.info("* ATTACKER {}", sideOne);
+        LOGGER.info("* DEFENDER {}", sideTwo);
         while (sideOne.isAlive() && sideTwo.isAlive()) {
             sideOne.hit(sideTwo);
             if (sideTwo.isAlive()) {
@@ -25,9 +27,12 @@ public class Battle {
             }
         }
         LOGGER.info(
-                "{} has won the fight! (Health left: {}).",
-                sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo,
-                sideOne.isAlive() ? sideOne.getHealth() : sideTwo.getHealth()
+                "{} has won the fight!",
+                sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo
+        );
+        LOGGER.debug(
+                "{} has lost...",
+                !sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo
         );
         return sideOne.isAlive();
     }
@@ -37,15 +42,23 @@ public class Battle {
         defendingArmy.lineUp().moveUnits();
         var iterator1 = attackingArmy.firstAlive();
         var iterator2 = defendingArmy.firstAlive();
-        LOGGER.info("The battle between {} and {} has begun!", attackingArmy, defendingArmy);
+        int roundCounter = 0;
+        LOGGER.info("# THE BATTLE HAS BEGUN #");
+        LOGGER.info("# ATTACKERS {}", attackingArmy);
+        LOGGER.info("# DEFENDERS {}", defendingArmy);
+
         while (iterator1.hasNext() && iterator2.hasNext()) {
+            LOGGER.info("ROUND #{}", ++roundCounter);
             fight(iterator1.next(), iterator2.next());
             attackingArmy.moveUnits();
             defendingArmy.moveUnits();
-            LOGGER.info("First army after fight: {}", attackingArmy);
-            LOGGER.info("Second army after fight: {}", defendingArmy);
+            LOGGER.debug("First army after fight: {}", attackingArmy);
+            LOGGER.debug("Second army after fight: {}", defendingArmy);
         }
-        LOGGER.info("{} has won the battle!}", iterator1.hasNext() ? attackingArmy : defendingArmy);
+        LOGGER.info("THE BATTLE HAS ENDED IN ROUND #{}", roundCounter);
+        LOGGER.info("WINNERS {}", iterator1.hasNext() ? attackingArmy : defendingArmy);
+        LOGGER.info("LOSERS {}", !iterator1.hasNext() ? attackingArmy : defendingArmy);
+
         return iterator1.hasNext();
     }
 

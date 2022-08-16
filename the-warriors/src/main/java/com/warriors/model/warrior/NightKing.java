@@ -2,12 +2,14 @@ package com.warriors.model.warrior;
 
 import com.warriors.model.warrior.interfaces.IWarlord;
 import com.warriors.model.warrior.interfaces.IWarrior;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j(topic = "NIGHT KING LOG")
 public class NightKing extends Warlord {
 
     @Override
@@ -27,6 +29,8 @@ public class NightKing extends Warlord {
 
     private Collection<IWarrior> raiseTheDead(List<IWarrior> almostDeadTroops) {
         List<IWarrior> raisedFromDeathTroops;
+        LOGGER.debug("{} raises all dead warriors!");
+        LOGGER.debug("{} raises all dead warriors!");
         raisedFromDeathTroops = almostDeadTroops.stream()
                 .filter(warrior -> !warrior.isAlive())
                 .filter(warrior -> !(warrior instanceof DeadWarrior))

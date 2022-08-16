@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 /**
  * Warrior Factory, creates troops of Warriors
  */
-@Slf4j
+@Slf4j(topic = "ARMY LOG")
 public class Army {
     private final List<IWarrior> troops = new ArrayList<>();
     private IWarlord warlord;
@@ -27,9 +27,9 @@ public class Army {
             if (troops.stream().noneMatch(Warlord.class::isInstance)) {
                 warlord = warlordInstance;
                 troops.add((IWarrior) warlord);
-                LOGGER.debug("Warlord added to the army!");
+                LOGGER.info("Warlord added to the army!");
             } else {
-                LOGGER.debug("Warlord is already in army!");
+                LOGGER.error("Warlord is already in army!");
             }
             return this;
         }
@@ -45,13 +45,14 @@ public class Army {
 
     public void moveUnits() {
         if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
+            LOGGER.trace("There is a Warlord and he will move units!");
+            LOGGER.debug("Army before moving units: {}", this);
             Collection<IWarrior> rearrangedTroops = warlord.rearrangeTroops(troops);
             troops.clear();
             troops.addAll(rearrangedTroops);
             deleteConnections();
             lineUp();
-
-            LOGGER.trace("There is a Warlord and he will move units!");
+            LOGGER.debug("Army after moving units: {}", this);
         } else {
             LOGGER.trace("There is no Warlord or he's dead!");
         }

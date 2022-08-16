@@ -6,7 +6,7 @@ import com.warriors.model.warrior.interfaces.CanHeal;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@Slf4j(topic = "HEALER LOG")
 public class Healer extends Warrior implements CanHeal {
     public static final int INITIAL_HEALTH = 60;
     public static final int INITIAL_HEAL_POWER = 2;
@@ -24,16 +24,12 @@ public class Healer extends Warrior implements CanHeal {
 
     @Override
     public void processCommand(ICommand command, IWarrior sender) {
-        if (!this.isAlive()) {
-            return;
-        }
-        if (command instanceof HealCommand) {
-            int healthBeforeHeal = sender.getHealth();
-            heal(sender);
-            LOGGER.info(
-                    "{} heals injured {} and increases his health from {} to {}.",
-                    this, sender, healthBeforeHeal, sender.getHealth()
+        if ((command instanceof HealCommand) && sender.getHealth() < sender.getInitialHealth() && this.isAlive() && sender.isAlive()) {
+            LOGGER.debug(
+                    "{} heals injured {} and increases his health by {}.",
+                    this, sender, getHealPower()
             );
+            heal(sender);
             return;
         }
         super.processCommand(command, sender);
