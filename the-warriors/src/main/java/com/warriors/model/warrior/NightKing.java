@@ -1,5 +1,6 @@
 package com.warriors.model.warrior;
 
+import com.warriors.model.warrior.interfaces.IWarlord;
 import com.warriors.model.warrior.interfaces.IWarrior;
 
 import java.util.ArrayList;
@@ -13,7 +14,11 @@ public class NightKing extends Warlord {
     public Collection<IWarrior> rearrangeTroops(Iterable<IWarrior> troopsToRearrange) {
         List<IWarrior> rearrangedTroopsOfWarriors = new ArrayList<>(super.rearrangeTroops(troopsToRearrange));
 
-        if ((rearrangedTroopsOfWarriors.get(0) == this) && rearrangedTroopsOfWarriors.size() > 1) {
+        boolean armyHasUndeadWarriorsExceptKing = rearrangedTroopsOfWarriors.stream()
+                .filter(warrior -> !(warrior instanceof IWarlord))
+                .allMatch(DeadWarrior.class::isInstance);
+
+        if (rearrangedTroopsOfWarriors.get(0) == this && !armyHasUndeadWarriorsExceptKing) {
             return raiseTheDead(rearrangedTroopsOfWarriors);
         } else {
             return rearrangedTroopsOfWarriors;
@@ -22,15 +27,9 @@ public class NightKing extends Warlord {
 
     private Collection<IWarrior> raiseTheDead(List<IWarrior> almostDeadTroops) {
         List<IWarrior> raisedFromDeathTroops;
-//        for (IWarrior iWarrior : almostDeadTroops) {
-//            if (!(iWarrior instanceof IWarlord)) {
-//                iWarrior = new DeadWarrior(iWarrior);
-//            }
-//            raisedFromDeathTroops.add(iWarrior);
-//        }
-
         raisedFromDeathTroops = almostDeadTroops.stream()
                 .filter(warrior -> !warrior.isAlive())
+                .filter(warrior -> !(warrior instanceof DeadWarrior))
                 .map(DeadWarrior::new)
                 .collect(Collectors.toList());
 
