@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public class DeadWarrior implements IWarrior {
     public static final int INITIAL_HEALTH = 1;
+    public static final int INITIAL_ATTACK = 3;
     private int health;
     private final IWarrior decoratedWarrior;
 
@@ -20,7 +21,7 @@ public class DeadWarrior implements IWarrior {
 
     @Override
     public int getAttack() {
-        return decoratedWarrior.getAttack() + 1;
+        return INITIAL_ATTACK;
     }
 
     @Override
