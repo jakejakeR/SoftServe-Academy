@@ -51,9 +51,9 @@ public class Army {
             deleteConnections();
             lineUp();
 
-            LOGGER.debug("There is a Warlord and he will move units!");
+            LOGGER.trace("There is a Warlord and he will move units!");
         } else {
-            LOGGER.debug("There is no Warlord or he's dead!");
+            LOGGER.trace("There is no Warlord or he's dead!");
         }
     }
 
