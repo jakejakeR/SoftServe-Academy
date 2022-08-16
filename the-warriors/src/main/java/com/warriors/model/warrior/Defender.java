@@ -4,7 +4,7 @@ import com.warriors.model.damage.IDamage;
 import com.warriors.model.warrior.interfaces.HasDefense;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@Slf4j(topic = "DEFENSE LOG")
 public class Defender extends Warrior implements HasDefense {
     public static final int INITIAL_HEALTH = 60;
     public static final int INITIAL_ATTACK = 3;
@@ -24,12 +24,12 @@ public class Defender extends Warrior implements HasDefense {
     @Override
     public void receiveDamage(IDamage damage) {
         int reducedDamage = damage.getHitPoints() - getDefense();
-        setHealth(getHealth() - Math.max(0, reducedDamage));
-
         LOGGER.debug(
                 "{} blocks the attack from {} (damage: {}), and reduces damage to {}",
                 this, damage.getDamageDealer(), damage.getHitPoints(), reducedDamage
         );
+
+        setHealth(getHealth() - Math.max(0, reducedDamage));
     }
 
     @Override

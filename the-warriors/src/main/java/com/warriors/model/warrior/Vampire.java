@@ -4,7 +4,7 @@ import com.warriors.model.warrior.interfaces.IWarrior;
 import com.warriors.model.warrior.interfaces.Vampirism;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@Slf4j(topic = "VAMPIRE LOG")
 public class Vampire extends Warrior implements Vampirism {
     public static final int INITIAL_ATTACK = 4;
     public static final int INITIAL_HEALTH = 40;
@@ -26,8 +26,8 @@ public class Vampire extends Warrior implements Vampirism {
         int dealtDamage = opponentsHealthBeforeHit - opponentsHealthAfterHit;
         drainLife(dealtDamage);
         LOGGER.debug(
-                "{} drains {} point(s) of life base on dealt damage ({}) from {} (Health left: {})",
-                this, dealtDamage / 2, dealtDamage, opponent, opponent.getHealth()
+                "{} drains {} point(s) of life based on dealt damage ({}) from {}",
+                this, dealtDamage / 2, dealtDamage, opponent
         );
     }
 

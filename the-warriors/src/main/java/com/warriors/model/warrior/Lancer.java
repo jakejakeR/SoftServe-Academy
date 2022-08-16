@@ -22,7 +22,6 @@ public class Lancer extends Warrior implements CanPierce {
     @Override
     public void hit(IWarrior opponent) {
         opponent.processCommand(new PiercingDamage(getAttack(), this, getPierce()), this);
-        LOGGER.info("{} hits {} (health after hit: {}).", this, opponent, opponent.getHealth());
         processCommand(new HealCommand(), this);
     }
 

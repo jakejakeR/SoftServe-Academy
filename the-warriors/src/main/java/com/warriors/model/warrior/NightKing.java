@@ -2,12 +2,14 @@ package com.warriors.model.warrior;
 
 import com.warriors.model.warrior.interfaces.IWarlord;
 import com.warriors.model.warrior.interfaces.IWarrior;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j(topic = "NIGHT KING LOG")
 public class NightKing extends Warlord {
 
     @Override
