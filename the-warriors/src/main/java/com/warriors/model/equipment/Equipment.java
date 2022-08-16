@@ -10,6 +10,10 @@ public class Equipment {
         weapons.add(weapon);
     }
 
+    public void removeWeapons() {
+        weapons.clear();
+    }
+
     public int getHealthModifiers() {
         return weapons.stream().mapToInt(Weapon::getHealth).sum();
     }
