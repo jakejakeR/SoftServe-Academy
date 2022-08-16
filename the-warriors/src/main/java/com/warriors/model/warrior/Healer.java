@@ -24,10 +24,7 @@ public class Healer extends Warrior implements CanHeal {
 
     @Override
     public void processCommand(ICommand command, IWarrior sender) {
-        if (!this.isAlive()) {
-            return;
-        }
-        if ((command instanceof HealCommand) && sender.getHealth() < sender.getInitialHealth()) {
+        if ((command instanceof HealCommand) && sender.getHealth() < sender.getInitialHealth() && this.isAlive() && sender.isAlive()) {
             LOGGER.debug(
                     "{} heals injured {} and increases his health by {}.",
                     this, sender, getHealPower()

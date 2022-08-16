@@ -5,12 +5,16 @@ import com.warriors.command.ICommand;
 import com.warriors.model.damage.IDamage;
 import com.warriors.model.damage.SimpleDamage;
 import com.warriors.model.equipment.Weapon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
 public interface IWarrior extends CanAttack, HasHealth, HasEquipment {
 
+    Logger LOGGER = LoggerFactory.getLogger("HIT LOG");
     default void hit(IWarrior opponent) {
+        LOGGER.debug("{} HITS {}.", this, opponent);
         opponent.processCommand(new SimpleDamage(getAttack(), this), this);
         processCommand(new HealCommand(), this);
     }

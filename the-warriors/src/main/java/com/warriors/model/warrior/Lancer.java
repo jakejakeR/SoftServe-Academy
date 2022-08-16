@@ -6,7 +6,7 @@ import com.warriors.model.warrior.interfaces.CanPierce;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@Slf4j(topic = "HIT LOG")
 public class Lancer extends Warrior implements CanPierce {
     public static final int INITIAL_ATTACK = 6;
     public static final int INITIAL_PIERCE_POWER = 50;
@@ -21,6 +21,7 @@ public class Lancer extends Warrior implements CanPierce {
 
     @Override
     public void hit(IWarrior opponent) {
+        LOGGER.debug("{} HITS {}.", this, opponent);
         opponent.processCommand(new PiercingDamage(getAttack(), this, getPierce()), this);
         processCommand(new HealCommand(), this);
     }

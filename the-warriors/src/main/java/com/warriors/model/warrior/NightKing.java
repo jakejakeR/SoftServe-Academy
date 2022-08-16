@@ -29,6 +29,8 @@ public class NightKing extends Warlord {
 
     private Collection<IWarrior> raiseTheDead(List<IWarrior> almostDeadTroops) {
         List<IWarrior> raisedFromDeathTroops;
+        LOGGER.debug("{} raises all dead warriors!");
+        LOGGER.debug("{} raises all dead warriors!");
         raisedFromDeathTroops = almostDeadTroops.stream()
                 .filter(warrior -> !warrior.isAlive())
                 .filter(warrior -> !(warrior instanceof DeadWarrior))

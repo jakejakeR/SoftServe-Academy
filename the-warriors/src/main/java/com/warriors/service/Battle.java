@@ -21,10 +21,8 @@ public class Battle {
         LOGGER.info("* ATTACKER {}", sideOne);
         LOGGER.info("* DEFENDER {}", sideTwo);
         while (sideOne.isAlive() && sideTwo.isAlive()) {
-            LOGGER.debug("{} HITS {}.", sideOne, sideTwo);
             sideOne.hit(sideTwo);
             if (sideTwo.isAlive()) {
-                LOGGER.debug("{} HITS {}.", sideTwo, sideOne);
                 sideTwo.hit(sideOne);
             }
         }
@@ -48,6 +46,7 @@ public class Battle {
         LOGGER.info("# THE BATTLE HAS BEGUN #");
         LOGGER.info("# ATTACKERS {}", attackingArmy);
         LOGGER.info("# DEFENDERS {}", defendingArmy);
+
         while (iterator1.hasNext() && iterator2.hasNext()) {
             LOGGER.info("ROUND #{}", ++roundCounter);
             fight(iterator1.next(), iterator2.next());
@@ -59,6 +58,7 @@ public class Battle {
         LOGGER.info("THE BATTLE HAS ENDED IN ROUND #{}", roundCounter);
         LOGGER.info("WINNERS {}", iterator1.hasNext() ? attackingArmy : defendingArmy);
         LOGGER.info("LOSERS {}", !iterator1.hasNext() ? attackingArmy : defendingArmy);
+
         return iterator1.hasNext();
     }
 
