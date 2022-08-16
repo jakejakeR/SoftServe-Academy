@@ -7,6 +7,8 @@ import com.warriors.model.warrior.interfaces.IWarlord;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import com.warriors.model.warrior.interfaces.observer.Observer;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -45,10 +47,16 @@ public class Army implements Observer {
         return this;
     }
 
+    Logger observerLog = LoggerFactory.getLogger("OBSERVER LOG");
+
     @Override
     public void update(IWarrior warrior) {
+        observerLog.debug("Observer has been notified by {}", warrior);
         if (!warrior.isAlive()) {
+            observerLog.debug("Notifying {} is dead.", warrior);
+            deleteConnections();
             moveUnits();
+            lineUp();
         }
     }
 
@@ -56,10 +64,10 @@ public class Army implements Observer {
         if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
             LOGGER.trace("There is a Warlord and he will move units!");
             LOGGER.debug("Army before moving units: {}", this);
+            deleteConnections();
             Collection<IWarrior> rearrangedTroops = warlord.rearrangeTroops(troops);
             troops.clear();
             troops.addAll(rearrangedTroops);
-            deleteConnections();
             lineUp();
             LOGGER.debug("Army after moving units: {}", this);
         } else {

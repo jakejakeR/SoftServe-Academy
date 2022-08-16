@@ -30,7 +30,6 @@ public class Defender extends Warrior implements HasDefense {
         );
 
         setHealth(getHealth() - Math.max(0, reducedDamage));
-        this.notifyObserver();
     }
 
     @Override

@@ -22,7 +22,6 @@ public interface IWarrior extends CanAttack, HasHealth, HasEquipment, Observable
 
     default void receiveDamage(IDamage damage) {
         reduceHealthBasedOnDamage(damage.getHitPoints());
-        this.notifyObserver();
     }
 
     default Optional<IWarrior> getNextBehind() {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j(topic = "WARRIOR LOG")
+@Slf4j(topic = "OBSERVABLE LOG")
 public class Warrior implements IWarrior {
     private final List<Observer> observers;
     protected final Equipment equipment;
@@ -39,13 +39,15 @@ public class Warrior implements IWarrior {
             int initialHealth = getHealth();
             receiveDamage(damage);
             int dealtDamage = initialHealth - getHealth();
-
+            this.notifyObserver();
+            //TODO zrobić tak żeby było dobrze
             if (command instanceof IPiercing piercing && piercing.getCounter() > 1) {
                 piercing.decreaseCounter();
                 damage.setPierceHitPoints(dealtDamage);
                 getNextBehind()
                         .ifPresent(iWarrior -> iWarrior.processCommand(command, this));
             }
+
             return;
         }
 
@@ -59,6 +61,7 @@ public class Warrior implements IWarrior {
 
     @Override
     public void notifyObserver() {
+        LOGGER.info("{} notifies observer", this);
         observers.forEach(observer -> observer.update(this));
     }
 
