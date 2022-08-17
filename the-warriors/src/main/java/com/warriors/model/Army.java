@@ -5,7 +5,10 @@ import com.warriors.model.warrior.Warlord;
 import com.warriors.model.warrior.interfaces.HasHealth;
 import com.warriors.model.warrior.interfaces.IWarlord;
 import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.observer.Observer;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -14,7 +17,7 @@ import java.util.function.Supplier;
  * Warrior Factory, creates troops of Warriors
  */
 @Slf4j(topic = "ARMY LOG")
-public class Army {
+public class Army implements Observer {
     private final List<IWarrior> troops = new ArrayList<>();
     private IWarlord warlord;
 
@@ -37,20 +40,34 @@ public class Army {
         for (int i = 0; i < quantity; i++) {
             IWarrior warrior = factory.get();
             troops.add(warrior);
+            warrior.registerObserver(this);
             LOGGER.trace("{} added to the army {}.", warrior, this);
         }
 
         return this;
     }
 
+    Logger observerLog = LoggerFactory.getLogger("OBSERVER LOG");
+
+    @Override
+    public void update(IWarrior warrior) {
+        observerLog.debug("Observer has been notified by {}", warrior);
+        if (!warrior.isAlive()) {
+            observerLog.debug("Notifying {} is dead.", warrior);
+            deleteConnections();
+            moveUnits();
+            lineUp();
+        }
+    }
+
     public void moveUnits() {
         if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
             LOGGER.trace("There is a Warlord and he will move units!");
             LOGGER.debug("Army before moving units: {}", this);
+            deleteConnections();
             Collection<IWarrior> rearrangedTroops = warlord.rearrangeTroops(troops);
             troops.clear();
             troops.addAll(rearrangedTroops);
-            deleteConnections();
             lineUp();
             LOGGER.debug("Army after moving units: {}", this);
         } else {
@@ -110,7 +127,6 @@ public class Army {
     public String toString() {
         return "Army: " + troops;
     }
-
 
     /**
      * Iterator that always returns the first alive warrior,
