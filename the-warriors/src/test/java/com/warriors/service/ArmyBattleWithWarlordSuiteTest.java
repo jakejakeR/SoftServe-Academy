@@ -60,4 +60,14 @@ class ArmyBattleWithWarlordSuiteTest {
 
         Battle.fight(armyTwo, armyOne);
     }
+
+    @Test
+    void theKnightKingTest() {
+        var armyOfTheDead = new Army();
+        armyOfTheDead.addUnits(Knight::new, 1).addUnits(Warrior::new, 1).addUnits(Healer::new, 1);
+        var anotherArmy = new Army();
+        anotherArmy.addUnits(Lancer::new, 3);
+
+        Battle.fight(anotherArmy, armyOfTheDead);
+    }
 }

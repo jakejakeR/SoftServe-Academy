@@ -35,6 +35,9 @@ public class Warrior implements IWarrior {
 
     @Override
     public void processCommand(ICommand command, IWarrior sender) {
+        if (!this.isAlive()) {
+            return;
+        }
         if (command instanceof IDamage damage) {
             int initialHealth = getHealth();
             receiveDamage(damage);
