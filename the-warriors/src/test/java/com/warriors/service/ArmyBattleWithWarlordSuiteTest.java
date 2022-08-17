@@ -61,15 +61,43 @@ class ArmyBattleWithWarlordSuiteTest {
         armyTwo.addUnits(Lancer::new, 1);
 
         Battle.fight(armyTwo, armyOne);
+        //TODO add some asserts
     }
 
     @Test
     void theKnightKingTest() {
-        var armyOfTheDead = new Army();
-        armyOfTheDead.addUnits(Knight::new, 1).addUnits(Warrior::new, 1).addUnits(Healer::new, 1);
-        var anotherArmy = new Army();
-        anotherArmy.addUnits(Lancer::new, 3);
+        var ronald = new NightKing();
+        var heimdall = new Knight();
 
-        Battle.fight(anotherArmy, armyOfTheDead);
+        assertFalse(Battle.fight(heimdall, ronald));
+
+        var myArmy = new Army();
+        myArmy.addUnits(NightKing::new, 1);
+        myArmy.addUnits(Warrior::new, 2);
+        myArmy.addUnits(Lancer::new, 2);
+        myArmy.addUnits(Healer::new, 2);
+
+        var enemyArmy = new Army();
+        enemyArmy.addUnits(NightKing::new, 3);
+        enemyArmy.addUnits(Vampire::new, 1);
+        enemyArmy.addUnits(Healer::new, 2);
+        enemyArmy.addUnits(Knight::new, 2);
+
+        myArmy.moveUnits();
+        enemyArmy.moveUnits();
+
+// you can provide any other interface for testing the order
+        assertEquals(Lancer.class, myArmy.unitAtPosition(0).getClass());
+        assertEquals(Healer.class, myArmy.unitAtPosition(1).getClass());
+// negative index means from the last position, so -1 == last
+        assertEquals(NightKing.class, myArmy.unitAtPosition(myArmy.armySize() - 1).getClass());
+        assertEquals(Vampire.class, enemyArmy.unitAtPosition(0).getClass());
+        assertEquals(NightKing.class, enemyArmy.unitAtPosition(enemyArmy.armySize() - 1).getClass());
+        assertEquals(Knight.class, enemyArmy.unitAtPosition(enemyArmy.armySize() - 2).getClass());
+
+//6, not 8, because only 1 Warlord per army could be
+        assertEquals(6, enemyArmy.armySize());
+
+        assertTrue(Battle.fight(myArmy, enemyArmy));
     }
 }

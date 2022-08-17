@@ -14,6 +14,10 @@ public class Equipment {
         weapons.clear();
     }
 
+    public boolean isEmpty() {
+        return weapons.isEmpty();
+    }
+
     public int getHealthModifiers() {
         return weapons.stream().mapToInt(Weapon::getHealth).sum();
     }

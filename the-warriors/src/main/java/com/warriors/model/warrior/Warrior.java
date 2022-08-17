@@ -49,7 +49,7 @@ public class Warrior implements IWarrior {
                 getNextBehind()
                         .ifPresent(iWarrior -> iWarrior.processCommand(command, this));
             }
-            this.notifyObserver();
+            this.notifyObserver(this);
             return;
         }
 
@@ -62,9 +62,9 @@ public class Warrior implements IWarrior {
     }
 
     @Override
-    public void notifyObserver() {
-        LOGGER.info("{} notifies observer", this);
-        observers.forEach(observer -> observer.update(this));
+    public void notifyObserver(IWarrior thisWarrior) {
+        LOGGER.info("{} notifies observer", thisWarrior);
+        observers.forEach(observer -> observer.update(thisWarrior));
     }
 
     @Override

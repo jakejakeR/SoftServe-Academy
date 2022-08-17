@@ -5,6 +5,7 @@ import com.warriors.command.ICommand;
 import com.warriors.model.damage.IDamage;
 import com.warriors.model.damage.SimpleDamage;
 import com.warriors.model.equipment.Weapon;
+import com.warriors.model.warrior.DeadWarrior;
 import com.warriors.model.warrior.Healer;
 import com.warriors.model.warrior.interfaces.observer.Observable;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ public interface IWarrior extends CanAttack, HasHealth, HasEquipment, Observable
     default void hit(IWarrior opponent) {
         hitLog.debug("{} HITS {}.", this, opponent);
         opponent.processCommand(new SimpleDamage(getAttack(), this), this);
-        if (this.getNextBehind().orElse(null) instanceof Healer healer) {
+        if (this.getNextBehind().orElse(null) instanceof Healer healer && !(this instanceof DeadWarrior)) {
             healRequestLog.debug("{} sends heal request to {}.", this, healer);
             processCommand(new HealCommand(), this);
         }
