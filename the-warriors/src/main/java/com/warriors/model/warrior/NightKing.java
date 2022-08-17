@@ -29,15 +29,16 @@ public class NightKing extends Warlord {
 
     private Collection<IWarrior> raiseTheDead(List<IWarrior> almostDeadTroops) {
         List<IWarrior> raisedFromDeathTroops;
-        LOGGER.debug("{} raises all dead warriors!");
-        LOGGER.debug("{} raises all dead warriors!");
+        LOGGER.info("{} raises all dead warriors!", this);
+        LOGGER.debug("Army before raise: {}", almostDeadTroops);
         raisedFromDeathTroops = almostDeadTroops.stream()
                 .filter(warrior -> !warrior.isAlive())
                 .filter(warrior -> !(warrior instanceof DeadWarrior))
                 .map(DeadWarrior::new)
                 .collect(Collectors.toList());
-
+        LOGGER.debug("The DeadArmy: {}", raisedFromDeathTroops);
         raisedFromDeathTroops.add(this);
+        LOGGER.debug("The DeadArmy with NightKING: {}", raisedFromDeathTroops);
         return super.rearrangeTroops(raisedFromDeathTroops);
     }
 }
