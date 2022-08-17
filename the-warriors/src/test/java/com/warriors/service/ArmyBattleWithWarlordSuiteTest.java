@@ -61,6 +61,7 @@ class ArmyBattleWithWarlordSuiteTest {
         armyTwo.addUnits(Lancer::new, 1);
 
         Battle.fight(armyTwo, armyOne);
+        //TODO add some asserts
     }
 
     @Test

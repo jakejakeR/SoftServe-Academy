@@ -25,8 +25,8 @@ class DeadWarriorTest {
         // then
         assertFalse(kaputHealer.isAlive());
         assertEquals(3, deadWarriorOfHealer.getAttack());
-        assertEquals(1, deadWarriorOfHealer.getHealth());
-        assertEquals(1, deadWarriorOfHealer.getInitialHealth());
+        assertEquals(10, deadWarriorOfHealer.getHealth());
+        assertEquals(10, deadWarriorOfHealer.getInitialHealth());
         assertTrue(deadWarriorOfHealer.getEquipment().isEmpty());
     }
 
@@ -42,9 +42,9 @@ class DeadWarriorTest {
         lancerArmy.getWarriorFromTroops(0).hit(deadArmy.getWarriorFromTroops(0));
 
         // then
-        assertEquals(-5, deadArmy.getWarriorFromTroops(0).getHealth());
-        assertEquals(-2, deadArmy.getWarriorFromTroops(1).getHealth());
-        assertEquals(1, deadArmy.getWarriorFromTroops(2).getHealth());
+        assertEquals(4, deadArmy.getWarriorFromTroops(0).getHealth());
+        assertEquals(7, deadArmy.getWarriorFromTroops(1).getHealth());
+        assertEquals(10, deadArmy.getWarriorFromTroops(2).getHealth());
     }
 
     @Test
@@ -61,6 +61,6 @@ class DeadWarriorTest {
         deadArmy.getWarriorFromTroops(0).hit(warriorArmy.getWarriorFromTroops(0));
 
         // then
-        assertEquals(1, deadArmy.getWarriorFromTroops(0).getHealth());
+        assertEquals(10, deadArmy.getWarriorFromTroops(0).getHealth());
     }
 }

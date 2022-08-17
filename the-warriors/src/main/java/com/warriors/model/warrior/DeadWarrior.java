@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j(topic = "OBSERVABLE LOG")
 public class DeadWarrior extends Warrior {
-    public static final int INITIAL_HEALTH = 1;
+    public static final int INITIAL_HEALTH = 10;
     public static final int INITIAL_ATTACK = 3;
     private int health;
     private final IWarrior decoratedWarrior;
