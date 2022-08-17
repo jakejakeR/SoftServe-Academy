@@ -50,8 +50,7 @@ public class Battle {
         while (iterator1.hasNext() && iterator2.hasNext()) {
             LOGGER.info("ROUND #{}", ++roundCounter);
             fight(iterator1.next(), iterator2.next());
-            attackingArmy.moveUnits();
-            defendingArmy.moveUnits();
+
             LOGGER.debug("First army after fight: {}", attackingArmy);
             LOGGER.debug("Second army after fight: {}", defendingArmy);
         }

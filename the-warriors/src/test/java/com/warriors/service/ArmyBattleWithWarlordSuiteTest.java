@@ -44,4 +44,20 @@ class ArmyBattleWithWarlordSuiteTest {
 
         assertTrue(Battle.fight(myArmy, enemyArmy));
     }
+
+    @Test
+    void test123() {
+        var armyOne = new Army();
+        armyOne.addUnits(Warlord::new, 1);
+        armyOne.addUnits(Knight::new, 1);
+        armyOne.addUnits(Healer::new, 1);
+        armyOne.addUnits(Warrior::new, 1);
+        armyOne.getWarriorFromTroops(1).setHealth(6);
+        armyOne.getWarriorFromTroops(2).setHealth(3);
+
+        var armyTwo = new Army();
+        armyTwo.addUnits(Lancer::new, 1);
+
+        Battle.fight(armyTwo, armyOne);
+    }
 }
