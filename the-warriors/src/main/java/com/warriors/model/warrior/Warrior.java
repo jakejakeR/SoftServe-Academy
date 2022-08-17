@@ -43,7 +43,6 @@ public class Warrior implements IWarrior {
             receiveDamage(damage);
             int dealtDamage = initialHealth - getHealth();
 
-            //TODO zrobić tak żeby było dobrze
             if (command instanceof IPiercing piercing && piercing.getCounter() > 1) {
                 piercing.decreaseCounter();
                 damage.setPierceHitPoints(dealtDamage);
