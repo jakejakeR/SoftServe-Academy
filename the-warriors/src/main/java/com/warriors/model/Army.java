@@ -54,9 +54,7 @@ public class Army implements Observer {
         observerLog.debug("Observer has been notified by {}", warrior);
         if (!warrior.isAlive()) {
             observerLog.debug("Notifying {} is dead.", warrior);
-            deleteConnections();
             moveUnits();
-            lineUp();
         }
     }
 
