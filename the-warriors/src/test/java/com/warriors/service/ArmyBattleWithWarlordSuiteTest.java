@@ -2,6 +2,7 @@ package com.warriors.service;
 
 import com.warriors.model.Army;
 import com.warriors.model.warrior.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +47,7 @@ class ArmyBattleWithWarlordSuiteTest {
     }
 
     @Test
+    @DisplayName("When Lancer kills Knight and Healer at the same time, the move Units command is called")
     void test123() {
         var armyOne = new Army();
         armyOne.addUnits(Warlord::new, 1);

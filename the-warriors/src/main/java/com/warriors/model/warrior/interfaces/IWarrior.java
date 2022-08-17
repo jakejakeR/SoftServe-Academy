@@ -14,11 +14,13 @@ import java.util.Optional;
 
 public interface IWarrior extends CanAttack, HasHealth, HasEquipment, Observable {
 
-    Logger LOGGER = LoggerFactory.getLogger("HIT LOG");
+    Logger hitLog = LoggerFactory.getLogger("HIT LOG");
+    Logger healRequestLog = LoggerFactory.getLogger("REQUEST HEAL LOG");
     default void hit(IWarrior opponent) {
-        LOGGER.debug("{} HITS {}.", this, opponent);
+        hitLog.debug("{} HITS {}.", this, opponent);
         opponent.processCommand(new SimpleDamage(getAttack(), this), this);
-        if (this.getNextBehind().orElse(null) instanceof Healer) {
+        if (this.getNextBehind().orElse(null) instanceof Healer healer) {
+            healRequestLog.debug("{} sends heal request to {}.", this, healer);
             processCommand(new HealCommand(), this);
         }
     }
