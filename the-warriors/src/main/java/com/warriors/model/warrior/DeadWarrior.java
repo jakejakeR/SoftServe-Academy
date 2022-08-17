@@ -2,7 +2,10 @@ package com.warriors.model.warrior;
 
 import com.warriors.model.equipment.Equipment;
 import com.warriors.model.warrior.interfaces.IWarrior;
+import com.warriors.model.warrior.interfaces.observer.Observer;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j(topic = "OBSERVABLE LOG")
 public class DeadWarrior extends Warrior {
     public static final int INITIAL_HEALTH = 1;
     public static final int INITIAL_ATTACK = 3;
@@ -29,5 +32,15 @@ public class DeadWarrior extends Warrior {
     @Override
     public int getInitialHealth() {
         return INITIAL_HEALTH + getEquipment().getHealthModifiers();
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        decoratedWarrior.registerObserver(observer);
+    }
+
+    @Override
+    public void notifyObserver(IWarrior warrior) {
+        decoratedWarrior.notifyObserver(this);
     }
 }
