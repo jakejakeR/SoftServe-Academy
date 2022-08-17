@@ -39,7 +39,7 @@ public class Warrior implements IWarrior {
             int initialHealth = getHealth();
             receiveDamage(damage);
             int dealtDamage = initialHealth - getHealth();
-            this.notifyObserver();
+
             //TODO zrobić tak żeby było dobrze
             if (command instanceof IPiercing piercing && piercing.getCounter() > 1) {
                 piercing.decreaseCounter();
@@ -47,7 +47,7 @@ public class Warrior implements IWarrior {
                 getNextBehind()
                         .ifPresent(iWarrior -> iWarrior.processCommand(command, this));
             }
-
+            this.notifyObserver();
             return;
         }
 
