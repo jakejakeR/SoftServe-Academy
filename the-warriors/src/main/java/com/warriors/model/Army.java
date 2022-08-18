@@ -25,6 +25,14 @@ public class Army implements Observer {
         return new FirstAliveIterator();
     }
 
+    /**
+     * Adds Warriors to the collection of troops.
+     * Prevents from adding more than 1 Warlords.
+     * Sets Army as an Observer of each Warrior.
+     * @param factory supplier of warriors
+     * @param quantity of warriors to add
+     * @return fluent interface
+     */
     public Army addUnits(Supplier<IWarrior> factory, int quantity) {
         if (factory.get() instanceof IWarlord warlordInstance) {
             if (troops.stream().noneMatch(Warlord.class::isInstance)) {
@@ -58,6 +66,11 @@ public class Army implements Observer {
         }
     }
 
+
+    /**
+     * Performs rearrange of units in Army
+     * if there's a Warlord in troops collection.
+     */
     public void moveUnits() {
         if (troops.stream().filter(HasHealth::isAlive).anyMatch(Warlord.class::isInstance)) {
             LOGGER.trace("There is a Warlord and he will move units!");

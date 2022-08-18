@@ -12,6 +12,14 @@ import java.util.stream.Collectors;
 @Slf4j(topic = "NIGHT KING LOG")
 public class NightKing extends Warlord {
 
+    /**
+     * Performs rearrangement of troops just like super class does.
+     * Additionally, if Night King is the only alive warrior in troops,
+     * turns all dead Warriors into decorated new objects of
+     * DeadWarriors.
+     * @param troopsToRearrange Iterable of troops to rearrange.
+     * @return Collection of rearranged warriors.
+     */
     @Override
     public Collection<IWarrior> rearrangeTroops(Iterable<IWarrior> troopsToRearrange) {
         List<IWarrior> rearrangedTroopsOfWarriors = new ArrayList<>(super.rearrangeTroops(troopsToRearrange));

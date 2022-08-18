@@ -23,6 +23,14 @@ public class Warlord extends Defender implements IWarlord {
         return INITIAL_HEALTH + equipment.getHealthModifiers();
     }
 
+    /**
+     * Converts Iterable of troops to List of troops.
+     * Divides List of troops into List of alive Warriors and List of dead Warriors.
+     * Divides alive Warriors into separate Lists of particular types of Warriors.
+     * Puts those Lists in proper order into base List of troops.
+     * @param troopsToRearrange Iterable of troops to rearrange.
+     * @return Collection of rearranged warriors.
+     */
     @Override
     public Collection<IWarrior> rearrangeTroops(Iterable<IWarrior> troopsToRearrange) {
         List<IWarrior> rearrangedTroopsOfWarriors = new ArrayList<>();
