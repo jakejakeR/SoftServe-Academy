@@ -17,6 +17,13 @@ public interface IWarrior extends CanAttack, HasHealth, HasEquipment, Observable
 
     Logger hitLog = LoggerFactory.getLogger("HIT LOG");
     Logger healRequestLog = LoggerFactory.getLogger("REQUEST HEAL LOG");
+
+    /**
+     * Sends a Damage command do opponent.
+     * If sender has a Healer behind him and is not a type od DeadWarrior
+     * then sends heal request to the healer behind.
+     * @param opponent that receives a command to process.
+     */
     default void hit(IWarrior opponent) {
         hitLog.debug("{} HITS {}.", this, opponent);
         opponent.processCommand(new SimpleDamage(getAttack(), this), this);
