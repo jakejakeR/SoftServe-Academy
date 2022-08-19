@@ -27,6 +27,7 @@ public interface IWarrior extends CanAttack, HasHealth, HasEquipment, Observable
     default void hit(IWarrior opponent) {
         hitLog.debug("{} HITS {}.", this, opponent);
         opponent.processCommand(new SimpleDamage(getAttack(), this), this);
+
         if (this.getNextBehind().orElse(null) instanceof Healer healer && !(this instanceof DeadWarrior)) {
             healRequestLog.debug("{} sends heal request to {}.", this, healer);
             processCommand(new HealCommand(), this);
@@ -37,16 +38,16 @@ public interface IWarrior extends CanAttack, HasHealth, HasEquipment, Observable
         reduceHealthBasedOnDamage(damage.getHitPoints());
     }
 
+    default void processCommand(ICommand command, IWarrior sender) {
+        getNextBehind().ifPresent(iWarrior -> iWarrior.processCommand(command, this));
+    }
+
     default Optional<IWarrior> getNextBehind() {
         return Optional.empty();
     }
 
     default void setNextBehind(IWarrior nextBehind) {
         throw new UnsupportedOperationException();
-    }
-
-    default void processCommand(ICommand command, IWarrior sender) {
-        getNextBehind().ifPresent(iWarrior -> iWarrior.processCommand(command, this));
     }
 
     @Override

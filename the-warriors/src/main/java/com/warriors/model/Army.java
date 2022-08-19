@@ -29,7 +29,7 @@ public class Army implements Observer {
      * Adds Warriors to the collection of troops.
      * Prevents from adding more than 1 Warlords.
      * Sets Army as an Observer of each Warrior.
-     * @param factory supplier of warriors
+     * @param factory  supplier of warriors
      * @param quantity of warriors to add
      * @return fluent interface
      */
@@ -65,7 +65,6 @@ public class Army implements Observer {
             moveUnits();
         }
     }
-
 
     /**
      * Performs rearrange of units in Army
@@ -151,7 +150,6 @@ public class Army implements Observer {
          * If the current warrior is not alive -> skip him (cursor++)
          * If the current warrior is alive -> exit loop
          * Iterator points to the first alive warrior
-         *
          * @return true if next warrior is alive
          */
         @Override

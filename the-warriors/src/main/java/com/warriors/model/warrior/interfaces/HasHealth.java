@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 public interface HasHealth {
     Logger LOGGER = LoggerFactory.getLogger("DAMAGE LOG");
+
     default boolean isAlive() {
         return getHealth() > 0;
     }

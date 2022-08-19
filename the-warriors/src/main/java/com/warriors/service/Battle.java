@@ -26,14 +26,10 @@ public class Battle {
                 sideTwo.hit(sideOne);
             }
         }
-        LOGGER.info(
-                "{} has won the fight!",
-                sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo
-        );
-        LOGGER.debug(
-                "{} has lost...",
-                !sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo
-        );
+        LOGGER.info("{} has won the fight!",
+                sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo);
+        LOGGER.debug("{} has lost...",
+                !sideOne.isAlive() ? ATTACKING + sideOne : DEFENDING + sideTwo);
         return sideOne.isAlive();
     }
 
