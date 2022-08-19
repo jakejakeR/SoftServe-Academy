@@ -1,4 +1,4 @@
-package com.warriors.model.damage;
+package com.warriors.command.damage;
 
 import com.warriors.model.warrior.interfaces.IWarrior;
 

@@ -2,8 +2,8 @@ package com.warriors.model.warrior.interfaces;
 
 import com.warriors.command.HealCommand;
 import com.warriors.command.ICommand;
-import com.warriors.model.damage.IDamage;
-import com.warriors.model.damage.SimpleDamage;
+import com.warriors.command.damage.IDamage;
+import com.warriors.command.damage.SimpleDamage;
 import com.warriors.model.equipment.Weapon;
 import com.warriors.model.warrior.DeadWarrior;
 import com.warriors.model.warrior.Healer;

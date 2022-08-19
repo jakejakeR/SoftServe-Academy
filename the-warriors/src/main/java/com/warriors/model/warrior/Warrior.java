@@ -1,8 +1,8 @@
 package com.warriors.model.warrior;
 
 import com.warriors.command.ICommand;
-import com.warriors.model.damage.IDamage;
-import com.warriors.model.damage.IPiercing;
+import com.warriors.command.damage.IDamage;
+import com.warriors.command.damage.IPiercing;
 import com.warriors.model.equipment.Equipment;
 import com.warriors.model.warrior.interfaces.IWarrior;
 import com.warriors.model.warrior.interfaces.observer.Observer;
