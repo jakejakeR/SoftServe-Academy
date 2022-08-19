@@ -24,11 +24,11 @@ public class NightKing extends Warlord {
     public Collection<IWarrior> rearrangeTroops(Iterable<IWarrior> troopsToRearrange) {
         List<IWarrior> rearrangedTroopsOfWarriors = new ArrayList<>(super.rearrangeTroops(troopsToRearrange));
 
-        boolean armyHasUndeadWarriorsExceptKing = rearrangedTroopsOfWarriors.stream()
+        boolean allAreDeadWarriorsExceptKing = rearrangedTroopsOfWarriors.stream()
                 .filter(warrior -> !(warrior instanceof IWarlord))
                 .allMatch(DeadWarrior.class::isInstance);
 
-        if (rearrangedTroopsOfWarriors.get(0) == this && !armyHasUndeadWarriorsExceptKing) {
+        if (rearrangedTroopsOfWarriors.get(0) == this && !allAreDeadWarriorsExceptKing) {
             return raiseTheDead(rearrangedTroopsOfWarriors);
         } else {
             return rearrangedTroopsOfWarriors;
