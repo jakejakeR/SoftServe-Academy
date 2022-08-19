@@ -17,6 +17,7 @@ public class NightKing extends Warlord {
      * Additionally, if Night King is the only alive warrior in troops,
      * turns all dead Warriors into decorated new objects of
      * DeadWarriors.
+     *
      * @param troopsToRearrange Iterable of troops to rearrange.
      * @return Collection of rearranged warriors.
      */
@@ -37,14 +38,17 @@ public class NightKing extends Warlord {
 
     private Collection<IWarrior> raiseTheDead(List<IWarrior> almostDeadTroops) {
         List<IWarrior> raisedFromDeathTroops;
+
         LOGGER.info("{} raises all dead warriors!", this);
         LOGGER.debug("Army before raise: {}", almostDeadTroops);
+
         raisedFromDeathTroops = almostDeadTroops.stream()
                 .filter(warrior -> !warrior.isAlive())
                 .filter(warrior -> !(warrior instanceof DeadWarrior))
                 .map(DeadWarrior::new)
                 .collect(Collectors.toList());
         LOGGER.debug("The DeadArmy: {}", raisedFromDeathTroops);
+
         raisedFromDeathTroops.add(this);
         LOGGER.debug("The DeadArmy with NightKING: {}", raisedFromDeathTroops);
         return super.rearrangeTroops(raisedFromDeathTroops);
