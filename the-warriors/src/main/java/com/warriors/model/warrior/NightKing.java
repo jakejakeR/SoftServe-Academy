@@ -17,7 +17,6 @@ public class NightKing extends Warlord {
      * Additionally, if Night King is the only alive warrior in troops,
      * turns all dead Warriors into decorated new objects of
      * DeadWarriors.
-     *
      * @param troopsToRearrange Iterable of troops to rearrange.
      * @return Collection of rearranged warriors.
      */
